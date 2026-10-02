@@ -1,0 +1,203 @@
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --gray-dark: #1d1d1f;
+  --gray-light: #f5f5f7;
+  --font-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --bento-glass: rgba(20, 20, 22, 0.65);
+  --bento-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-apple);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 5vw;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.glow-cursor {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  filter: blur(40px);
+}
+
+.hero-content {
+  z-index: 10;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 15vw, 10rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: #a1a1a6;
+  margin-top: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #a1a1a6;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* --- BENTO BOX SECTION --- */
+.bento-section {
+  min-height: 100vh;
+  padding: 100px 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 250px;
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.bento-cell {
+  background: var(--bento-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--bento-border);
+  border-radius: 32px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-cell:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.col-span-2 { grid-column: span 2; }
+.col-span-3 { grid-column: span 3; }
+.col-span-4 { grid-column: span 4; }
+.row-span-2 { grid-row: span 2; }
+
+/* Bento Typo */
+.bento-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  z-index: 2;
+}
+
+.bento-desc {
+  color: #a1a1a6;
+  font-size: 1rem;
+  line-height: 1.5;
+  z-index: 2;
+}
+
+.bento-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.5s ease;
+  z-index: 1;
+}
+
+.bento-cell:hover .bento-image {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.bento-content-bottom {
+  margin-top: auto;
+  z-index: 2;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+  .col-span-2, .col-span-3, .col-span-4 {
+    grid-column: span 1;
+  }
+  .row-span-2 {
+    grid-row: span 1;
+    min-height: 300px;
+  }
+}
