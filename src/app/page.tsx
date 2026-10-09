@@ -21,9 +21,6 @@ const DEMO_CARDS = [
   { imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Tropical beach" },
   { imgUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Starry mountain" },
   { imgUrl: "https://images.unsplash.com/photo-1495562569060-2eec283d3391?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Golden sunset" },
-  { imgUrl: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Lake reflection" },
-  { imgUrl: "https://images.unsplash.com/photo-1470071131384-001b85755b36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Green valley" },
-  { imgUrl: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Sunbeam nature" },
 ];
 
 export default function Home() {
@@ -72,17 +69,18 @@ export default function Home() {
 
   return (
     <main>
+      {/* Glow dynamique qui suit la souris, placé globalement sur toute la page */}
+      <motion.div 
+        className="glow-cursor"
+        animate={{ x: mousePosition.x - 200, y: mousePosition.y - 200 }}
+        transition={{ type: "tween", ease: "linear", duration: 0.1 }}
+      />
+      
       {/* HERO SECTION */}
       <section className="hero-section">
-        {/* Glow dynamique qui suit la souris */}
-        <motion.div 
-          className="glow-cursor"
-          animate={{ x: mousePosition.x, y: mousePosition.y }}
-          transition={{ type: "tween", ease: "linear", duration: 0.1 }}
-        />
         
-        <div className="hero-content flex flex-col items-center gap-8 z-10 pt-16">
-          <div className="text-center">
+        <div className="hero-content flex flex-col items-center gap-6 z-10">
+          <div className="text-center" style={{ transform: 'translateY(-5vh)' }}>
             <motion.h1 
               className="hero-title"
               initial={{ opacity: 0, y: 30 }}

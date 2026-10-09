@@ -11,68 +11,61 @@ export default function RLCarDemo() {
     let isMounted = true;
 
     const runSimulation = async () => {
+      const safeStart = async (anim: any) => { if (isMounted) await controls.start(anim); };
+      const safeSet = async (anim: any) => { if (isMounted) await controls.set(anim); };
+
       while (isMounted) {
         // Position de départ (Centre de la ligne du bas)
-        await controls.set({ left: '50%', top: '88%', rotate: 0, opacity: 1 });
+        await safeSet({ left: '50%', top: '88%', rotate: 0, opacity: 1 });
         
         let crash = false;
         let success = false;
 
         // Le circuit est un anneau (O-shape)
-        // Coordonnées des virages (au centre de la route) :
-        // Bottom-Right: left 90%, top 88%
-        // Top-Right: left 90%, top 12%
-        // Top-Left: left 10%, top 12%
-        // Bottom-Left: left 10%, top 88%
-
         if (epoch < 3) {
-          // Va trop loin à droite et tape le mur extérieur
-          await controls.start({ left: '95%', transition: { duration: 0.6, ease: "linear" } });
+          await safeStart({ left: '95%', transition: { duration: 0.6, ease: "linear" } });
           crash = true;
         } else if (epoch < 6) {
-          // Tourne bien, monte, et tape le mur extérieur en haut
-          await controls.start({ left: '88%', transition: { duration: 0.5, ease: "linear" } });
-          await controls.start({ rotate: -90, transition: { duration: 0.1 } });
-          await controls.start({ top: '5%', transition: { duration: 0.8, ease: "linear" } });
+          await safeStart({ left: '88%', transition: { duration: 0.5, ease: "linear" } });
+          await safeStart({ rotate: -90, transition: { duration: 0.1 } });
+          await safeStart({ top: '5%', transition: { duration: 0.8, ease: "linear" } });
           crash = true;
         } else if (epoch < 10) {
-          // Tourne bien 2 fois, mais tape le mur intérieur à gauche
-          await controls.start({ left: '88%', transition: { duration: 0.5, ease: "linear" } });
-          await controls.start({ rotate: -90, transition: { duration: 0.1 } });
-          await controls.start({ top: '12%', transition: { duration: 0.8, ease: "linear" } });
-          await controls.start({ rotate: -180, transition: { duration: 0.1 } });
-          await controls.start({ left: '15%', transition: { duration: 0.8, ease: "linear" } });
+          await safeStart({ left: '88%', transition: { duration: 0.5, ease: "linear" } });
+          await safeStart({ rotate: -90, transition: { duration: 0.1 } });
+          await safeStart({ top: '12%', transition: { duration: 0.8, ease: "linear" } });
+          await safeStart({ rotate: -180, transition: { duration: 0.1 } });
+          await safeStart({ left: '15%', transition: { duration: 0.8, ease: "linear" } });
           crash = true;
         } else {
-          // Tour complet parfait !
-          await controls.start({ left: '88%', transition: { duration: 0.5, ease: "linear" } });
-          await controls.start({ rotate: -90, transition: { duration: 0.1 } });
-          await controls.start({ top: '12%', transition: { duration: 0.8, ease: "linear" } });
-          await controls.start({ rotate: -180, transition: { duration: 0.1 } });
-          await controls.start({ left: '12%', transition: { duration: 0.8, ease: "linear" } });
-          await controls.start({ rotate: -270, transition: { duration: 0.1 } });
-          await controls.start({ top: '88%', transition: { duration: 0.8, ease: "linear" } });
-          await controls.start({ rotate: -360, transition: { duration: 0.1 } });
-          await controls.start({ left: '50%', transition: { duration: 0.4, ease: "linear" } });
+          await safeStart({ left: '88%', transition: { duration: 0.5, ease: "linear" } });
+          await safeStart({ rotate: -90, transition: { duration: 0.1 } });
+          await safeStart({ top: '12%', transition: { duration: 0.8, ease: "linear" } });
+          await safeStart({ rotate: -180, transition: { duration: 0.1 } });
+          await safeStart({ left: '12%', transition: { duration: 0.8, ease: "linear" } });
+          await safeStart({ rotate: -270, transition: { duration: 0.1 } });
+          await safeStart({ top: '88%', transition: { duration: 0.8, ease: "linear" } });
+          await safeStart({ rotate: -360, transition: { duration: 0.1 } });
+          await safeStart({ left: '50%', transition: { duration: 0.4, ease: "linear" } });
           success = true;
         }
 
         if (crash) {
-          setStatus("CRASH !");
-          await controls.start({ scale: 2, backgroundColor: '#ff3366', transition: { duration: 0.1 } });
+          if (isMounted) setStatus("CRASH !");
+          await safeStart({ scale: 2, backgroundColor: '#ff3366', transition: { duration: 0.1 } });
           await new Promise(r => setTimeout(r, 600)); 
-          await controls.set({ scale: 1, backgroundColor: '#00ffcc' });
+          await safeSet({ scale: 1, backgroundColor: '#00ffcc' });
           if (isMounted) setEpoch(e => e + 1);
         }
 
         if (success) {
-          setStatus("GOAL REACHED !");
-          await controls.start({ scale: [1, 1.5, 1], backgroundColor: '#00ffcc', transition: { duration: 0.5, repeat: 2 } });
+          if (isMounted) setStatus("GOAL REACHED !");
+          await safeStart({ scale: [1, 1.5, 1], backgroundColor: '#00ffcc', transition: { duration: 0.5, repeat: 2 } });
           await new Promise(r => setTimeout(r, 1500));
           if (isMounted) setEpoch(1); // Reset infini
         }
         
-        setStatus("LEARNING");
+        if (isMounted) setStatus("LEARNING");
       }
     };
 
