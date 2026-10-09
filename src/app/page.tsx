@@ -6,6 +6,7 @@ import MedicalScanDemo from '@/components/MedicalScanDemo';
 import DataArchitectureDemo from '@/components/DataArchitectureDemo';
 import RLCarDemo from '@/components/RLCarDemo';
 import ECommerceDemo from '@/components/ECommerceDemo';
+import PawriseCareDemo from '@/components/PawriseCareDemo';
 import { 
   SiPython, SiPytorch, SiPandas, SiC, SiCplusplus, 
   SiRacket, SiTypescript, SiJavascript, SiReact, 
@@ -22,8 +23,8 @@ const DEMO_CARDS = [
   { imgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", alt: "Architecture Data" },
   // 4. LesAmisDuCBD (Végétal CBD / Minimaliste sombre)
   { imgUrl: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80", alt: "LesAmisDuCBD" },
-  // 5. Placeholder 1 (Abstrait fluide tech)
-  { imgUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 1" },
+  // 5. Pawrise Care (Data Science / Animaux)
+  { imgUrl: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80", alt: "Pawrise Care" },
   // 6. Placeholder 2 (Circuits technologiques)
   { imgUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 2" },
   // 7. Placeholder 3 (Matrice de code noir/vert épuré)
@@ -51,10 +52,10 @@ export default function Home() {
     },
     {
       id: 3,
-      title: "Architecture Data & Big Data",
-      subtitle: "Ingénierie & Informatique Distribuée",
-      description: "Conception complète de pipelines ETL industrialisés et sécurisés. J'ai géré l'extraction, la transformation (ex: title-casing) et le chargement vers des architectures distribuées (Data Lake Hadoop). L'optimisation des performances s'est faite via le déploiement de clusters Apache Spark. L'ensemble du flux était fiabilisé par des tests Pytest, orchestré sur AWS via Rundeck, et restitué via Streamlit et OpenSearch.",
-      skills: ["Apache Spark", "Hadoop", "AWS", "Pytest", "Streamlit", "OpenSearch", "ETL"]
+      title: "Linxo (Fintech)",
+      subtitle: "Backend & Data Engineering en Microservices",
+      description: "Développement backend au sein d'une architecture distribuée exigeante. Mon quotidien couvre un large spectre de missions : conception de nouveaux microservices (FastAPI), optimisation de pipelines d'enrichissement de données, conception de librairies métier, et refactorisation. J'évolue avec des standards de qualité élevés : validation stricte des schémas (Pydantic), couverture de tests exhaustive (Pytest, Tox, scripts custom), automatisation des environnements (uv), et déploiements continus sécurisés sur AWS (Rundeck, GitLab CI/CD).",
+      skills: ["Python", "FastAPI", "Pydantic", "Pytest / Tox", "AWS SSO", "Rundeck", "GitLab CI/CD", "uv"]
     },
     {
       id: 4,
@@ -62,6 +63,13 @@ export default function Home() {
       subtitle: "Développement Web & Fullstack",
       description: "Conception et déploiement de A à Z d'une plateforme web e-commerce complète (LesAmisDuCBD). J'ai pris en charge le développement front-end et back-end, la gestion sécurisée des bases de données, l'intégration des systèmes de paiement, et l'optimisation des performances web (latence, SEO, responsive design).",
       skills: ["React", "TypeScript", "Node.js", "API REST", "E-Commerce", "UI/UX"]
+    },
+    {
+      id: 5,
+      title: "Pawrise Care",
+      subtitle: "Plateforme Connectée de Santé Animale",
+      description: "Solution SaaS complète dédiée au bien-être des animaux de compagnie. Le projet couvre l'ensemble de la chaîne de valeur : l'acquisition des signes vitaux via collier IoT, le traitement des données via un Backend robuste, une application front-end intuitive pour les utilisateurs, et mon moteur d'IA pour détecter de manière proactive les anomalies de santé.",
+      skills: ["Python (Scikit-Learn)", "Time-Series Analysis", "React Native", "Node.js API", "IoT Telemetry (MQTT)", "WebSocket"]
     }
   ];
 
@@ -164,10 +172,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SECTION : PAWRISE CARE */}
+      <section className="snap-section">
+        <div style={{ width: '100%', maxWidth: '1200px' }}>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>02 / Data Science & Anomaly Detection</h2>
+          <div className="bento-grid" style={{ gridTemplateRows: '350px' }}>
+            
+            <motion.div 
+              className="bento-cell col-span-4 row-span-1"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{ padding: 0, position: 'relative' }}
+            >
+              <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 20, pointerEvents: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', right: '20px' }}>
+                <h2 className="bento-title" style={{ fontSize: '1.2rem', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>Pawrise Care : Health Dashboard</h2>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <a 
+                    href="https://pawrise-care.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ pointerEvents: 'auto', background: 'rgba(0, 255, 204, 0.1)', border: '1px solid rgba(0, 255, 204, 0.4)', color: '#00ffcc', padding: '6px 12px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(5px)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                  >
+                    Visiter le site ↗
+                  </a>
+                  <button 
+                    onClick={() => setSelectedProject(5)}
+                    style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '6px 12px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(5px)' }}
+                  >
+                    Détails ➔
+                  </button>
+                </div>
+              </div>
+              <PawriseCareDemo />
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
       {/* SECTION : INTELLIGENCE ARTIFICIELLE */}
       <section className="snap-section">
         <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>02 / Intelligence Artificielle</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>03 / Intelligence Artificielle</h2>
           <div className="bento-grid">
 
             {/* Tuile 2: Projet 1 */}
@@ -225,7 +273,7 @@ export default function Home() {
       {/* SECTION : DATA ENGINEERING */}
       <section className="snap-section">
         <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>03 / Data Engineering & Architecture</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>04 / Data Engineering & Architecture</h2>
           <div className="bento-grid" style={{ gridTemplateRows: '350px' }}>
 
             {/* Tuile 4: Projet 3 */}
@@ -238,13 +286,23 @@ export default function Home() {
               style={{ padding: 0, position: 'relative' }}
             >
               <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 20, pointerEvents: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', right: '20px' }}>
-                <h2 className="bento-title" style={{ fontSize: '1.2rem', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>Topologie Data</h2>
-                <button 
-                  onClick={() => setSelectedProject(3)}
-                  style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '6px 12px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(5px)' }}
-                >
-                  Détails ➔
-                </button>
+                <h2 className="bento-title" style={{ fontSize: '1.2rem', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>Linxo : Pipeline d'Enrichissement (Fintech)</h2>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <a 
+                    href="https://www.linxo.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ pointerEvents: 'auto', background: 'rgba(0, 255, 204, 0.1)', border: '1px solid rgba(0, 255, 204, 0.4)', color: '#00ffcc', padding: '6px 12px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(5px)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                  >
+                    Visiter le site ↗
+                  </a>
+                  <button 
+                    onClick={() => setSelectedProject(3)}
+                    style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '6px 12px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(5px)' }}
+                  >
+                    Détails ➔
+                  </button>
+                </div>
               </div>
               <DataArchitectureDemo />
             </motion.div>
@@ -256,7 +314,7 @@ export default function Home() {
       {/* SECTION : WEB & FULLSTACK */}
       <section className="snap-section">
         <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>04 / Développement Fullstack</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>05 / Développement Fullstack</h2>
           <div className="bento-grid" style={{ gridTemplateRows: '450px' }}>
             
             <motion.div 
@@ -286,7 +344,7 @@ export default function Home() {
       {/* SECTION : STACK & RESEAUX */}
       <section className="snap-section">
         <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>05 / Stack & Contact</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>06 / Stack & Contact</h2>
           <div className="bento-grid" style={{ gridTemplateRows: '150px' }}>
             
             {/* Tuile 5: Stack (2 colonnes) */}
