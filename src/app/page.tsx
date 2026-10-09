@@ -11,6 +11,20 @@ import {
   SiRacket, SiTypescript, SiJavascript, SiReact, 
   SiNextdotjs, SiNodedotjs, SiHtml5, SiCss, SiTailwindcss 
 } from 'react-icons/si';
+import SocialCards from '@/components/ui/card-fan-carousel';
+
+const DEMO_CARDS = [
+  { imgUrl: "https://images.unsplash.com/photo-1506744626753-143f6004b407?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80", alt: "Mountain landscape" },
+  { imgUrl: "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "City night" },
+  { imgUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Foggy forest" },
+  { imgUrl: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Sunlit woods" },
+  { imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Tropical beach" },
+  { imgUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Starry mountain" },
+  { imgUrl: "https://images.unsplash.com/photo-1495562569060-2eec283d3391?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Golden sunset" },
+  { imgUrl: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Lake reflection" },
+  { imgUrl: "https://images.unsplash.com/photo-1470071131384-001b85755b36?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Green valley" },
+  { imgUrl: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Sunbeam nature" },
+];
 
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -67,23 +81,35 @@ export default function Home() {
           transition={{ type: "tween", ease: "linear", duration: 0.1 }}
         />
         
-        <div className="hero-content">
-          <motion.h1 
-            className="hero-title"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+        <div className="hero-content flex flex-col items-center gap-8 z-10 pt-16">
+          <div className="text-center">
+            <motion.h1 
+              className="hero-title"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+            >
+              NINO L.
+            </motion.h1>
+            <motion.p 
+              className="hero-subtitle"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            >
+              Developer Fullstack / Data Engineer / AI Specialist
+            </motion.p>
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="w-full mt-4"
+            style={{ pointerEvents: 'auto' }}
           >
-            NINO L.
-          </motion.h1>
-          <motion.p 
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          >
-            Developer Fullstack / Data Engineer / AI Specialist
-          </motion.p>
+            <SocialCards cards={DEMO_CARDS} />
+          </motion.div>
         </div>
 
         <motion.div 
