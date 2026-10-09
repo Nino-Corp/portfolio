@@ -14,13 +14,20 @@ import {
 import SocialCards from '@/components/ui/card-fan-carousel';
 
 const DEMO_CARDS = [
-  { imgUrl: "https://images.unsplash.com/photo-1506744626753-143f6004b407?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80", alt: "Mountain landscape" },
-  { imgUrl: "https://images.unsplash.com/photo-1511884642898-4c92249e20b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "City night" },
-  { imgUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Foggy forest" },
-  { imgUrl: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Sunlit woods" },
-  { imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Tropical beach" },
-  { imgUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Starry mountain" },
-  { imgUrl: "https://images.unsplash.com/photo-1495562569060-2eec283d3391?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", alt: "Golden sunset" },
+  // 1. Crash & Learn RL (IA, Conduite, Lignes tech)
+  { imgUrl: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80", alt: "Crash & Learn RL" },
+  // 2. DiagAI Médical (Scanner, Géométrie abstraite)
+  { imgUrl: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80", alt: "DiagAI Médical" },
+  // 3. Architecture Data (Serveurs, Lignes lumineuses)
+  { imgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", alt: "Architecture Data" },
+  // 4. LesAmisDuCBD (Végétal CBD / Minimaliste sombre)
+  { imgUrl: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80", alt: "LesAmisDuCBD" },
+  // 5. Placeholder 1 (Abstrait fluide tech)
+  { imgUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 1" },
+  // 6. Placeholder 2 (Circuits technologiques)
+  { imgUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 2" },
+  // 7. Placeholder 3 (Matrice de code noir/vert épuré)
+  { imgUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 3" },
 ];
 
 export default function Home() {
