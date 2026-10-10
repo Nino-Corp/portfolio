@@ -81,7 +81,7 @@ export default function MedicalScanDemo() {
               zIndex: 10
             }}
           >
-            <div style={{ position: 'absolute', top: '-25px', left: '-2px', background: results.right.isAnomaly ? '#ff3366' : '#00ffcc', color: results.right.isAnomaly ? 'white' : 'black', fontSize: '0.7rem', fontWeight: 'bold', padding: '2px 8px', whiteSpace: 'nowrap' }}>
+            <div style={{ position: 'absolute', top: '-25px', left: '-2px', background: results.right.isAnomaly ? '#ff3366' : '#00ffcc', color: results.right.isAnomaly ? 'white' : 'black', fontSize: '0.65rem', fontWeight: 'bold', padding: '2px 6px', maxWidth: '140px', lineHeight: '1.2' }}>
               {results.right.isAnomaly ? 'ANOMALIE DÉTECTÉE' : 'SAIN'} ({results.right.score}%)
             </div>
           </motion.div>
@@ -102,7 +102,7 @@ export default function MedicalScanDemo() {
               zIndex: 10
             }}
           >
-            <div style={{ position: 'absolute', top: '-25px', left: '-2px', background: results.left.isAnomaly ? '#ff3366' : '#00ffcc', color: results.left.isAnomaly ? 'white' : 'black', fontSize: '0.7rem', fontWeight: 'bold', padding: '2px 8px', whiteSpace: 'nowrap' }}>
+            <div style={{ position: 'absolute', top: '-25px', left: '-2px', background: results.left.isAnomaly ? '#ff3366' : '#00ffcc', color: results.left.isAnomaly ? 'white' : 'black', fontSize: '0.65rem', fontWeight: 'bold', padding: '2px 6px', maxWidth: '140px', lineHeight: '1.2' }}>
               {results.left.isAnomaly ? 'ANOMALIE DÉTECTÉE' : 'SAIN'} ({results.left.score}%)
             </div>
           </motion.div>
@@ -113,7 +113,7 @@ export default function MedicalScanDemo() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
             onClick={(e) => { e.stopPropagation(); setHasScanned(false); }}
-            style={{ position: 'absolute', bottom: '20px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', padding: '5px 15px', borderRadius: '15px', fontSize: '0.8rem', zIndex: 20 }}
+            style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', padding: '5px 15px', borderRadius: '15px', fontSize: '0.8rem', zIndex: 20 }}
           >
             RÉINITIALISER
           </motion.button>

@@ -18,56 +18,56 @@ export default function DataArchitectureDemo() {
   const enrichedTx = '{ "merchant": "Amazon", "type": "E_COMMERCE", "amt": -15.99 }';
 
   return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: '#050505', display: 'flex', flexDirection: 'column', paddingTop: '70px', paddingLeft: '25px', paddingRight: '25px', paddingBottom: '25px', overflow: 'hidden' }}>
+    <div className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col pb-[25px] px-[15px] sm:px-[25px]">
       
       {/* Background Matrix/Grid */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(0, 255, 204, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.02) 1px, transparent 1px)', backgroundSize: '30px 30px', zIndex: 0 }} />
+      <div className="absolute inset-0 z-0" style={{ backgroundImage: 'linear-gradient(rgba(0, 255, 204, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.02) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '20px', height: '100%', zIndex: 10 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5 h-full z-10 relative">
         
         {/* LEFT PANEL : Microservices & Data Pipeline */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative' }}>
-          <div style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.1em', marginBottom: '10px' }}>PIPELINE MICROSERVICES (ORCHESTRATOR)</div>
+        <div className="flex flex-col justify-center relative w-full overflow-hidden">
+          <div className="text-[0.6rem] sm:text-[0.7rem] text-[#888] tracking-widest mb-2 sm:mb-4">PIPELINE MICROSERVICES (ORCHESTRATOR)</div>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full">
             {/* Raw Input */}
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px dashed rgba(255,255,255,0.2)', padding: '10px', borderRadius: '8px', fontSize: '0.65rem', color: '#888', fontFamily: 'monospace' }}>
+            <div className="bg-white/5 border border-dashed border-white/20 p-2 sm:p-3 rounded-lg text-[0.55rem] sm:text-[0.65rem] text-[#888] font-mono break-all w-full sm:w-auto shrink-0">
               <div>[Raw Data Flow]</div>
-              <div style={{ color: '#fff', marginTop: '5px' }}>{rawTx}</div>
+              <div className="text-white mt-1">{rawTx}</div>
             </div>
 
-            <ArrowRight size={16} color={step >= 1 ? '#00ffcc' : '#444'} />
+            <ArrowRight size={16} color={step >= 1 ? '#00ffcc' : '#444'} className="rotate-90 sm:rotate-0 my-1 sm:my-0 flex-shrink-0" />
 
             {/* Pydantic Validation */}
             <motion.div 
               animate={{ borderColor: step === 1 ? '#00ffcc' : 'rgba(255,255,255,0.1)', backgroundColor: step === 1 ? 'rgba(0,255,204,0.05)' : '#0a0a0c' }}
-              style={{ border: '2px solid rgba(255,255,255,0.1)', padding: '10px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+              className="border-2 p-2 sm:p-3 rounded-lg flex flex-col items-center w-full sm:w-auto shrink-0"
             >
               <ShieldCheck size={20} color={step >= 1 ? '#00ffcc' : '#888'} />
-              <div style={{ fontSize: '0.6rem', color: 'white', marginTop: '5px', fontWeight: 'bold' }}>Pydantic / FastAPI</div>
+              <div className="text-[0.55rem] sm:text-[0.6rem] text-white mt-1 font-bold">Pydantic / FastAPI</div>
             </motion.div>
 
-            <ArrowRight size={16} color={step >= 2 ? '#00ffcc' : '#444'} />
+            <ArrowRight size={16} color={step >= 2 ? '#00ffcc' : '#444'} className="rotate-90 sm:rotate-0 my-1 sm:my-0 flex-shrink-0" />
 
             {/* Insights Library (Pattern Matching) */}
             <motion.div 
               animate={{ borderColor: step === 2 ? '#00ffcc' : 'rgba(255,255,255,0.1)', backgroundColor: step === 2 ? 'rgba(0,255,204,0.05)' : '#0a0a0c' }}
-              style={{ border: '2px solid rgba(255,255,255,0.1)', padding: '10px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '100px' }}
+              className="border-2 p-2 sm:p-3 rounded-lg flex flex-col items-center min-w-[80px] sm:min-w-[100px] w-full sm:w-auto shrink-0"
             >
               <Server size={20} color={step >= 2 ? '#00ffcc' : '#888'} />
-              <div style={{ fontSize: '0.6rem', color: 'white', marginTop: '5px', fontWeight: 'bold' }}>core-processing-lib</div>
-              <div style={{ fontSize: '0.5rem', color: '#00ffcc' }}>Pattern Matching</div>
+              <div className="text-[0.55rem] sm:text-[0.6rem] text-white mt-1 font-bold">core-processing-lib</div>
+              <div className="text-[0.45rem] sm:text-[0.5rem] text-[#00ffcc]">Pattern Matching</div>
             </motion.div>
 
-            <ArrowRight size={16} color={step >= 3 ? '#00ffcc' : '#444'} />
+            <ArrowRight size={16} color={step >= 3 ? '#00ffcc' : '#444'} className="rotate-90 sm:rotate-0 my-1 sm:my-0 flex-shrink-0" />
             
             {/* Output */}
             <motion.div 
               initial={{ opacity: 0 }} animate={{ opacity: step === 3 ? 1 : 0.4 }}
-              style={{ background: 'rgba(0,255,204,0.1)', border: '1px solid #00ffcc', padding: '10px', borderRadius: '8px', fontSize: '0.65rem', color: '#00ffcc', fontFamily: 'monospace' }}
+              className="bg-[#00ffcc]/10 border border-[#00ffcc] p-2 sm:p-3 rounded-lg text-[0.55rem] sm:text-[0.65rem] text-[#00ffcc] font-mono break-all w-full sm:w-auto shrink-0"
             >
               <div>[Enriched Tx]</div>
-              <div style={{ color: '#fff', marginTop: '5px' }}>{enrichedTx}</div>
+              <div className="text-white mt-1">{enrichedTx}</div>
             </motion.div>
 
           </div>
@@ -94,12 +94,12 @@ export default function DataArchitectureDemo() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1 }}>
             
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="break-all sm:break-normal">
               <span style={{ color: '#00ffcc' }}>$</span> uv run pytest --cov=core-processing
             </motion.div>
 
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span>tests/test_pattern_matching.py</span>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="flex flex-col sm:flex-row sm:justify-between">
+              <span className="truncate">tests/test_pattern_matching.py</span>
               <span style={{ color: '#00ffcc' }}>.......... [100%]</span>
             </motion.div>
 

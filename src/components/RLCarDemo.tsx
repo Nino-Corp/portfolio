@@ -74,7 +74,7 @@ export default function RLCarDemo() {
   }, [epoch, controls]);
 
   return (
-    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', backgroundColor: '#050505', display: 'flex', flexDirection: 'column', padding: '25px', paddingBottom: '90px' }}>
+    <div className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col p-[25px] pb-[120px] sm:pb-[90px]">
       
       {/* Header stats */}
       <div style={{ display: 'flex', justifyContent: 'space-between', zIndex: 10, paddingBottom: '15px' }}>
@@ -108,7 +108,7 @@ export default function RLCarDemo() {
         <div style={{ position: 'absolute', inset: '22%', border: '4px solid rgba(255,255,255,0.2)', borderRadius: '15px', background: '#111' }} />
         
         {/* Ligne de départ / arrivée */}
-        <div style={{ position: 'absolute', left: '50%', bottom: '5%', width: '4px', height: '17%', background: 'repeating-linear-gradient(0deg, #fff, #fff 5px, #000 5px, #000 10px)', transform: 'translateX(-50%)' }} />
+        <div style={{ position: 'absolute', left: '50%', bottom: '10%', width: '4px', height: '12%', background: 'repeating-linear-gradient(0deg, #fff, #fff 5px, #000 5px, #000 10px)', transform: 'translateX(-50%)' }} />
 
         {/* Labels START/GOAL */}
         <div style={{ position: 'absolute', left: '50%', bottom: '2%', transform: 'translateX(-50%)', fontSize: '0.5rem', color: '#888', fontWeight: 'bold' }}>START / FINISH</div>

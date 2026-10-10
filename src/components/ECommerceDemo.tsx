@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function ECommerceDemo() {
   return (
-    <div style={{ width: '100%', height: '100%', position: 'absolute', inset: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#000', paddingTop: '70px', paddingBottom: '30px' }}>
+    <div className="w-full h-full absolute inset-0 overflow-hidden flex flex-col items-center justify-center bg-black pb-[30px]">
       
       {/* Glow en arrière-plan */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(46, 204, 113, 0.15) 0%, transparent 60%)' }} />

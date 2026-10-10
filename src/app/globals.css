@@ -201,7 +201,14 @@ body {
   }
   .row-span-2 {
     grid-row: span 1;
-    min-height: 300px;
+    min-height: 350px;
+  }
+  .bento-cell {
+    padding: 15px;
+  }
+  .bento-title {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
   }
 }
 

@@ -16,12 +16,12 @@ export default function PawriseCareDemo() {
   }, []);
 
   return (
-    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', backgroundColor: '#050505', display: 'flex', flexDirection: 'column', paddingTop: '70px', paddingLeft: '25px', paddingRight: '25px', paddingBottom: '25px' }}>
+    <div className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col pb-[25px] px-[15px] sm:px-[25px]">
       
       {/* Background Grid */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '20px 20px', zIndex: 0 }} />
+      <div className="absolute inset-0 z-0" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
 
-      <div style={{ flex: 1, zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px' }}>
+      <div className="flex-1 z-10 flex flex-col md:flex-row items-center justify-between md:px-5 gap-6 md:gap-0 overflow-y-auto md:overflow-hidden pb-10 md:pb-0">
         
         {/* 1. IoT Collar */}
         <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -53,23 +53,50 @@ export default function PawriseCareDemo() {
         </div>
 
         {/* 2. Data Flow (Cloud / AI Engine) */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 20px' }}>
-          <div style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.1em', marginBottom: '10px' }}>MOTEUR IA & BACKEND</div>
+        <div className="flex-1 flex flex-col items-center justify-center mx-0 md:mx-5 relative w-full md:w-auto min-h-[150px] md:min-h-[auto]">
+          <div className="absolute top-0 md:static text-[0.6rem] sm:text-[0.7rem] text-[#888] tracking-widest mb-0 md:mb-2 whitespace-nowrap">MOTEUR IA & BACKEND</div>
           
-          <div style={{ width: '100%', position: 'relative', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="w-[40px] h-[100px] md:w-full md:h-[40px] relative flex items-center justify-center mt-4 md:mt-0">
             {/* Ligne de connexion */}
-            <div style={{ position: 'absolute', left: 0, right: 0, height: '2px', background: 'rgba(255,255,255,0.1)', top: '50%', transform: 'translateY(-50%)' }} />
+            <div className="absolute top-0 bottom-0 w-[2px] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 md:left-0 md:right-0 md:w-auto md:h-[2px] bg-white/10" />
             
             {/* Particules de données circulant */}
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                initial={{ left: '0%' }}
-                animate={{ left: '100%' }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: i * 0.6 }}
-                style={{ position: 'absolute', width: '8px', height: '8px', background: '#00ffcc', borderRadius: '50%', boxShadow: '0 0 10px #00ffcc', top: '50%', transform: 'translate(-50%, -50%)' }}
+                initial={{ top: '0%', left: '50%' }}
+                animate={{ top: '100%', left: '50%' }}
+                // On desktop, we want it to go left to right instead. We can use a CSS class or just let Framer Motion handle simple layout changes. 
+                // Wait, Framer Motion doesn't do media queries easily in `animate`.
+                // Let's use CSS animations for the particles to make them fully responsive!
+                className="hidden" // Hiding the framer motion ones to replace with CSS
               />
             ))}
+            
+            {/* Particules de données circulant (CSS Responsive) */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+               {[0, 1, 2].map((i) => (
+                 <div
+                   key={i}
+                   className="absolute bg-[#00ffcc] rounded-full shadow-[0_0_10px_#00ffcc] w-[8px] h-[8px]"
+                   style={{
+                     animation: `flowParticle 2s linear infinite ${i * 0.6}s`,
+                   }}
+                 />
+               ))}
+               <style dangerouslySetInnerHTML={{__html: `
+                 @keyframes flowParticle {
+                   0% { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+                   100% { top: 100%; left: 50%; transform: translate(-50%, -50%); }
+                 }
+                 @media (min-width: 768px) {
+                   @keyframes flowParticle {
+                     0% { left: 0%; top: 50%; transform: translate(-50%, -50%); }
+                     100% { left: 100%; top: 50%; transform: translate(-50%, -50%); }
+                   }
+                 }
+               `}} />
+            </div>
             
             {/* Nœud central (Serveur IA) */}
             <motion.div 
@@ -83,11 +110,11 @@ export default function PawriseCareDemo() {
         </div>
 
         {/* 3. Smartphone App */}
-        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.1em', marginBottom: '15px' }}>MOBILE APP</div>
+        <div className="relative flex flex-col items-center shrink-0">
+          <div className="text-[0.6rem] sm:text-[0.7rem] text-[#888] tracking-widest mb-3">MOBILE APP</div>
           
           {/* Smartphone Frame */}
-          <div style={{ width: '120px', height: '220px', background: '#0a0a0c', border: '3px solid #333', borderRadius: '20px', padding: '10px', position: 'relative', display: 'flex', flexDirection: 'column', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', overflow: 'hidden' }}>
+          <div className="w-[120px] h-[220px] bg-[#0a0a0c] border-[3px] border-[#333] rounded-[20px] p-2 relative flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden shrink-0">
             
             {/* Notch */}
             <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '30px', height: '10px', background: '#333', borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px', zIndex: 20 }} />
