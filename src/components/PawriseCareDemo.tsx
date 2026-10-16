@@ -1,169 +1,369 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Heart, Activity, Wifi, PawPrint } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, Activity, Wifi, PawPrint, Cpu, Navigation } from 'lucide-react';
 
 export default function PawriseCareDemo() {
   const [heartRate, setHeartRate] = useState(112);
-  const [activeTab, setActiveTab] = useState('health');
-  
-  // Simulation du battement de coeur pour les données
+  const [activeTab, setActiveTab] = useState<'health' | 'map'>('health');
+
+  // Simulation du battement de coeur en temps réel
   useEffect(() => {
     const interval = setInterval(() => {
-      setHeartRate(prev => prev + (Math.random() > 0.5 ? 1 : -1));
+      setHeartRate(prev => {
+        const delta = Math.random() > 0.5 ? 1 : -1;
+        const next = prev + delta;
+        return next < 106 ? 108 : next > 118 ? 116 : next;
+      });
     }, 2000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col pb-[25px] px-[15px] sm:px-[25px]">
-      
-      {/* Background Grid */}
-      <div className="absolute inset-0 z-0" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+    <div 
+      className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col justify-center select-none"
+      style={{ padding: '8px 12px 12px 12px' }}
+    >
+      {/* Grille de fond subtile + Halo ambiant style Apple */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none" 
+        style={{ 
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)', 
+          backgroundSize: '24px 24px' 
+        }} 
+      />
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(0, 255, 204, 0.05) 0%, transparent 70%)'
+        }}
+      />
 
-      <div className="flex-1 z-10 flex flex-col md:flex-row items-center justify-between md:px-5 gap-6 md:gap-0 overflow-y-auto md:overflow-hidden pb-10 md:pb-0">
+      {/* Animation CSS responsive pour les particules de données */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes pawriseFlowMobile {
+          0% { top: 0%; left: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+          20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          100% { top: 100%; left: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+        }
+        @keyframes pawriseFlowDesktop {
+          0% { left: 0%; top: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+          15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          100% { left: 100%; top: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+        }
+        .pawrise-particle {
+          animation: pawriseFlowMobile 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+        @media (min-width: 768px) {
+          .pawrise-particle {
+            animation-name: pawriseFlowDesktop;
+          }
+        }
+      `}} />
+
+      {/* Conteneur Principal : Vertical sur Mobile, Horizontal sur Desktop */}
+      <div 
+        className="relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-between md:justify-around overflow-hidden"
+        style={{ padding: '4px 8px' }}
+      >
         
-        {/* 1. IoT Collar */}
-        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.1em', marginBottom: '15px' }}>COLLIER IoT</div>
-          
-          <div style={{ position: 'relative', width: '90px', height: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {/* Collar shape */}
-            <div style={{ width: '80px', height: '80px', borderRadius: '50%', border: '6px solid rgba(255,255,255,0.1)', position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <PawPrint size={32} color="rgba(255,255,255,0.2)" />
-            </div>
-            {/* Smart Tag */}
-            <div style={{ width: '25px', height: '35px', background: '#00ffcc', borderRadius: '5px', boxShadow: '0 0 15px rgba(0,255,204,0.4)', position: 'absolute', bottom: '-5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <motion.div 
-                animate={{ opacity: [1, 0, 1] }} 
-                transition={{ duration: 1.5, repeat: Infinity }}
-                style={{ width: '6px', height: '6px', background: 'white', borderRadius: '50%' }}
-              />
-            </div>
-            
-            {/* Emitting waves */}
+        {/* =========================================================
+            1. COLLIER IoT (Style AirTag / Capteur Biométrique)
+           ========================================================= */}
+        <div className="flex flex-col items-center shrink-0">
+          <div 
+            className="text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase"
+            style={{ marginBottom: '8px' }}
+          >
+            Collier IoT
+          </div>
+
+          <div className="relative w-[78px] h-[78px] sm:w-[92px] sm:h-[92px] flex items-center justify-center">
+            {/* Ondes radar concentriques */}
             <motion.div
-              animate={{ scale: [1, 2], opacity: [0.8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-              style={{ position: 'absolute', right: '-20px', top: '10px' }}
-            >
-              <Wifi size={24} color="#00ffcc" />
-            </motion.div>
-          </div>
-        </div>
+              animate={{ scale: [1, 1.55], opacity: [0.35, 0] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
+              className="absolute inset-0 rounded-full border border-[#00ffcc]/40 pointer-events-none"
+            />
+            <motion.div
+              animate={{ scale: [1, 1.3], opacity: [0.25, 0] }}
+              transition={{ duration: 2.4, delay: 0.8, repeat: Infinity, ease: "easeOut" }}
+              className="absolute inset-0 rounded-full border border-[#00ffcc]/30 pointer-events-none"
+            />
 
-        {/* 2. Data Flow (Cloud / AI Engine) */}
-        <div className="flex-1 flex flex-col items-center justify-center mx-0 md:mx-5 relative w-full md:w-auto min-h-[150px] md:min-h-[auto]">
-          <div className="absolute top-0 md:static text-[0.6rem] sm:text-[0.7rem] text-[#888] tracking-widest mb-0 md:mb-2 whitespace-nowrap">MOTEUR IA & BACKEND</div>
-          
-          <div className="w-[40px] h-[100px] md:w-full md:h-[40px] relative flex items-center justify-center mt-4 md:mt-0">
-            {/* Ligne de connexion */}
-            <div className="absolute top-0 bottom-0 w-[2px] left-1/2 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 md:left-0 md:right-0 md:w-auto md:h-[2px] bg-white/10" />
-            
-            {/* Particules de données circulant */}
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ top: '0%', left: '50%' }}
-                animate={{ top: '100%', left: '50%' }}
-                // On desktop, we want it to go left to right instead. We can use a CSS class or just let Framer Motion handle simple layout changes. 
-                // Wait, Framer Motion doesn't do media queries easily in `animate`.
-                // Let's use CSS animations for the particles to make them fully responsive!
-                className="hidden" // Hiding the framer motion ones to replace with CSS
+            {/* Anneau du collier façon céramique sombre */}
+            <div 
+              className="w-[68px] h-[68px] sm:w-[80px] sm:h-[80px] rounded-full flex items-center justify-center relative shadow-[inset_0_2px_10px_rgba(255,255,255,0.08),0_10px_25px_rgba(0,0,0,0.8)]"
+              style={{ 
+                background: ' radial-gradient(circle at 30% 30%, #1c1c1e, #0a0a0c)',
+                border: '4px solid rgba(255,255,255,0.12)' 
+              }}
+            >
+              <PawPrint className="w-6 h-6 sm:w-7 sm:h-7 text-white/25" />
+            </div>
+
+            {/* Module capteur IoT actif */}
+            <div 
+              className="absolute -bottom-1.5 flex items-center gap-1 rounded-full bg-[#111113]/95 border border-[#00ffcc]/50 shadow-[0_0_15px_rgba(0,255,204,0.3)] backdrop-blur-md"
+              style={{ padding: '3px 8px' }}
+            >
+              <motion.span 
+                animate={{ opacity: [1, 0.25, 1] }} 
+                transition={{ duration: 1.4, repeat: Infinity }}
+                className="w-1.5 h-1.5 rounded-full bg-[#00ffcc] shadow-[0_0_6px_#00ffcc]"
               />
-            ))}
-            
-            {/* Particules de données circulant (CSS Responsive) */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-               {[0, 1, 2].map((i) => (
-                 <div
-                   key={i}
-                   className="absolute bg-[#00ffcc] rounded-full shadow-[0_0_10px_#00ffcc] w-[8px] h-[8px]"
-                   style={{
-                     animation: `flowParticle 2s linear infinite ${i * 0.6}s`,
-                   }}
-                 />
-               ))}
-               <style dangerouslySetInnerHTML={{__html: `
-                 @keyframes flowParticle {
-                   0% { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-                   100% { top: 100%; left: 50%; transform: translate(-50%, -50%); }
-                 }
-                 @media (min-width: 768px) {
-                   @keyframes flowParticle {
-                     0% { left: 0%; top: 50%; transform: translate(-50%, -50%); }
-                     100% { left: 100%; top: 50%; transform: translate(-50%, -50%); }
-                   }
-                 }
-               `}} />
+              <span className="text-[9px] font-mono font-semibold text-[#00ffcc] tracking-wider">
+                MQTT
+              </span>
             </div>
-            
-            {/* Nœud central (Serveur IA) */}
-            <motion.div 
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 5, backdropFilter: 'blur(5px)' }}
+
+            {/* Icône d'émission sans-fil */}
+            <motion.div
+              animate={{ opacity: [0.4, 1, 0.4], y: [0, -2, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -right-2 top-0 bg-[#00ffcc]/10 border border-[#00ffcc]/30 rounded-full flex items-center justify-center backdrop-blur-sm"
+              style={{ width: '22px', height: '22px' }}
             >
-              <Activity size={20} color="white" />
+              <Wifi size={12} color="#00ffcc" />
             </motion.div>
           </div>
         </div>
 
-        {/* 3. Smartphone App */}
-        <div className="relative flex flex-col items-center shrink-0">
-          <div className="text-[0.6rem] sm:text-[0.7rem] text-[#888] tracking-widest mb-3">MOBILE APP</div>
-          
-          {/* Smartphone Frame */}
-          <div className="w-[120px] h-[220px] bg-[#0a0a0c] border-[3px] border-[#333] rounded-[20px] p-2 relative flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden shrink-0">
-            
-            {/* Notch */}
-            <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: '30px', height: '10px', background: '#333', borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px', zIndex: 20 }} />
-            
-            {/* Dynamic App Content */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingTop: '15px', position: 'relative', zIndex: 10 }}>
-              {activeTab === 'health' && (
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div style={{ width: '25px', height: '25px', borderRadius: '50%', background: 'url(https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=50&h=50&fit=crop) center/cover' }} />
-                    <div>
-                      <div style={{ color: 'white', fontSize: '0.6rem', fontWeight: 'bold' }}>Rex</div>
-                      <div style={{ color: '#00ffcc', fontSize: '0.4rem' }}>En ligne</div>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: '10px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                    <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 0.8, repeat: Infinity }}>
-                      <Heart size={24} color="#ff3366" fill="rgba(255,51,102,0.3)" />
-                    </motion.div>
-                    <div style={{ marginTop: '5px', color: 'white', fontSize: '0.9rem', fontFamily: 'monospace', fontWeight: 'bold' }}>{heartRate}</div>
-                    <div style={{ color: '#888', fontSize: '0.4rem' }}>BPM</div>
-                  </div>
-                  <div style={{ marginTop: 'auto', height: '25px', display: 'flex', alignItems: 'flex-end', gap: '3px' }}>
-                    {[40, 60, 50, 80, 50, 70, 90].map((h, i) => (
-                      <motion.div key={i} initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 1, delay: i * 0.1 }} style={{ flex: 1, background: 'rgba(0,255,204,0.5)', borderRadius: '2px' }} />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+        {/* =========================================================
+            2. MOTEUR IA & BACKEND (Pipeline & Puce Neural Engine)
+           ========================================================= */}
+        <div 
+          className="flex-1 flex flex-col items-center justify-center relative w-full md:w-auto"
+          style={{ margin: '4px 0', minHeight: '78px' }}
+        >
+          <div 
+            className="text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase whitespace-nowrap z-10"
+            style={{ marginBottom: '6px' }}
+          >
+            Moteur IA &amp; Backend
+          </div>
 
-              {activeTab === 'map' && (
-                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center' }}>
-                  <div style={{ color: 'white', fontSize: '0.6rem', fontWeight: 'bold', marginBottom: '10px' }}>Localisation GPS</div>
-                  <div style={{ flex: 1, width: '100%', borderRadius: '10px', background: 'repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 10px, transparent 10px, transparent 20px)', position: 'relative', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    {/* Dog location blip */}
-                    <motion.div animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: 'absolute', top: '40%', left: '40%', width: '10px', height: '10px', background: '#00ffcc', borderRadius: '50%', boxShadow: '0 0 10px #00ffcc' }} />
-                  </div>
-                </motion.div>
-              )}
+          {/* Zone de transit des données */}
+          <div className="relative w-[44px] h-[56px] md:w-full md:max-w-[260px] lg:max-w-[320px] md:h-[48px] flex items-center justify-center">
+            
+            {/* Ligne de connexion (Verticale sur mobile, Horizontale sur desktop) */}
+            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1.5px] md:top-1/2 md:bottom-auto md:-translate-y-1/2 md:left-0 md:right-0 md:translate-x-0 md:w-full md:h-[1.5px] bg-gradient-to-b md:bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+            {/* Particules lumineuses */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="pawrise-particle absolute bg-[#00ffcc] rounded-full shadow-[0_0_10px_#00ffcc] w-[7px] h-[7px]"
+                  style={{ animationDelay: `${i * 0.7}s` }}
+                />
+              ))}
             </div>
 
-            {/* Bottom Navigation Bar */}
-            <div style={{ marginTop: '10px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', padding: '5px', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-              <div onClick={() => setActiveTab('health')} style={{ cursor: 'pointer', padding: '5px', borderRadius: '5px', background: activeTab === 'health' ? 'rgba(255,255,255,0.1)' : 'transparent' }}>
-                <Activity size={14} color={activeTab === 'health' ? '#00ffcc' : '#888'} />
+            {/* Puce Centrale IA (Style Apple Silicon) */}
+            <div 
+              className="relative z-10 flex items-center gap-2 rounded-xl bg-[#141417]/90 border border-white/15 shadow-[0_8px_24px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+              style={{ padding: '6px 10px' }}
+            >
+              <div className="relative w-6 h-6 rounded-lg bg-[#00ffcc]/10 border border-[#00ffcc]/30 flex items-center justify-center">
+                <Cpu size={14} className="text-[#00ffcc]" />
               </div>
-              <div onClick={() => setActiveTab('map')} style={{ cursor: 'pointer', padding: '5px', borderRadius: '5px', background: activeTab === 'map' ? 'rgba(255,255,255,0.1)' : 'transparent' }}>
-                <Wifi size={14} color={activeTab === 'map' ? '#00ffcc' : '#888'} />
+              <div className="flex flex-col text-left">
+                <span className="text-[10px] font-semibold text-white leading-tight whitespace-nowrap">
+                  Anomaly AI
+                </span>
+                <span className="text-[8px] font-mono text-[#00ffcc] leading-tight whitespace-nowrap">
+                  Score: 99.4% OK
+                </span>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================
+            3. APPLICATION MOBILE (Style iPhone Pro / Apple Santé)
+           ========================================================= */}
+        <div className="flex flex-col items-center shrink-0">
+          <div 
+            className="text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase"
+            style={{ marginBottom: '8px' }}
+          >
+            Mobile App
+          </div>
+
+          {/* Châssis iPhone Pro */}
+          <div 
+            className="w-[185px] h-[222px] sm:w-[190px] sm:h-[230px] bg-[#0b0b0e] border-[2.5px] border-[#2c2c2e] rounded-[26px] relative flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.85),inset_0_0_0_1px_rgba(255,255,255,0.06)] overflow-hidden shrink-0"
+            style={{ padding: '10px 10px 8px 10px' }}
+          >
+            {/* Dynamic Island */}
+            <div 
+              className="w-[46px] h-[11px] bg-black rounded-full mx-auto flex items-center justify-end shrink-0 border border-white/[0.06]"
+              style={{ padding: '0 4px', marginBottom: '6px' }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00ffcc]/80" />
+            </div>
+
+            {/* Contenu Dynamique de l'écran */}
+            <div className="flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
+              <AnimatePresence mode="wait">
+                {activeTab === 'health' ? (
+                  <motion.div
+                    key="health"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex flex-col justify-between h-full"
+                  >
+                    {/* En-tête Profil Animal */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div 
+                          className="w-6 h-6 rounded-full border border-white/20 shrink-0"
+                          style={{ 
+                            background: 'url(https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=80&h=80&fit=crop) center/cover' 
+                          }} 
+                        />
+                        <div className="leading-none">
+                          <div className="text-white text-[11px] font-semibold">Rex</div>
+                          <div className="text-[#00ffcc] text-[8px] font-medium flex items-center gap-1" style={{ marginTop: '2px' }}>
+                            <span className="w-1 h-1 rounded-full bg-[#00ffcc]" /> En ligne
+                          </div>
+                        </div>
+                      </div>
+                      <span 
+                        className="text-[8px] font-mono text-white/60 bg-white/[0.06] rounded-full border border-white/10"
+                        style={{ padding: '2px 5px' }}
+                      >
+                        LIVE
+                      </span>
+                    </div>
+
+                    {/* Carte Fréquence Cardiaque (Apple Health Style) */}
+                    <div 
+                      className="rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between"
+                      style={{ padding: '8px 10px', margin: '6px 0' }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <motion.div 
+                          animate={{ scale: [1, 1.22, 1] }} 
+                          transition={{ duration: 0.75, repeat: Infinity }}
+                          className="w-7 h-7 rounded-lg bg-[#ff2d55]/15 border border-[#ff2d55]/30 flex items-center justify-center"
+                        >
+                          <Heart size={15} color="#ff2d55" fill="#ff2d55" />
+                        </motion.div>
+                        <div>
+                          <div className="text-[8px] text-[#86868b] uppercase tracking-wider">Rythme</div>
+                          <div className="text-[9px] text-[#00ffcc] font-medium">Normal</div>
+                        </div>
+                      </div>
+                      <div className="text-right leading-none">
+                        <div className="text-white text-[15px] font-mono font-bold tabular-nums">
+                          {heartRate}
+                        </div>
+                        <div className="text-[#86868b] text-[8px] font-medium" style={{ marginTop: '2px' }}>
+                          BPM
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mini Graphe Temporel (Time-Series) */}
+                    <div className="flex flex-col">
+                      <div className="flex justify-between items-center text-[8px] text-[#86868b]" style={{ marginBottom: '3px' }}>
+                        <span>Variabilité (HRV)</span>
+                        <span className="text-white/70 font-mono">60s</span>
+                      </div>
+                      <div className="h-[24px] flex items-end gap-[3px]">
+                        {[42, 65, 52, 84, 58, 74, 92, 68, 78].map((h, i) => (
+                          <motion.div 
+                            key={i} 
+                            initial={{ height: 0 }} 
+                            animate={{ height: `${h}%` }} 
+                            transition={{ duration: 0.6, delay: i * 0.05 }} 
+                            className="flex-1 rounded-[2px] bg-gradient-to-t from-[#00ffcc]/30 to-[#00ffcc]/80" 
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="map"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex flex-col justify-between h-full"
+                  >
+                    <div className="flex items-center justify-between" style={{ marginBottom: '4px' }}>
+                      <span className="text-white text-[10px] font-semibold">Localisation GPS</span>
+                      <span className="text-[#00ffcc] text-[8px] font-mono">± 1.2m</span>
+                    </div>
+
+                    {/* Carte Radar Style "Localiser" d'Apple */}
+                    <div 
+                      className="flex-1 w-full rounded-xl relative overflow-hidden border border-white/10 flex items-center justify-center"
+                      style={{
+                        background: 'radial-gradient(circle at center, rgba(0,255,204,0.12) 0%, rgba(15,15,18,0.95) 75%)',
+                        backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+                        backgroundSize: '14px 14px'
+                      }}
+                    >
+                      {/* Cercle de périmètre */}
+                      <motion.div
+                        animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                        className="w-7 h-7 rounded-full border border-[#00ffcc] absolute"
+                      />
+                      {/* Point GPS Rex */}
+                      <div className="relative z-10 w-3 h-3 rounded-full bg-[#00ffcc] border-2 border-white shadow-[0_0_12px_#00ffcc]" />
+
+                      {/* Badge distance */}
+                      <div 
+                        className="absolute bottom-1.5 left-1.5 right-1.5 bg-black/75 backdrop-blur-md rounded-lg border border-white/10 flex items-center justify-between"
+                        style={{ padding: '3px 6px' }}
+                      >
+                        <span className="text-[8px] text-white/90 flex items-center gap-1">
+                          <Navigation size={8} className="text-[#00ffcc]" /> Zone sûre
+                        </span>
+                        <span className="text-[8px] font-mono text-[#00ffcc]">à 14m</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Barre de navigation inférieure (Segmented Dock) */}
+            <div 
+              className="bg-white/[0.06] border border-white/[0.08] rounded-xl flex justify-between items-center shrink-0"
+              style={{ padding: '3px', marginTop: '6px' }}
+            >
+              <button
+                type="button"
+                onClick={() => setActiveTab('health')}
+                className={`flex-1 flex items-center justify-center gap-1 rounded-lg text-[9px] font-medium transition-all cursor-pointer border-none ${
+                  activeTab === 'health' ? 'bg-white/15 text-[#00ffcc]' : 'bg-transparent text-[#86868b]'
+                }`}
+                style={{ padding: '4px 0' }}
+              >
+                <Activity size={11} />
+                <span>Santé</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('map')}
+                className={`flex-1 flex items-center justify-center gap-1 rounded-lg text-[9px] font-medium transition-all cursor-pointer border-none ${
+                  activeTab === 'map' ? 'bg-white/15 text-[#00ffcc]' : 'bg-transparent text-[#86868b]'
+                }`}
+                style={{ padding: '4px 0' }}
+              >
+                <Navigation size={11} />
+                <span>GPS</span>
+              </button>
             </div>
 
           </div>

@@ -186,20 +186,30 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{ padding: '20px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
             >
-              <div className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 shrink-0">
-                <h2 className="bento-title text-base sm:text-lg lg:text-xl m-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">Pawrise Care : Health Dashboard</h2>
+              <div 
+                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 sm:gap-0 shrink-0"
+                style={{ marginBottom: '16px' }}
+              >
+                <h2 
+                  className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+                  style={{ margin: 0 }}
+                >
+                  Pawrise Care : Health Dashboard
+                </h2>
                 <div className="flex gap-2">
                   <a 
                     href="https://pawrise-care.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="pointer-events-auto bg-[#00ffcc]/10 border border-[#00ffcc]/40 text-[#00ffcc] px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center"
+                    className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95"
+                    style={{ padding: '6px 14px' }}
                   >
                     Visiter le site ↗
                   </a>
                   <button 
                     onClick={() => setSelectedProject(5)}
-                    className="pointer-events-auto bg-white/10 border border-white/30 text-white px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md"
+                    className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-full text-xs cursor-pointer backdrop-blur-md transition-all active:scale-95"
+                    style={{ padding: '6px 14px' }}
                   >
                     Détails ➔
                   </button>
