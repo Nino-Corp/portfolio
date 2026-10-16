@@ -227,54 +227,80 @@ export default function Home() {
       {/* SECTION : INTELLIGENCE ARTIFICIELLE */}
       <section className="snap-section">
         <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>03 / Intelligence Artificielle</h2>
-          <div className="bento-grid">
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>03 / Intelligence Artificielle</h2>
 
-            {/* Tuile 2: Projet 1 */}
-            <motion.div 
-              className="bento-cell col-span-2 row-span-2 min-h-[350px] lg:min-h-0"
+          {/* Layout flex : row sur desktop, col sur mobile */}
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '16px', width: '100%' }} className="ai-projects-row">
+
+            {/* Carte 1 : Crash & Learn RL */}
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ padding: 0 }} 
+              className="bento-cell"
+              style={{ flex: 1, minHeight: '420px', padding: 0, position: 'relative', overflow: 'hidden' }}
             >
               <RLCarDemo />
-              <div className="bento-content-bottom absolute bottom-0 left-0 right-0 p-4 sm:p-7 bg-gradient-to-t from-black/80 to-transparent pointer-events-none flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                <div>
-                  <h2 className="bento-title text-base sm:text-lg lg:text-xl m-0">Crash & Learn RL</h2>
-                  <p className="bento-desc text-xs sm:text-sm">Apprentissage par Renforcement Profond</p>
+              {/* Overlay bas */}
+              <div
+                style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0,
+                  padding: '20px',
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
+                  display: 'flex', flexDirection: 'column', gap: '10px',
+                  pointerEvents: 'none',
+                  zIndex: 20,
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>Crash &amp; Learn RL</h3>
+                    <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: '#a1a1a6' }}>Apprentissage par Renforcement Profond</p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(1)}
+                    style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap', flexShrink: 0 }}
+                  >
+                    Détails ➔
+                  </button>
                 </div>
-                <button 
-                  onClick={() => setSelectedProject(1)}
-                  className="pointer-events-auto bg-white/10 border border-white/30 text-white px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md"
-                >
-                  Détails ➔
-                </button>
               </div>
             </motion.div>
 
-            {/* Tuile 3: Projet 2 */}
-            <motion.div 
-              className="bento-cell col-span-2 row-span-2 min-h-[350px] lg:min-h-0"
+            {/* Carte 2 : DiagAI Médical */}
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              style={{ padding: 0 }}
+              className="bento-cell"
+              style={{ flex: 1, minHeight: '420px', padding: 0, position: 'relative', overflow: 'hidden' }}
             >
               <MedicalScanDemo />
-              <div className="bento-content-bottom absolute bottom-0 left-0 right-0 p-4 sm:p-7 bg-gradient-to-t from-black/80 to-transparent pointer-events-none flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 sm:gap-0">
-                <div>
-                  <h2 className="bento-title text-base sm:text-lg lg:text-xl m-0">DiagAI Médical</h2>
-                  <p className="bento-desc text-xs sm:text-sm">Diagnostic par réseaux de neurones</p>
+              {/* Overlay bas */}
+              <div
+                style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0,
+                  padding: '20px',
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
+                  display: 'flex', flexDirection: 'column', gap: '10px',
+                  pointerEvents: 'none',
+                  zIndex: 20,
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>DiagAI Médical</h3>
+                    <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: '#a1a1a6' }}>Diagnostic par réseaux de neurones</p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(2)}
+                    style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap', flexShrink: 0 }}
+                  >
+                    Détails ➔
+                  </button>
                 </div>
-                <button 
-                  onClick={() => setSelectedProject(2)}
-                  className="pointer-events-auto bg-white/10 border border-white/30 text-white px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md"
-                >
-                  Détails ➔
-                </button>
               </div>
             </motion.div>
 
@@ -285,43 +311,43 @@ export default function Home() {
       {/* SECTION : DATA ENGINEERING */}
       <section className="snap-section">
         <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>04 / Data Engineering & Architecture</h2>
-          <div className="bento-grid">
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>04 / Data Engineering & Architecture</h2>
 
-            {/* Tuile 4: Projet 3 */}
-            <motion.div 
-              className="bento-cell col-span-4 row-span-1 min-h-[650px] lg:min-h-[350px] flex flex-col"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              style={{ padding: '20px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
-            >
-              <div className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 shrink-0">
-                <h2 className="bento-title text-base sm:text-lg lg:text-xl m-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">Linxo : Pipeline d'Enrichissement (Fintech)</h2>
-                <div className="flex gap-2">
-                  <a 
-                    href="https://www.linxo.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="pointer-events-auto bg-[#00ffcc]/10 border border-[#00ffcc]/40 text-[#00ffcc] px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center"
-                  >
-                    Visiter le site ↗
-                  </a>
-                  <button 
-                    onClick={() => setSelectedProject(3)}
-                    className="pointer-events-auto bg-white/10 border border-white/30 text-white px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md"
-                  >
-                    Détails ➔
-                  </button>
-                </div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="bento-cell data-engineering-card"
+            style={{ padding: '20px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
+          >
+            {/* Header titre + boutons */}
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '16px', flexShrink: 0, flexWrap: 'wrap' }}>
+              <h3 style={{ margin: 0, fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>Linxo : Pipeline d'Enrichissement (Fintech)</h3>
+              <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+                <a
+                  href="https://www.linxo.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ background: 'rgba(0,255,204,0.1)', border: '1px solid rgba(0,255,204,0.4)', color: '#00ffcc', padding: '7px 14px', borderRadius: '20px', fontSize: '0.72rem', cursor: 'pointer', backdropFilter: 'blur(10px)', textDecoration: 'none', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}
+                >
+                  Visiter ↗
+                </a>
+                <button
+                  onClick={() => setSelectedProject(3)}
+                  style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '7px 14px', borderRadius: '20px', fontSize: '0.72rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap' }}
+                >
+                  Détails ➔
+                </button>
               </div>
-              <div className="flex-1 relative w-full rounded-xl overflow-hidden">
-                <DataArchitectureDemo />
-              </div>
-            </motion.div>
+            </div>
 
-          </div>
+            {/* Demo area */}
+            <div style={{ flex: 1, position: 'relative', width: '100%', borderRadius: '12px', overflow: 'hidden', minHeight: '300px' }}>
+              <DataArchitectureDemo />
+            </div>
+          </motion.div>
+
         </div>
       </section>
 

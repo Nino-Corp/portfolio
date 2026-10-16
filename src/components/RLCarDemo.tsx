@@ -74,44 +74,45 @@ export default function RLCarDemo() {
   }, [epoch, controls]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col p-[25px] pb-[120px] sm:pb-[90px]">
+    <div className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col" style={{ padding: '16px 16px 0' }}>
       
       {/* Header stats */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', zIndex: 10, paddingBottom: '15px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 10, paddingBottom: '12px', flexShrink: 0 }}>
         <div>
-          <div style={{ fontSize: '0.6rem', color: '#888', letterSpacing: '0.1em' }}>SIMULATION EPOCH</div>
-          <div style={{ fontFamily: 'monospace', fontSize: '1.4rem', color: 'white' }}>{epoch.toString().padStart(3, '0')}</div>
+          <div style={{ fontSize: '0.55rem', color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Simulation Epoch</div>
+          <div style={{ fontFamily: 'monospace', fontSize: 'clamp(1.1rem, 3vw, 1.4rem)', color: 'white', fontWeight: 700 }}>{epoch.toString().padStart(3, '0')}</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '0.6rem', color: '#888', letterSpacing: '0.1em' }}>STATUS</div>
+          <div style={{ fontSize: '0.55rem', color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Status</div>
           <div style={{ 
             fontFamily: 'monospace', 
-            fontSize: '1.2rem', 
-            fontWeight: 'bold',
-            color: status === "CRASH !" ? '#ff3366' : status === "GOAL REACHED !" ? '#00ffcc' : 'white' 
+            fontSize: 'clamp(0.7rem, 2vw, 1.1rem)', 
+            fontWeight: 700,
+            color: status === "CRASH !" ? '#ff3366' : status === "GOAL REACHED !" ? '#00ffcc' : 'white',
+            letterSpacing: '0.05em',
           }}>
             {status}
           </div>
         </div>
       </div>
 
-      {/* Circuit Area (Prend tout l'espace restant) */}
-      <div style={{ flex: 1, position: 'relative', marginTop: '10px', background: '#0a0a0c', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
+      {/* Circuit Area (flex: 1 = prend tout l'espace restant, jusqu'au bas) */}
+      <div style={{ flex: 1, position: 'relative', background: '#0a0a0c', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', marginBottom: '16px' }}>
         
-        {/* Grille de fond pour le style technique */}
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+        {/* Grille de fond */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
 
-        {/* Mur extérieur du circuit */}
-        <div style={{ position: 'absolute', inset: '5%', border: '4px solid rgba(255,255,255,0.2)', borderRadius: '30px' }} />
+        {/* Mur extérieur */}
+        <div style={{ position: 'absolute', inset: '6%', border: '3px solid rgba(255,255,255,0.18)', borderRadius: '28px' }} />
         
-        {/* Mur intérieur du circuit */}
-        <div style={{ position: 'absolute', inset: '22%', border: '4px solid rgba(255,255,255,0.2)', borderRadius: '15px', background: '#111' }} />
+        {/* Mur intérieur */}
+        <div style={{ position: 'absolute', inset: '22%', border: '3px solid rgba(255,255,255,0.18)', borderRadius: '14px', background: '#111' }} />
         
         {/* Ligne de départ / arrivée */}
-        <div style={{ position: 'absolute', left: '50%', bottom: '10%', width: '4px', height: '12%', background: 'repeating-linear-gradient(0deg, #fff, #fff 5px, #000 5px, #000 10px)', transform: 'translateX(-50%)' }} />
+        <div style={{ position: 'absolute', left: '50%', bottom: '10%', width: '3px', height: '12%', background: 'repeating-linear-gradient(0deg, #fff, #fff 4px, #000 4px, #000 8px)', transform: 'translateX(-50%)' }} />
 
-        {/* Labels START/GOAL */}
-        <div style={{ position: 'absolute', left: '50%', bottom: '2%', transform: 'translateX(-50%)', fontSize: '0.5rem', color: '#888', fontWeight: 'bold' }}>START / FINISH</div>
+        {/* Label */}
+        <div style={{ position: 'absolute', left: '50%', bottom: '2%', transform: 'translateX(-50%)', fontSize: '0.45rem', color: '#666', fontWeight: 'bold', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>START / FINISH</div>
 
         {/* La "Voiture" AI */}
         <motion.div
@@ -125,11 +126,10 @@ export default function RLCarDemo() {
             boxShadow: '0 0 15px #00ffcc, 0 0 5px #fff',
             zIndex: 20,
             transformOrigin: 'center center',
-            marginLeft: '-8px', // Centrage
+            marginLeft: '-8px',
             marginTop: '-5px'
           }}
         >
-          {/* Petits "phares" */}
           <div style={{ position: 'absolute', right: '-2px', top: '1px', width: '3px', height: '2px', background: '#fff', borderRadius: '50%', boxShadow: '2px 0 5px #fff' }} />
           <div style={{ position: 'absolute', right: '-2px', bottom: '1px', width: '3px', height: '2px', background: '#fff', borderRadius: '50%', boxShadow: '2px 0 5px #fff' }} />
         </motion.div>
