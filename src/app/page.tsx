@@ -318,8 +318,8 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bento-cell data-engineering-card"
-            style={{ padding: '20px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
+            className="bento-cell data-engineering-card p-5 sm:p-6"
+            style={{ position: 'relative', backgroundColor: '#050505', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
           >
             {/* Header titre + boutons */}
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '16px', flexShrink: 0, flexWrap: 'wrap' }}>
