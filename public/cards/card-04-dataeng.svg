@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg-dataeng" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#0a1824" stop-opacity="1" />
+      <stop offset="50%" stop-color="#050d16" stop-opacity="1" />
+      <stop offset="100%" stop-color="#020408" stop-opacity="1" />
+    </radialGradient>
+
+    <radialGradient id="de-core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.7" />
+      <stop offset="40%" stop-color="#3b82f6" stop-opacity="0.3" />
+      <stop offset="80%" stop-color="#1d4ed8" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="stream-pipe-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.3" />
+    </linearGradient>
+
+    <linearGradient id="stream-pipe-2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.2" />
+      <stop offset="50%" stop-color="#00ffcc" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8" />
+    </linearGradient>
+
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+    </filter>
+    <filter id="glow-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+    </filter>
+
+    <pattern id="grid-de" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ffffff" stroke-width="0.75" stroke-opacity="0.03" />
+    </pattern>
+  </defs>
+
+  <!-- Deep Obsidian Canvas -->
+  <rect width="560" height="800" fill="url(#bg-dataeng)" />
+  <rect width="560" height="800" fill="url(#grid-de)" />
+
+  <!-- Ambient Light -->
+  <circle cx="280" cy="340" r="180" fill="url(#de-core-glow)" filter="url(#glow-heavy)" opacity="0.6" />
+
+  <!-- Technical Grid Conduits & HUD Lines -->
+  <g opacity="0.25">
+    <circle cx="280" cy="340" r="210" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2 10" />
+    <circle cx="280" cy="340" r="150" fill="none" stroke="#00ffcc" stroke-width="0.75" stroke-dasharray="8 8" />
+  </g>
+
+  <!-- Precision Technical Reticle -->
+  <g opacity="0.3" stroke="#00ffcc" stroke-width="1">
+    <line x1="280" y1="90" x2="280" y2="120" />
+    <line x1="280" y1="560" x2="280" y2="590" />
+    <line x1="50" y1="340" x2="80" y2="340" />
+    <line x1="480" y1="340" x2="510" y2="340" />
+  </g>
+
+  <!-- Central Motif: High-Throughput Pipeline Bus & Microservice Nodes -->
+  <g transform="translate(0, 0)">
+    <!-- Main Conduit Spine 1 (Curved High-Speed Data Highway) -->
+    <path d="M 70 260 
+             C 170 260, 210 320, 280 320 
+             C 350 320, 390 380, 490 380" 
+          fill="none" 
+          stroke="url(#stream-pipe-1)" 
+          stroke-width="2.5" 
+          stroke-linecap="round" />
+
+    <!-- Conduit Spine 2 (Secondary Parallel Pipeline) -->
+    <path d="M 70 340 
+             C 160 340, 210 340, 280 340 
+             C 350 340, 400 340, 490 340" 
+          fill="none" 
+          stroke="#00ffcc" 
+          stroke-width="1.2" 
+          stroke-dasharray="6 8" 
+          opacity="0.6" />
+
+    <!-- Conduit Spine 3 (Feedback / Transform Loop) -->
+    <path d="M 70 420 
+             C 170 420, 210 360, 280 360 
+             C 350 360, 390 300, 490 300" 
+          fill="none" 
+          stroke="url(#stream-pipe-2)" 
+          stroke-width="2" 
+          stroke-linecap="round" />
+
+    <!-- Isometric Central Pipeline Hub (Linxo Microservice Bus) -->
+    <g transform="translate(280, 340)">
+      <!-- Central Processing Rhombus / Cube -->
+      <polygon points="0,-45 42,-20 42,25 0,50 -42,25 -42,-20" fill="#040c14" stroke="#00ffcc" stroke-width="1.8" />
+      <polygon points="0,-45 42,-20 0,5 -42,-20" fill="rgba(0,255,204,0.12)" stroke="#00ffcc" stroke-width="1" />
+      <polygon points="0,5 42,-20 42,25 0,50" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="1" />
+      <polygon points="0,5 -42,-20 -42,25 0,50" fill="rgba(0,229,255,0.08)" stroke="#00e5ff" stroke-width="1" />
+
+      <!-- Center Hub Light Indicator -->
+      <circle cx="0" cy="5" r="8" fill="#00ffcc" filter="url(#glow-soft)" />
+      <circle cx="0" cy="5" r="3" fill="#ffffff" />
+    </g>
+
+    <!-- Upstream Ingestion Node (Left) -->
+    <g transform="translate(160, 290)">
+      <circle cx="0" cy="0" r="18" fill="#05101a" stroke="#3b82f6" stroke-width="1.5" />
+      <circle cx="0" cy="0" r="7" fill="#00ffcc" filter="url(#glow-soft)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" />
+      <circle cx="0" cy="0" r="26" fill="none" stroke="#3b82f6" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5" />
+    </g>
+
+    <!-- Downstream Ingestion Node (Right) -->
+    <g transform="translate(400, 390)">
+      <circle cx="0" cy="0" r="18" fill="#05101a" stroke="#00ffcc" stroke-width="1.5" />
+      <circle cx="0" cy="0" r="7" fill="#00e5ff" filter="url(#glow-soft)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" />
+      <circle cx="0" cy="0" r="26" fill="none" stroke="#00ffcc" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.5" />
+    </g>
+
+    <!-- Moving Data Packet Pulses along Conduits -->
+    <!-- Packet 1 -->
+    <circle cx="110" cy="260" r="4.5" fill="#ffffff" filter="url(#glow-soft)" />
+    <circle cx="215" cy="295" r="5" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="215" cy="295" r="2" fill="#ffffff" />
+
+    <!-- Packet 2 -->
+    <circle cx="345" cy="385" r="5" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="345" cy="385" r="2" fill="#ffffff" />
+    <circle cx="450" cy="380" r="4.5" fill="#ffffff" filter="url(#glow-soft)" />
+
+    <!-- Packet 3 (Reverse / Feedback) -->
+    <circle cx="120" cy="420" r="4" fill="#3b82f6" filter="url(#glow-soft)" />
+    <circle cx="345" cy="325" r="4.5" fill="#00e5ff" filter="url(#glow-soft)" />
+    <circle cx="440" cy="305" r="4" fill="#00ffcc" filter="url(#glow-soft)" />
+  </g>
+
+  <!-- Bottom Vignette -->
+  <rect y="520" width="560" height="280" fill="url(#bg-dataeng)" opacity="0.85" />
+</svg>

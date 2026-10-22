@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg-ia" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#120c1f" stop-opacity="1" />
+      <stop offset="50%" stop-color="#080612" stop-opacity="1" />
+      <stop offset="100%" stop-color="#020306" stop-opacity="1" />
+    </radialGradient>
+
+    <radialGradient id="ia-core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.6" />
+      <stop offset="35%" stop-color="#a855f7" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#6366f1" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="neural-link" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#a855f7" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.3" />
+    </linearGradient>
+
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+    </filter>
+    <filter id="glow-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+    </filter>
+
+    <pattern id="grid-ia" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ffffff" stroke-width="0.75" stroke-opacity="0.03" />
+    </pattern>
+  </defs>
+
+  <!-- Deep Obsidian Canvas -->
+  <rect width="560" height="800" fill="url(#bg-ia)" />
+  <rect width="560" height="800" fill="url(#grid-ia)" />
+
+  <!-- Ambient Light -->
+  <circle cx="280" cy="340" r="180" fill="url(#ia-core-glow)" filter="url(#glow-heavy)" opacity="0.6" />
+
+  <!-- Radar Arc (LiDAR Perception Range) -->
+  <g opacity="0.3">
+    <path d="M 120 400 A 180 180 0 0 1 440 400" fill="none" stroke="#00ffcc" stroke-width="1" stroke-dasharray="2 8" />
+    <path d="M 160 380 A 130 130 0 0 1 400 380" fill="none" stroke="#a855f7" stroke-width="0.75" stroke-dasharray="4 6" />
+    <path d="M 200 360 A 80 80 0 0 1 360 360" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-dasharray="1 4" opacity="0.5" />
+    <!-- LiDAR Scan Sweep Line -->
+    <line x1="280" y1="420" x2="160" y2="240" stroke="#00ffcc" stroke-width="1.2" opacity="0.7" stroke-dasharray="3 3" />
+  </g>
+
+  <!-- Technical Reticle -->
+  <g opacity="0.3" stroke="#00ffcc" stroke-width="1">
+    <line x1="280" y1="90" x2="280" y2="120" />
+    <line x1="280" y1="560" x2="280" y2="590" />
+    <line x1="50" y1="340" x2="80" y2="340" />
+    <line x1="480" y1="340" x2="510" y2="340" />
+  </g>
+
+  <!-- Central Motif: Neural Tensor Synaptic Lattice & Vision Target -->
+  <g transform="translate(0, 0)">
+    <!-- Neural Network Synapse Lines -->
+    <g stroke="url(#neural-link)" stroke-width="1.2" opacity="0.7">
+      <!-- Layer 1 to Layer 2 -->
+      <line x1="180" y1="260" x2="240" y2="310" />
+      <line x1="180" y1="260" x2="240" y2="370" />
+      <line x1="160" y1="340" x2="240" y2="310" />
+      <line x1="160" y1="340" x2="240" y2="370" />
+      <line x1="180" y1="420" x2="240" y2="370" />
+      <line x1="180" y1="420" x2="280" y2="430" />
+
+      <!-- Layer 2 to Layer 3 (Center Core) -->
+      <line x1="240" y1="310" x2="320" y2="290" />
+      <line x1="240" y1="310" x2="320" y2="360" />
+      <line x1="240" y1="370" x2="320" y2="360" />
+      <line x1="240" y1="370" x2="320" y2="410" />
+
+      <!-- Layer 3 to Layer 4 -->
+      <line x1="320" y1="290" x2="400" y2="280" />
+      <line x1="320" y1="290" x2="380" y2="340" />
+      <line x1="320" y1="360" x2="380" y2="340" />
+      <line x1="320" y1="410" x2="400" y2="400" />
+
+      <!-- Cross-connections -->
+      <line x1="240" y1="310" x2="280" y2="230" stroke="#00ffcc" stroke-width="0.8" opacity="0.5" stroke-dasharray="2 3" />
+      <line x1="320" y1="290" x2="280" y2="230" stroke="#a855f7" stroke-width="0.8" opacity="0.5" stroke-dasharray="2 3" />
+    </g>
+
+    <!-- Medical Vision Scan Box / Bounding Target (Isometric / Floating) -->
+    <rect x="220" y="270" width="120" height="120" rx="16" fill="rgba(168,85,247,0.04)" stroke="#a855f7" stroke-width="1.2" stroke-dasharray="6 8" opacity="0.6" />
+    <path d="M 215 285 L 215 265 L 235 265" fill="none" stroke="#00ffcc" stroke-width="2" />
+    <path d="M 325 265 L 345 265 L 345 285" fill="none" stroke="#00ffcc" stroke-width="2" />
+    <path d="M 215 375 L 215 395 L 235 395" fill="none" stroke="#00ffcc" stroke-width="2" />
+    <path d="M 325 395 L 345 395 L 345 375" fill="none" stroke="#00ffcc" stroke-width="2" />
+
+    <!-- Neural Nodes (Glowing Dots) -->
+    <!-- Input layer -->
+    <circle cx="180" cy="260" r="5" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="180" cy="260" r="2.5" fill="#ffffff" />
+    <circle cx="160" cy="340" r="4.5" fill="#a855f7" filter="url(#glow-soft)" />
+    <circle cx="160" cy="340" r="2" fill="#ffffff" />
+    <circle cx="180" cy="420" r="5" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="180" cy="420" r="2.5" fill="#ffffff" />
+
+    <!-- Hidden layer 1 -->
+    <circle cx="240" cy="310" r="6" fill="#00e5ff" filter="url(#glow-soft)" />
+    <circle cx="240" cy="310" r="3" fill="#ffffff" />
+    <circle cx="240" cy="370" r="6" fill="#a855f7" filter="url(#glow-soft)" />
+    <circle cx="240" cy="370" r="3" fill="#ffffff" />
+
+    <!-- Focal Decision Core (Markov / Agent Center) -->
+    <circle cx="280" cy="340" r="18" fill="none" stroke="#00ffcc" stroke-width="1.5" />
+    <circle cx="280" cy="340" r="10" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="280" cy="340" r="4" fill="#ffffff" />
+
+    <!-- Hidden layer 2 -->
+    <circle cx="320" cy="290" r="6" fill="#a855f7" filter="url(#glow-soft)" />
+    <circle cx="320" cy="290" r="3" fill="#ffffff" />
+    <circle cx="320" cy="360" r="5.5" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="320" cy="360" r="2.5" fill="#ffffff" />
+    <circle cx="320" cy="410" r="5" fill="#6366f1" filter="url(#glow-soft)" />
+    <circle cx="320" cy="410" r="2" fill="#ffffff" />
+
+    <!-- Output layer -->
+    <circle cx="400" cy="280" r="5" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="400" cy="280" r="2" fill="#ffffff" />
+    <circle cx="380" cy="340" r="6" fill="#a855f7" filter="url(#glow-soft)" />
+    <circle cx="380" cy="340" r="3" fill="#ffffff" />
+    <circle cx="400" cy="400" r="4.5" fill="#00e5ff" filter="url(#glow-soft)" />
+    <circle cx="400" cy="400" r="2" fill="#ffffff" />
+
+    <!-- Apex Satellite -->
+    <circle cx="280" cy="230" r="4" fill="#ffffff" filter="url(#glow-soft)" />
+    <circle cx="280" cy="430" r="3.5" fill="#00ffcc" />
+  </g>
+
+  <!-- Bottom Vignette -->
+  <rect y="520" width="560" height="280" fill="url(#bg-ia)" opacity="0.85" />
+</svg>

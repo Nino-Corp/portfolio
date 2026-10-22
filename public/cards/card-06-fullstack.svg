@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="bg-fullstack" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#071c18" stop-opacity="1" />
+      <stop offset="50%" stop-color="#040e0c" stop-opacity="1" />
+      <stop offset="100%" stop-color="#020404" stop-opacity="1" />
+    </radialGradient>
+
+    <radialGradient id="fs-core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0.75" />
+      <stop offset="40%" stop-color="#10b981" stop-opacity="0.35" />
+      <stop offset="80%" stop-color="#047857" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="glass-plate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="40%" stop-color="#00ffcc" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.03" />
+    </linearGradient>
+
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+    </filter>
+    <filter id="glow-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+    </filter>
+
+    <pattern id="grid-fs" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#ffffff" stroke-width="0.75" stroke-opacity="0.03" />
+    </pattern>
+  </defs>
+
+  <!-- Deep Obsidian Canvas -->
+  <rect width="560" height="800" fill="url(#bg-fullstack)" />
+  <rect width="560" height="800" fill="url(#grid-fs)" />
+
+  <!-- Ambient Light -->
+  <circle cx="280" cy="340" r="180" fill="url(#fs-core-glow)" filter="url(#glow-heavy)" opacity="0.6" />
+
+  <!-- Technical Reticle & Orbit Rings -->
+  <g opacity="0.25">
+    <circle cx="280" cy="340" r="210" fill="none" stroke="#10b981" stroke-width="1" stroke-dasharray="2 10" />
+    <circle cx="280" cy="340" r="160" fill="none" stroke="#00ffcc" stroke-width="0.75" stroke-dasharray="6 6" />
+  </g>
+
+  <!-- Precision Technical Reticle -->
+  <g opacity="0.3" stroke="#00ffcc" stroke-width="1">
+    <line x1="280" y1="90" x2="280" y2="120" />
+    <line x1="280" y1="560" x2="280" y2="590" />
+    <line x1="50" y1="340" x2="80" y2="340" />
+    <line x1="480" y1="340" x2="510" y2="340" />
+  </g>
+
+  <!-- Central Motif: 3 Floating Isometric Glass Layers (Frontend, API, Database) -->
+  <g transform="translate(280, 340)">
+    <!-- Layer 3: Database / Infrastructure Layer (Bottom) -->
+    <g transform="translate(0, 75)">
+      <!-- Isometric Plane -->
+      <polygon points="0,-35 120,25 0,85 -120,25" fill="url(#glass-plate)" stroke="#10b981" stroke-width="1.2" opacity="0.5" />
+      <!-- DB Cylinder glyph -->
+      <ellipse cx="0" cy="25" rx="28" ry="12" fill="none" stroke="#10b981" stroke-width="1" />
+      <line x1="-28" y1="25" x2="-28" y2="35" stroke="#10b981" stroke-width="1" />
+      <line x1="28" y1="25" x2="28" y2="35" stroke="#10b981" stroke-width="1" />
+      <path d="M -28 35 A 28 12 0 0 0 28 35" fill="none" stroke="#10b981" stroke-width="1" />
+      <circle cx="0" cy="25" r="3" fill="#00ffcc" filter="url(#glow-soft)" />
+    </g>
+
+    <!-- Vertical Data Conduits (connecting Layer 3 to Layer 2) -->
+    <line x1="-60" y1="100" x2="-60" y2="25" stroke="#00ffcc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5" />
+    <line x1="60" y1="100" x2="60" y2="25" stroke="#00ffcc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5" />
+    <line x1="0" y1="100" x2="0" y2="25" stroke="#00ffcc" stroke-width="1.2" opacity="0.7" />
+
+    <!-- Layer 2: API Engine / Logic Layer (Middle) -->
+    <g transform="translate(0, 0)">
+      <!-- Isometric Plane -->
+      <polygon points="0,-40 130,25 0,90 -130,25" fill="url(#glass-plate)" stroke="#00ffcc" stroke-width="1.4" opacity="0.7" />
+      <!-- Logic Circuits on Plane -->
+      <line x1="-50" y1="25" x2="50" y2="25" stroke="#00ffcc" stroke-width="1" opacity="0.6" />
+      <line x1="0" y1="0" x2="0" y2="50" stroke="#00ffcc" stroke-width="1" opacity="0.6" />
+      <!-- Microservice Hub Nodes -->
+      <circle cx="-50" cy="25" r="5" fill="#00ffcc" filter="url(#glow-soft)" />
+      <circle cx="-50" cy="25" r="2" fill="#ffffff" />
+      <circle cx="50" cy="25" r="5" fill="#10b981" filter="url(#glow-soft)" />
+      <circle cx="50" cy="25" r="2" fill="#ffffff" />
+      <circle cx="0" cy="25" r="6" fill="#ffffff" filter="url(#glow-soft)" />
+      <circle cx="0" cy="25" r="3" fill="#00ffcc" />
+    </g>
+
+    <!-- Vertical Data Conduits (connecting Layer 2 to Layer 1) -->
+    <line x1="-60" y1="25" x2="-60" y2="-50" stroke="#00ffcc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5" />
+    <line x1="60" y1="25" x2="60" y2="-50" stroke="#00ffcc" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5" />
+    <line x1="0" y1="25" x2="0" y2="-50" stroke="#00ffcc" stroke-width="1.2" opacity="0.7" />
+
+    <!-- Layer 1: E-Commerce UI / Web Layer (Top Hero Plane) -->
+    <g transform="translate(0, -75)">
+      <!-- Isometric Glass Window Plate -->
+      <polygon points="0,-45 140,25 0,95 -140,25" fill="url(#glass-plate)" stroke="#ffffff" stroke-width="1.8" />
+      <polygon points="0,-45 140,25 0,95 -140,25" fill="rgba(0,255,204,0.06)" />
+
+      <!-- Minimalist E-Commerce Interface Wireframe Lines -->
+      <!-- App Header bar -->
+      <path d="M -90 12 L 0 -32 L 90 12" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.8" />
+      <!-- Window dots in isometric projection -->
+      <circle cx="-75" cy="5" r="2.5" fill="#00ffcc" />
+      <circle cx="-65" cy="0" r="2.5" fill="#00e5ff" />
+      <circle cx="-55" cy="-5" r="2.5" fill="#10b981" />
+
+      <!-- Product Card 1 (Left) -->
+      <polygon points="-70,25 -25,-2 -25,25 -70,52" fill="rgba(0,255,204,0.1)" stroke="#00ffcc" stroke-width="1" />
+      <!-- Product Card 2 (Right) -->
+      <polygon points="25,-2 70,25 70,52 25,25" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1" />
+
+      <!-- Floating Code Glyph `< / >` -->
+      <g transform="translate(0, 25)" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+        <path d="M -14 -4 L -22 4 L -14 12" />
+        <path d="M 14 -4 L 22 4 L 14 12" />
+        <line x1="-3" y1="16" x2="3" y2="-8" stroke="#00ffcc" stroke-width="1.8" />
+      </g>
+    </g>
+
+    <!-- Floating Energy Particles -->
+    <circle cx="-100" cy="-20" r="3" fill="#00ffcc" filter="url(#glow-soft)" />
+    <circle cx="100" cy="50" r="3.5" fill="#10b981" filter="url(#glow-soft)" />
+  </g>
+
+  <!-- Bottom Vignette -->
+  <rect y="520" width="560" height="280" fill="url(#bg-fullstack)" opacity="0.85" />
+</svg>

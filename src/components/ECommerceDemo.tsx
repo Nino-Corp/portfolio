@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function ECommerceDemo() {
   return (
-    <div className="w-full h-full absolute inset-0 overflow-hidden flex flex-col items-center justify-center bg-black pb-[30px]">
+    <div className="w-full h-full absolute inset-0 overflow-hidden flex flex-col items-center justify-center bg-black p-4 sm:p-6">
       
       {/* Glow en arrière-plan */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(46, 204, 113, 0.15) 0%, transparent 60%)' }} />
@@ -14,7 +14,7 @@ export default function ECommerceDemo() {
         initial={{ scale: 0.95, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        style={{ width: '90%', maxWidth: '750px', height: '100%', maxHeight: '300px', background: '#0a0a0c', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', zIndex: 10 }}
+        style={{ width: '90%', maxWidth: '750px', height: '100%', maxHeight: '360px', background: '#0a0a0c', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', zIndex: 10 }}
       >
         {/* Barre du navigateur */}
         <div style={{ position: 'relative', height: '40px', background: 'rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', padding: '0 15px', gap: '8px' }}>

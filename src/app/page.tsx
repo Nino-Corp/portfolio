@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Image from "next/image";
 import { motion } from "framer-motion";
 import MedicalScanDemo from '@/components/MedicalScanDemo';
 import DataArchitectureDemo from '@/components/DataArchitectureDemo';
 import RLCarDemo from '@/components/RLCarDemo';
 import ECommerceDemo from '@/components/ECommerceDemo';
 import PawriseCareDemo from '@/components/PawriseCareDemo';
+import HomepediaDemo from '@/components/HomepediaDemo';
 import { 
   SiPython, SiPytorch, SiPandas, SiC, SiCplusplus, 
   SiRacket, SiTypescript, SiJavascript, SiReact, 
@@ -15,20 +15,55 @@ import {
 import SocialCards from '@/components/ui/card-fan-carousel';
 
 const DEMO_CARDS = [
-  // 1. Crash & Learn RL (IA, Conduite, Lignes tech)
-  { imgUrl: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80", alt: "Crash & Learn RL" },
-  // 2. DiagAI Médical (Scanner, Géométrie abstraite)
-  { imgUrl: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80", alt: "DiagAI Médical" },
-  // 3. Architecture Data (Serveurs, Lignes lumineuses)
-  { imgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80", alt: "Architecture Data" },
-  // 4. LesAmisDuCBD (Végétal CBD / Minimaliste sombre)
-  { imgUrl: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80", alt: "LesAmisDuCBD" },
-  // 5. Pawrise Care (Data Science / Animaux)
-  { imgUrl: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80", alt: "Pawrise Care" },
-  // 6. Placeholder 2 (Circuits technologiques)
-  { imgUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 2" },
-  // 7. Placeholder 3 (Matrice de code noir/vert épuré)
-  { imgUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80", alt: "Projet à venir 3" },
+  { 
+    sectionId: "section-01",
+    title: "Introduction",
+    subtitle: "Parcours & Vision",
+    imgUrl: "/cards/card-01-intro.svg", 
+    alt: "Introduction" 
+  },
+  { 
+    sectionId: "section-02",
+    title: "Pawrise Care",
+    subtitle: "Data Science & IoT",
+    imgUrl: "/cards/card-02-pawrise.svg", 
+    alt: "Pawrise Care" 
+  },
+  { 
+    sectionId: "section-03",
+    title: "Intelligence Artificielle",
+    subtitle: "Deep RL & Computer Vision",
+    imgUrl: "/cards/card-03-ia.svg", 
+    alt: "Intelligence Artificielle" 
+  },
+  { 
+    sectionId: "section-04",
+    title: "Data Engineering",
+    subtitle: "Architecture & Pipelines Linxo",
+    imgUrl: "/cards/card-04-dataeng.svg", 
+    alt: "Data Engineering" 
+  },
+  { 
+    sectionId: "section-05",
+    title: "Big Data & DataOps",
+    subtitle: "Homepedia (Apache Spark)",
+    imgUrl: "/cards/card-05-bigdata.svg", 
+    alt: "Homepedia" 
+  },
+  { 
+    sectionId: "section-06",
+    title: "Développement Fullstack",
+    subtitle: "E-Commerce LesAmisDuCBD",
+    imgUrl: "/cards/card-06-fullstack.svg", 
+    alt: "LesAmisDuCBD" 
+  },
+  { 
+    sectionId: "section-07",
+    title: "Stack & Contact",
+    subtitle: "Technologies & Réseaux",
+    imgUrl: "/cards/card-07-stack.svg", 
+    alt: "Stack & Contact" 
+  },
 ];
 
 export default function Home() {
@@ -70,6 +105,13 @@ export default function Home() {
       subtitle: "Plateforme Connectée de Santé Animale",
       description: "Solution SaaS complète dédiée au bien-être des animaux de compagnie. Le projet couvre l'ensemble de la chaîne de valeur : l'acquisition des signes vitaux via collier IoT, le traitement des données via un Backend robuste, une application front-end intuitive pour les utilisateurs, et mon moteur d'IA pour détecter de manière proactive les anomalies de santé.",
       skills: ["Python (Scikit-Learn)", "Time-Series Analysis", "React Native", "Node.js API", "IoT Telemetry (MQTT)", "WebSocket"]
+    },
+    {
+      id: 6,
+      title: "Homepedia",
+      subtitle: "Plateforme Big Data & DataOps sur le Marché Immobilier",
+      description: "Conception et déploiement d'une infrastructure Big Data complète pour l'analyse multi-échelle du marché immobilier français (à destination des collectivités et fonds d'investissement). Pipeline d'ingestion et de standardisation de plus de 15 sources hétérogènes (DVF, INSEE, cadastres, scraping d'annonces, et avis textuels citoyens). Traitement distribué massif sur cluster Apache Spark & Hadoop (Databricks), stockage hybride relationnel (PostgreSQL) et non-relationnel (Elasticsearch), analyse de sentiment par NLP sur les avis municipaux, et restitution sous forme de cartographies interactives (Streamlit, Leaflet) à l'échelle régionale, départementale et communale.",
+      skills: ["Apache Spark", "Hadoop", "Databricks", "Python / PySpark", "PostgreSQL", "Elasticsearch", "NLP (Sentiment Analysis)", "Streamlit / Leaflet", "DataOps / ETL", "Docker"]
     }
   ];
 
@@ -84,7 +126,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* Glow dynamique qui suit la souris, placé globalement sur toute la page */}
+      {/* Glow dynamique */}
       <motion.div 
         className="glow-cursor"
         animate={{ x: mousePosition.x - 200, y: mousePosition.y - 200 }}
@@ -93,7 +135,6 @@ export default function Home() {
       
       {/* HERO SECTION */}
       <section className="hero-section">
-        
         <div className="hero-content flex flex-col items-center gap-6 z-10">
           <div className="text-center" style={{ transform: 'translateY(-5vh)' }}>
             <motion.h1 
@@ -126,20 +167,21 @@ export default function Home() {
         </div>
 
         <motion.div 
-          className="scroll-indicator"
+          className="scroll-indicator cursor-pointer hover:text-white transition-colors"
+          onClick={() => {
+            document.getElementById('section-01')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
         >
-          ↓ SCROLL TO EXPLORE
+          ↓ SCROLL OR CLICK TO EXPLORE
         </motion.div>
       </section>
 
-      {/* BENTO BOX SECTIONS (SCROLL SNAP) */}
-
-      {/* SECTION : INTRODUCTION */}
-      <section className="snap-section">
-        <div style={{ width: '100%', maxWidth: '1000px', alignSelf: 'center' }}>
+      {/* SECTION 01 : INTRODUCTION */}
+      <section className="snap-section" id="section-01">
+        <div style={{ width: '100%', maxWidth: '1000px', margin: 'auto' }}>
           <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '30px' }}>01 / Introduction</h2>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -172,23 +214,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION : PAWRISE CARE */}
-      <section className="snap-section">
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
+      {/* SECTION 02 : PAWRISE CARE */}
+      <section className="snap-section" id="section-02">
+        <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
           <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>02 / Data Science & Anomaly Detection</h2>
           <div className="bento-grid">
             
+            {/* ROW-SPAN-2 POUR NE PAS ÉCRASER LA CARTE */}
             <motion.div 
-              className="bento-cell col-span-4 row-span-1 min-h-[600px] md:min-h-[350px] flex flex-col"
+              className="bento-cell col-span-4 row-span-2 flex flex-col"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ padding: '20px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
+              style={{ padding: '24px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
             >
               <div 
-                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 sm:gap-0 shrink-0"
-                style={{ marginBottom: '16px' }}
+                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center shrink-0"
+                style={{ marginBottom: '16px', gap: '12px' }}
               >
                 <h2 
                   className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
@@ -196,26 +239,26 @@ export default function Home() {
                 >
                   Pawrise Care : Health Dashboard
                 </h2>
-                <div className="flex gap-2">
+                <div className="flex items-center" style={{ gap: '10px' }}>
                   <a 
                     href="https://pawrise-care.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95"
-                    style={{ padding: '6px 14px' }}
+                    className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
+                    style={{ padding: '6px 14px', gap: '4px' }}
                   >
                     Visiter le site ↗
                   </a>
                   <button 
                     onClick={() => setSelectedProject(5)}
-                    className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-full text-xs cursor-pointer backdrop-blur-md transition-all active:scale-95"
-                    style={{ padding: '6px 14px' }}
+                    className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-full text-xs cursor-pointer backdrop-blur-md transition-all active:scale-95 font-medium"
+                    style={{ padding: '6px 14px', gap: '4px' }}
                   >
                     Détails ➔
                   </button>
                 </div>
               </div>
-              <div className="flex-1 relative w-full rounded-xl overflow-hidden">
+              <div className="flex-1 relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/[0.05]">
                 <PawriseCareDemo />
               </div>
             </motion.div>
@@ -224,13 +267,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION : INTELLIGENCE ARTIFICIELLE */}
-      <section className="snap-section">
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
+      {/* SECTION 03 : INTELLIGENCE ARTIFICIELLE */}
+      <section className="snap-section" id="section-03">
+        <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
           <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>03 / Intelligence Artificielle</h2>
 
           {/* Layout flex : row sur desktop, col sur mobile */}
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '16px', width: '100%' }} className="ai-projects-row">
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '16px', width: '100%', flexWrap: 'wrap' }}>
 
             {/* Carte 1 : Crash & Learn RL */}
             <motion.div
@@ -239,10 +282,9 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="bento-cell"
-              style={{ flex: 1, minHeight: '420px', padding: 0, position: 'relative', overflow: 'hidden' }}
+              style={{ flex: '1 1 300px', minHeight: '450px', padding: 0, position: 'relative', overflow: 'hidden' }}
             >
               <RLCarDemo />
-              {/* Overlay bas */}
               <div
                 style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -260,6 +302,7 @@ export default function Home() {
                   </div>
                   <button
                     onClick={() => setSelectedProject(1)}
+                    className="hover:bg-white/20 active:scale-95 transition-all"
                     style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap', flexShrink: 0 }}
                   >
                     Détails ➔
@@ -275,10 +318,9 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bento-cell"
-              style={{ flex: 1, minHeight: '420px', padding: 0, position: 'relative', overflow: 'hidden' }}
+              style={{ flex: '1 1 300px', minHeight: '450px', padding: 0, position: 'relative', overflow: 'hidden' }}
             >
               <MedicalScanDemo />
-              {/* Overlay bas */}
               <div
                 style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -296,6 +338,7 @@ export default function Home() {
                   </div>
                   <button
                     onClick={() => setSelectedProject(2)}
+                    className="hover:bg-white/20 active:scale-95 transition-all"
                     style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap', flexShrink: 0 }}
                   >
                     Détails ➔
@@ -308,73 +351,145 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION : DATA ENGINEERING */}
-      <section className="snap-section">
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
+      {/* SECTION 04 : DATA ENGINEERING */}
+      <section className="snap-section" id="section-04">
+        <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
           <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>04 / Data Engineering & Architecture</h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="bento-cell data-engineering-card p-5 sm:p-6"
-            style={{ position: 'relative', backgroundColor: '#050505', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
-          >
-            {/* Header titre + boutons */}
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '16px', flexShrink: 0, flexWrap: 'wrap' }}>
-              <h3 style={{ margin: 0, fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.3 }}>Linxo : Pipeline d'Enrichissement (Fintech)</h3>
-              <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
-                <a
-                  href="https://www.linxo.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ background: 'rgba(0,255,204,0.1)', border: '1px solid rgba(0,255,204,0.4)', color: '#00ffcc', padding: '7px 14px', borderRadius: '20px', fontSize: '0.72rem', cursor: 'pointer', backdropFilter: 'blur(10px)', textDecoration: 'none', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}
-                >
-                  Visiter ↗
-                </a>
-                <button
-                  onClick={() => setSelectedProject(3)}
-                  style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '7px 14px', borderRadius: '20px', fontSize: '0.72rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap' }}
-                >
-                  Détails ➔
-                </button>
-              </div>
-            </div>
-
-            {/* Demo area */}
-            <div style={{ flex: 1, position: 'relative', width: '100%', borderRadius: '12px', overflow: 'hidden', minHeight: '300px' }}>
-              <DataArchitectureDemo />
-            </div>
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* SECTION : WEB & FULLSTACK */}
-      <section className="snap-section">
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>05 / Développement Fullstack</h2>
           <div className="bento-grid">
-            
-            <motion.div 
-              className="bento-cell col-span-4 row-span-1 min-h-[500px] flex flex-col"
+            <motion.div
+              className="bento-cell col-span-4 row-span-2 flex flex-col"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ padding: '20px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
+              style={{ padding: '24px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
             >
-              <div className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6 shrink-0">
-                <h2 className="bento-title text-base sm:text-lg lg:text-xl m-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">E-Commerce Website (LesAmisDuCBD)</h2>
-                <button 
-                  onClick={() => setSelectedProject(4)}
-                  className="pointer-events-auto bg-white/10 border border-white/30 text-white px-3 py-1.5 rounded-full text-xs cursor-pointer backdrop-blur-md"
+              <div 
+                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center shrink-0"
+                style={{ marginBottom: '16px', gap: '12px' }}
+              >
+                <h3 
+                  className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+                  style={{ margin: 0 }}
                 >
-                  Détails ➔
-                </button>
+                  Linxo : Pipeline d'Enrichissement (Fintech)
+                </h3>
+                <div className="flex items-center" style={{ gap: '10px' }}>
+                  <a
+                    href="https://www.linxo.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
+                    style={{ padding: '6px 14px', gap: '4px' }}
+                  >
+                    Visiter ↗
+                  </a>
+                  <button
+                    onClick={() => setSelectedProject(3)}
+                    className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-full text-xs font-medium cursor-pointer backdrop-blur-md flex items-center transition-all active:scale-95"
+                    style={{ padding: '6px 14px', gap: '4px' }}
+                  >
+                    Détails ➔
+                  </button>
+                </div>
               </div>
-              <div className="flex-1 relative w-full rounded-xl overflow-hidden">
+
+              <div className="flex-1 relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/[0.05]">
+                <DataArchitectureDemo />
+              </div>
+            </motion.div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 05 : BIG DATA & DATAOPS (HOMEPEDIA) */}
+      <section className="snap-section" id="section-05">
+        <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>
+            05 / Big Data & DataOps
+          </h2>
+
+          <div className="bento-grid">
+            <motion.div
+              className="bento-cell col-span-4 row-span-2 flex flex-col"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{ padding: '24px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
+            >
+              <div 
+                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center shrink-0"
+                style={{ marginBottom: '16px', gap: '12px' }}
+              >
+                <div>
+                  <h3 
+                    className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+                    style={{ margin: 0 }}
+                  >
+                    Homepedia : Exploring Housing Insights
+                  </h3>
+                  <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: '#86868b' }}>
+                    Architecture Big Data distribuée (Apache Spark) & Cartographie décisionnelle
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <button
+                    onClick={() => setSelectedProject(6)}
+                    className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-full text-xs font-medium cursor-pointer backdrop-blur-md flex items-center transition-all active:scale-95"
+                    style={{ padding: '6px 14px', gap: '4px' }}
+                  >
+                    Détails ➔
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex-1 relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/[0.05]">
+                <HomepediaDemo />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 06 : WEB & FULLSTACK */}
+      <section className="snap-section" id="section-06">
+        <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>06 / Développement Fullstack</h2>
+          <div className="bento-grid">
+            
+            <motion.div 
+              className="bento-cell col-span-4 row-span-2 flex flex-col"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{ padding: '24px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
+            >
+              <div 
+                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center shrink-0"
+                style={{ marginBottom: '16px', gap: '12px' }}
+              >
+                <h2 
+                  className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+                  style={{ margin: 0 }}
+                >
+                  E-Commerce Website (LesAmisDuCBD)
+                </h2>
+                <div className="flex items-center">
+                  <button 
+                    onClick={() => setSelectedProject(4)}
+                    className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-full text-xs font-medium cursor-pointer backdrop-blur-md flex items-center transition-all active:scale-95"
+                    style={{ padding: '6px 14px', gap: '4px' }}
+                  >
+                    Détails ➔
+                  </button>
+                </div>
+              </div>
+              
+              <div className="flex-1 relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/[0.05]">
                 <ECommerceDemo />
               </div>
             </motion.div>
@@ -383,20 +498,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION : STACK & RESEAUX */}
-      <section className="snap-section">
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>06 / Stack & Contact</h2>
+      {/* SECTION 07 : STACK & RESEAUX */}
+      <section className="snap-section" id="section-07">
+        <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>07 / Stack & Contact</h2>
           <div className="bento-grid">
             
-            {/* Tuile 5: Stack (2 colonnes) */}
+            {/* Tuile Stack */}
             <motion.div 
               className="bento-cell col-span-2 row-span-1"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '15px', padding: '20px' }}
+              style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyItems: 'center', flexWrap: 'wrap', gap: '15px', padding: '20px', justifyContent: 'center' }}
             >
               {[
                 { name: 'Python', icon: SiPython, color: '#3776AB' },
@@ -432,7 +547,7 @@ export default function Home() {
               ))}
             </motion.div>
 
-            {/* Tuile 6: Github */}
+            {/* Tuile Github */}
             <motion.a
               href="https://github.com/Nino-Corp"
               target="_blank"
@@ -447,7 +562,7 @@ export default function Home() {
               <h2 className="bento-title" style={{ margin: 0, color: '#000' }}>GitHub ↗</h2>
             </motion.a>
 
-            {/* Tuile 7: Contact */}
+            {/* Tuile Contact */}
             <motion.a
               href="https://www.linkedin.com/in/nino-litim-91a622220/"
               target="_blank"
@@ -468,7 +583,7 @@ export default function Home() {
 
       {/* MODAL DE DETAILS */}
       {selectedProject !== null && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyItems: 'center', padding: '20px', justifyContent: 'center' }}>
           {/* Overlay flou */}
           <motion.div 
             initial={{ opacity: 0 }}
