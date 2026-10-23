@@ -305,3 +305,45 @@ body {
     border-radius: 2rem;
   }
 }
+
+/* ─── TIMELINE DARK THEME (Navigation Fil d'Ariane) ───────────────────────── */
+[data-slot="timeline-separator"] {
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+[data-slot="timeline-separator"][data-state="completed"] {
+  background-color: #00ffcc;
+  box-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+}
+
+[data-slot="timeline-indicator"] {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-slot="timeline-indicator"][data-state="pending"] {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: none;
+}
+[data-slot="timeline-indicator"][data-state="current"] {
+  border-color: #00ffcc;
+  background: rgba(0, 255, 204, 0.12);
+  outline: 2px solid rgba(0, 255, 204, 0.25);
+  outline-offset: 2px;
+  box-shadow: 0 0 18px rgba(0, 255, 204, 0.6);
+}
+[data-slot="timeline-indicator"][data-state="completed"] {
+  border-color: #00ffcc;
+  background: #00ffcc;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Nav Fil d'ariane vertical item spacing & separator alignment */
+nav[aria-label="Fil d'ariane vertical"] [data-slot="timeline-item"]:not(:last-child) {
+  padding-bottom: 38px !important;
+}
+
+nav[aria-label="Fil d'ariane vertical"] [data-slot="timeline-separator"] {
+  top: 18px !important;
+  height: calc(100% - 18px) !important;
+  width: 1.5px !important;
+}

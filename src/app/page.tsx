@@ -13,6 +13,7 @@ import {
   SiNextdotjs, SiNodedotjs, SiHtml5, SiCss, SiTailwindcss 
 } from 'react-icons/si';
 import SocialCards from '@/components/ui/card-fan-carousel';
+import SectionNav from '@/components/SectionNav';
 
 const DEMO_CARDS = [
   { 
@@ -132,9 +133,12 @@ export default function Home() {
         animate={{ x: mousePosition.x - 200, y: mousePosition.y - 200 }}
         transition={{ type: "tween", ease: "linear", duration: 0.1 }}
       />
+
+      {/* Fil d'ariane vertical Apple ultra-moderne */}
+      <SectionNav />
       
       {/* HERO SECTION */}
-      <section className="hero-section">
+      <section className="hero-section" id="section-hero">
         <div className="hero-content flex flex-col items-center gap-6 z-10">
           <div className="text-center" style={{ transform: 'translateY(-5vh)' }}>
             <motion.h1 
@@ -197,13 +201,13 @@ export default function Home() {
 
               <ul style={{ marginTop: '20px', paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>Développement Fullstack & Web :</strong> Conception et déploiement d'applications web modernes de A à Z (ex: plateformes e-commerce), de l'interface utilisateur (React, TypeScript) à l'architecture Backend et base de données (Node.js).
+                  <strong style={{ color: '#fff', fontWeight: 500 }}>Développement Fullstack &amp; Web :</strong> Conception et déploiement d'applications web modernes de A à Z (ex: plateformes e-commerce), de l'interface utilisateur (React, TypeScript) à l'architecture Backend et base de données (Node.js).
                 </li>
                 <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>Data Engineering & Big Data :</strong> Création de pipelines ETL industrialisés, ingestion de flux IoT en temps réel, et traitement distribué à grande échelle (Hadoop, Apache Spark).
+                  <strong style={{ color: '#fff', fontWeight: 500 }}>Data Engineering &amp; Big Data :</strong> Création de pipelines ETL industrialisés, ingestion de flux IoT en temps réel, et traitement distribué à grande échelle (Hadoop, Apache Spark).
                 </li>
                 <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>DevOps & Qualité :</strong> Déploiement et orchestration d'architectures sur AWS (Rundeck, SSO), restitution (OpenSearch, Streamlit) et fiabilisation systématique des flux de production via tests unitaires (Pytest).
+                  <strong style={{ color: '#fff', fontWeight: 500 }}>DevOps &amp; Qualité :</strong> Déploiement et orchestration d'architectures sur AWS (Rundeck, SSO), restitution (OpenSearch, Streamlit) et fiabilisation systématique des flux de production via tests unitaires (Pytest).
                 </li>
                 <li>
                   <strong style={{ color: '#fff', fontWeight: 500 }}>Intelligence Artificielle :</strong> Modélisation et entraînement d'algorithmes complexes, allant de la Computer Vision en imagerie médicale (Deep Learning) à la conduite autonome par Apprentissage par Renforcement (Processus Markoviens).
