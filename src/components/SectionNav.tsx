@@ -88,10 +88,10 @@ export default function SectionNav() {
   return (
     <nav
       aria-label="Fil d'ariane vertical"
-      className="hidden lg:flex fixed right-4 xl:right-7 2xl:right-11 top-1/2 -translate-y-1/2 z-50 flex-col select-none pointer-events-auto"
+      className="hidden lg:flex fixed right-4 xl:right-7 2xl:right-11 top-1/2 -translate-y-1/2 z-50 flex-col select-none pointer-events-auto w-[155px]"
     >
-      <div className="relative">
-        <Timeline value={currentStep} orientation="vertical" className="w-auto">
+      <div className="relative w-full">
+        <Timeline value={currentStep} orientation="vertical" className="w-full">
           {NAV_SECTIONS.map((section, index) => {
             const isActive = activeIndex === index;
             const isCompleted = index < activeIndex;
@@ -142,12 +142,12 @@ export default function SectionNav() {
                   </TimelineDate>
 
                   <TimelineTitle
-                    className={`text-[11.5px] tracking-wide whitespace-nowrap transition-all duration-200 ${
+                    className={`text-[11.5px] tracking-wide whitespace-nowrap transition-colors duration-200 ${
                       isActive
-                        ? "text-white font-semibold translate-x-1"
+                        ? "text-white font-semibold"
                         : isCompleted
-                        ? "text-white/60 group-hover:text-white group-hover:translate-x-1 font-normal"
-                        : "text-white/30 group-hover:text-white/90 group-hover:translate-x-1 font-normal"
+                        ? "text-white/60 group-hover:text-white font-normal"
+                        : "text-white/30 group-hover:text-white/90 font-normal"
                     }`}
                   >
                     {section.shortLabel}
