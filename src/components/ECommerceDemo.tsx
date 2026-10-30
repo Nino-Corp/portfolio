@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function ECommerceDemo() {
   return (
-    <div className="w-full h-full absolute inset-0 overflow-hidden flex flex-col items-center justify-center bg-black p-4 sm:p-6">
+    <div className="ecom-demo w-full h-full absolute inset-0 overflow-hidden flex flex-col items-center justify-center bg-black p-4 sm:p-6">
       
       {/* Glow en arrière-plan */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(46, 204, 113, 0.15) 0%, transparent 60%)' }} />
@@ -14,10 +14,11 @@ export default function ECommerceDemo() {
         initial={{ scale: 0.95, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
+        className="ecom-browser"
         style={{ width: '90%', maxWidth: '750px', height: '100%', maxHeight: '360px', background: '#0a0a0c', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', zIndex: 10 }}
       >
         {/* Barre du navigateur */}
-        <div style={{ position: 'relative', height: '40px', background: 'rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', padding: '0 15px', gap: '8px' }}>
+        <div className="ecom-bar" style={{ position: 'relative', height: '40px', background: 'rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', padding: '0 15px', gap: '8px' }}>
           <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
           <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
           <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }} />
@@ -29,10 +30,10 @@ export default function ECommerceDemo() {
         </div>
 
         {/* Contenu du faux site e-commerce stylisé */}
-        <div style={{ flex: 1, position: 'relative', background: 'linear-gradient(180deg, #05140a 0%, #000000 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '30px 20px', overflow: 'hidden' }}>
+        <div className="ecom-content" style={{ flex: 1, position: 'relative', background: 'linear-gradient(180deg, #05140a 0%, #000000 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '30px 20px', overflow: 'hidden' }}>
           
           {/* Fausse Navbar du site */}
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', padding: '0 20px' }}>
+          <div className="ecom-nav" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', padding: '0 20px' }}>
             <div style={{ fontWeight: 800, color: '#2ecc71', fontSize: '1.2rem', letterSpacing: '-0.02em' }}>LADC.</div>
             <div style={{ display: 'flex', gap: '15px' }}>
               <div style={{ width: '30px', height: '4px', background: 'rgba(255,255,255,0.2)', borderRadius: '2px' }} />
@@ -46,6 +47,7 @@ export default function ECommerceDemo() {
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
+            className="ecom-title"
             style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', textAlign: 'center', margin: 0, lineHeight: 1.1 }}
           >
             Le meilleur du CBD,<br/>
@@ -53,10 +55,11 @@ export default function ECommerceDemo() {
           </motion.h3>
 
           {/* Faux produits animés */}
-          <div style={{ display: 'flex', gap: '20px', marginTop: '40px' }}>
+          <div className="ecom-products" style={{ display: 'flex', gap: '20px', marginTop: '40px' }}>
             {[1, 2, 3].map((i) => (
               <motion.div
                 key={i}
+                className="ecom-product"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
@@ -83,6 +86,7 @@ export default function ECommerceDemo() {
         rel="noopener noreferrer"
         initial={{ y: 15, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1, transition: { delay: 0.6, duration: 0.4, ease: "easeOut" } }}
+        className="ecom-cta"
         style={{ 
           marginTop: '30px', 
           zIndex: 10, 

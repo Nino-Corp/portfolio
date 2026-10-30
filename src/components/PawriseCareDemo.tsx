@@ -19,9 +19,8 @@ export default function PawriseCareDemo() {
   }, []);
 
   return (
-    <div 
-      className="absolute inset-0 overflow-hidden bg-[#050505] flex flex-col justify-center select-none"
-      style={{ padding: '24px 16px 16px 16px' }}
+    <div
+      className="pawrise-demo relative md:absolute md:inset-0 overflow-hidden bg-[#050505] flex flex-col justify-center select-none"
     >
       {/* Grille de fond & Halo */}
       <div 
@@ -52,6 +51,10 @@ export default function PawriseCareDemo() {
           85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
           100% { left: 100%; top: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
         }
+        .pawrise-demo { padding: 48px 16px; }
+        @media (min-width: 768px) {
+          .pawrise-demo { padding: 24px 16px 16px 16px; }
+        }
         .pawrise-particle {
           animation: pawriseFlowMobile 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
@@ -63,7 +66,7 @@ export default function PawriseCareDemo() {
       `}} />
 
       {/* Conteneur Flex Principal */}
-      <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-0">
+      <div className="relative z-10 w-full md:h-full flex flex-col md:flex-row items-center justify-center md:justify-between gap-[36px] md:gap-0">
         
         {/* =========================================================
             1. COLLIER IoT

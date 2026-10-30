@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import {
   Timeline,
   TimelineItem,
@@ -85,12 +86,34 @@ export default function SectionNav() {
   const activeIndex = NAV_SECTIONS.findIndex((s) => s.id === activeSection);
   const currentStep = activeIndex >= 0 ? activeIndex : 0;
 
+  // Hidden on the landing page, revealed from the first section onward
+  const isVisible = activeSection !== NAV_SECTIONS[0].id;
+
   return (
     <nav
       aria-label="Fil d'ariane vertical"
-      className="hidden lg:flex fixed right-4 xl:right-7 2xl:right-11 top-1/2 -translate-y-1/2 z-50 flex-col select-none pointer-events-auto w-[155px]"
+      aria-hidden={!isVisible}
+      className={`hidden lg:flex fixed right-4 xl:right-7 2xl:right-11 top-1/2 -translate-y-1/2 z-50 flex-col select-none w-[155px] ${
+        isVisible ? "pointer-events-auto" : "pointer-events-none"
+      }`}
     >
-      <div className="relative w-full">
+      <motion.div
+        className="relative w-full"
+        initial={false}
+        animate={
+          isVisible
+            ? { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }
+            : { opacity: 0, x: 28, scale: 0.96, filter: "blur(10px)" }
+        }
+        transition={{
+          type: "spring",
+          stiffness: 140,
+          damping: 22,
+          mass: 0.8,
+          opacity: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+          filter: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+        }}
+      >
         <Timeline value={currentStep} orientation="vertical" className="w-full">
           {NAV_SECTIONS.map((section, index) => {
             const isActive = activeIndex === index;
@@ -157,7 +180,7 @@ export default function SectionNav() {
             );
           })}
         </Timeline>
-      </div>
+      </motion.div>
     </nav>
   );
 }

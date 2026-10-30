@@ -18,6 +18,7 @@ interface SocialCardsProps {
   cards: CardItem[];
 }
 
+const MOBILE_QUERY = "(max-width: 639px)";
 const MAX_VISIBLE = 7;
 const HALF = 3;
 
@@ -106,12 +107,32 @@ export default function SocialCards({ cards }: SocialCardsProps) {
     );
   }, [totalCards, needsPagination]);
 
+  // Below 640px the fan is replaced by a CSS scroll-snap strip (see globals.css): GSAP stays out of it
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !totalCards) return;
 
     const cardElements = Array.from(container.querySelectorAll<HTMLElement>(".fan-card"));
     if (!cardElements.length) return;
+
+    if (window.matchMedia(MOBILE_QUERY).matches) {
+      gsap.killTweensOf(cardElements);
+      gsap.set(cardElements, { clearProps: "all" });
+      container.scrollLeft = 0;
+      prevVisible.current = new Set();
+      hasEntered.current = false;
+      isAnimating.current = false;
+      return;
+    }
 
     const visibleMap = getVisibleMap(centerIndex);
     const previouslyVisible = prevVisible.current;
@@ -260,7 +281,7 @@ export default function SocialCards({ cards }: SocialCardsProps) {
       window.removeEventListener("resize", onResize);
       if (leaveTimer) clearTimeout(leaveTimer);
     };
-  }, [centerIndex, totalCards, getVisibleMap, needsPagination]);
+  }, [centerIndex, totalCards, getVisibleMap, needsPagination, isMobile]);
 
   if (!totalCards) return null;
 

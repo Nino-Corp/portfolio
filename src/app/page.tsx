@@ -14,6 +14,9 @@ import {
 } from 'react-icons/si';
 import SocialCards from '@/components/ui/card-fan-carousel';
 import SectionNav from '@/components/SectionNav';
+import HeroTitle from '@/components/HeroTitle';
+import ContactCTA from '@/components/ContactCTA';
+import HeroSubtitle from '@/components/HeroSubtitle';
 
 const DEMO_CARDS = [
   { 
@@ -141,22 +144,8 @@ export default function Home() {
       <section className="hero-section" id="section-hero">
         <div className="hero-content flex flex-col items-center gap-6 z-10">
           <div className="text-center" style={{ transform: 'translateY(-5vh)' }}>
-            <motion.h1 
-              className="hero-title"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-            >
-              NINO L.
-            </motion.h1>
-            <motion.p 
-              className="hero-subtitle"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            >
-              Developer Fullstack / Data Engineer / AI Specialist
-            </motion.p>
+            <HeroTitle text="NINO L." />
+            <HeroSubtitle />
           </div>
           
           <motion.div
@@ -226,7 +215,7 @@ export default function Home() {
             
             {/* ROW-SPAN-2 POUR NE PAS ÉCRASER LA CARTE */}
             <motion.div 
-              className="bento-cell col-span-4 row-span-2 flex flex-col"
+              className="bento-cell ecommerce-card col-span-4 row-span-2 flex flex-col"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -493,7 +482,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="flex-1 relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/[0.05]">
+              <div className="ecommerce-stage flex-1 relative w-full rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.6)] border border-white/[0.05]">
                 <ECommerceDemo />
               </div>
             </motion.div>
@@ -580,6 +569,9 @@ export default function Home() {
             >
               <h2 className="bento-title" style={{ margin: 0 }}>LinkedIn ↗</h2>
             </motion.a>
+
+            {/* CTA Contact */}
+            <ContactCTA />
 
           </div>
         </div>
