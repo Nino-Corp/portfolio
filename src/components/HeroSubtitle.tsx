@@ -2,11 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useLang } from "@/lib/i18n";
 
-const ROLES = ["Developer Fullstack", "Data Engineer", "AI Specialist"];
 const INTERVAL_MS = 2400;
 
 export default function HeroSubtitle() {
+  const { t } = useLang();
+  const ROLES = t.hero.roles;
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function HeroSubtitle() {
       transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
     >
       {ROLES.map((role, i) => (
-        <React.Fragment key={role}>
+        <React.Fragment key={i}>
           <motion.span
             className="inline-block"
             animate={{

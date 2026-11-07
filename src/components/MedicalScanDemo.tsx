@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
 
 export default function MedicalScanDemo() {
+  const { t } = useLang();
   const [isScanning, setIsScanning] = useState(false);
   const [hasScanned, setHasScanned] = useState(false);
   const [results, setResults] = useState({ left: { isAnomaly: false, score: 99 }, right: { isAnomaly: true, score: 98 } });
@@ -32,7 +34,7 @@ export default function MedicalScanDemo() {
       {/* Background Image */}
       <Image 
         src="/xray-ultra-clean.jpg" 
-        alt="Medical Scan" 
+        alt={t.medical.alt} 
         fill 
         sizes="(max-width: 768px) 100vw, 50vw"
         style={{ objectFit: 'cover', opacity: 0.6, filter: 'grayscale(100%)' }} 
@@ -47,7 +49,7 @@ export default function MedicalScanDemo() {
           animate={{ opacity: 1 }}
         >
           <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 22px', borderRadius: '24px', color: 'white', fontWeight: 600, fontSize: 'clamp(0.7rem, 2.5vw, 0.9rem)', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>
-            LANCER LE DIAGNOSTIC IA
+            {t.medical.launch}
           </div>
         </motion.div>
       )}
@@ -82,7 +84,7 @@ export default function MedicalScanDemo() {
             }}
           >
             <div style={{ position: 'absolute', top: '-22px', left: '-2px', background: results.right.isAnomaly ? '#ff3366' : '#00ffcc', color: results.right.isAnomaly ? 'white' : 'black', fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)', fontWeight: 'bold', padding: '2px 6px', maxWidth: '130px', lineHeight: '1.2', whiteSpace: 'nowrap' }}>
-              {results.right.isAnomaly ? 'ANOMALIE' : 'SAIN'} ({results.right.score}%)
+              {results.right.isAnomaly ? t.medical.anomaly : t.medical.healthy} ({results.right.score}%)
             </div>
           </motion.div>
 
@@ -103,7 +105,7 @@ export default function MedicalScanDemo() {
             }}
           >
             <div style={{ position: 'absolute', top: '-22px', left: '-2px', background: results.left.isAnomaly ? '#ff3366' : '#00ffcc', color: results.left.isAnomaly ? 'white' : 'black', fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)', fontWeight: 'bold', padding: '2px 6px', maxWidth: '130px', lineHeight: '1.2', whiteSpace: 'nowrap' }}>
-              {results.left.isAnomaly ? 'ANOMALIE' : 'SAIN'} ({results.left.score}%)
+              {results.left.isAnomaly ? t.medical.anomaly : t.medical.healthy} ({results.left.score}%)
             </div>
           </motion.div>
           
@@ -115,7 +117,7 @@ export default function MedicalScanDemo() {
             onClick={(e) => { e.stopPropagation(); setHasScanned(false); }}
             style={{ position: 'absolute', top: '16px', right: '16px', background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.7rem', zIndex: 20, cursor: 'pointer', letterSpacing: '0.05em' }}
           >
-            RÉINITIALISER
+            {t.medical.reset}
           </motion.button>
         </>
       )}

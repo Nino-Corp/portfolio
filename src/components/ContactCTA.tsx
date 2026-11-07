@@ -3,6 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
+import type { Dict } from '@/lib/translations';
 
 const EMAIL = 'ninoprime@hotmail.com';
 const PHONE_DISPLAY = '06 83 71 72 57';
@@ -55,9 +57,18 @@ const PhoneIcon = () => (
   </svg>
 );
 
-const ROWS = [
-  { label: 'Mail', value: EMAIL, href: `mailto:${EMAIL}`, color: '#0a84ff', Icon: MailIcon, copyLabel: 'Copier l’adresse', openLabel: 'Écrire un mail' },
-  { label: 'Téléphone', value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}`, color: '#30d158', Icon: PhoneIcon, copyLabel: 'Copier le numéro', openLabel: 'Appeler' },
+const ROWS: {
+  id: 'mail' | 'phone';
+  value: string;
+  href: string;
+  color: string;
+  Icon: () => React.JSX.Element;
+  labelKey: keyof Dict['contact'];
+  copyKey: keyof Dict['contact'];
+  openKey: keyof Dict['contact'];
+}[] = [
+  { id: 'mail', value: EMAIL, href: `mailto:${EMAIL}`, color: '#0a84ff', Icon: MailIcon, labelKey: 'mail', copyKey: 'copyAddress', openKey: 'writeMail' },
+  { id: 'phone', value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}`, color: '#30d158', Icon: PhoneIcon, labelKey: 'phone', copyKey: 'copyNumber', openKey: 'call' },
 ];
 
 type Row = (typeof ROWS)[number];
@@ -69,6 +80,8 @@ const sheetButton: React.CSSProperties = {
 };
 
 export default function ContactCTA() {
+  const { t, localeTag } = useLang();
+  const c = t.contact;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<Row | null>(null);
   const [toast, setToast] = useState<Toast>(null);
@@ -84,7 +97,7 @@ export default function ContactCTA() {
     return () => clearInterval(id);
   }, []);
 
-  const time = now ? now.toLocaleTimeString('fr-FR', { timeZone: TIME_ZONE, hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '';
+  const time = now ? now.toLocaleTimeString(localeTag, { timeZone: TIME_ZONE, hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '';
   const tz = now
     ? (new Intl.DateTimeFormat('en-GB', { timeZone: TIME_ZONE, timeZoneName: 'short' }).formatToParts(now).find((p) => p.type === 'timeZoneName')?.value ?? '')
     : '';
@@ -99,7 +112,7 @@ export default function ContactCTA() {
   const handleCopy = async (value: string) => {
     setActive(null);
     const ok = await copyToClipboard(value);
-    setToast({ ok, text: ok ? 'Copié' : `Copie impossible : ${value}` });
+    setToast({ ok, text: ok ? c.copied : `${c.copyFailed} ${value}` });
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => setToast(null), 2000);
   };
@@ -116,8 +129,8 @@ export default function ContactCTA() {
     >
       <motion.div layout="position" className="contact-head">
         <div>
-          <h3 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 600, letterSpacing: '-0.01em', color: '#f5f5f7' }}>Contact</h3>
-          <p style={{ margin: '2px 0 0', fontSize: '0.95rem', color: '#a1a1a6' }}>Par mail ou par téléphone.</p>
+          <h3 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 600, letterSpacing: '-0.01em', color: '#f5f5f7' }}>{c.title}</h3>
+          <p style={{ margin: '2px 0 0', fontSize: '0.95rem', color: '#a1a1a6' }}>{c.subtitle}</p>
         </div>
         <motion.button
           type="button"
@@ -133,7 +146,7 @@ export default function ContactCTA() {
             transition: 'background 0.25s, color 0.25s',
           }}
         >
-          {open ? 'Fermer' : 'Me contacter'}
+          {open ? c.close : c.open}
         </motion.button>
       </motion.div>
 
@@ -152,10 +165,10 @@ export default function ContactCTA() {
           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_4px_#ffffff]" />
         </span>
         <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#30d158' }}>
-          Ouvert aux opportunités
+          {c.openToWork}
         </span>
         <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '0.7rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>
-          CDD / CDI / Intérim / Stage
+          {c.contracts}
         </span>
       </motion.div>
 
@@ -170,7 +183,7 @@ export default function ContactCTA() {
       >
         <PinIcon />
         <span style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0a84ff' }}>
-          Canton de Genève &amp; Paris
+          {c.location}
         </span>
         <span suppressHydrationWarning style={{ fontFamily: 'var(--font-mono, ui-monospace, monospace)', fontSize: '0.7rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', minWidth: '9.5ch' }}>
           {time ? `${time} ${tz}` : ' '}
@@ -190,7 +203,7 @@ export default function ContactCTA() {
             <div style={{ background: 'rgba(255,255,255,0.06)', borderRadius: '14px', overflow: 'hidden' }}>
               {ROWS.map((row, i) => (
                 <button
-                  key={row.label}
+                  key={row.id}
                   type="button"
                   onClick={() => setActive(row)}
                   className="contact-row"
@@ -207,7 +220,7 @@ export default function ContactCTA() {
                   }}>
                     <row.Icon />
                   </span>
-                  <span style={{ fontSize: '0.95rem', flexShrink: 0 }}>{row.label}</span>
+                  <span style={{ fontSize: '0.95rem', flexShrink: 0 }}>{c[row.labelKey]}</span>
                   <span className="contact-row-value" style={{ fontSize: '0.95rem', color: '#a1a1a6', marginLeft: 'auto', overflowWrap: 'anywhere', textAlign: 'right', minWidth: 0 }}>
                     {row.value}
                   </span>
@@ -239,7 +252,7 @@ export default function ContactCTA() {
               <motion.div
                 role="dialog"
                 aria-modal="true"
-                aria-label={active.label}
+                aria-label={c[active.labelKey] as string}
                 onClick={(e) => e.stopPropagation()}
                 initial={{ opacity: 0, scale: 0.94, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -252,14 +265,14 @@ export default function ContactCTA() {
                   borderRadius: '16px', overflow: 'hidden', border: '0.5px solid rgba(255,255,255,0.12)',
                 }}>
                   <div style={{ padding: '16px', textAlign: 'center', borderBottom: '0.5px solid rgba(255,255,255,0.12)' }}>
-                    <div style={{ fontSize: '0.8rem', color: '#a1a1a6' }}>{active.label}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#a1a1a6' }}>{c[active.labelKey] as string}</div>
                     <div style={{ fontSize: '1.05rem', fontWeight: 600, color: '#f5f5f7', marginTop: '2px', overflowWrap: 'anywhere' }}>{active.value}</div>
                   </div>
                   <a href={active.href} onClick={() => setActive(null)} style={{ ...sheetButton, borderBottom: '0.5px solid rgba(255,255,255,0.12)', fontWeight: 600 }}>
-                    {active.openLabel}
+                    {c[active.openKey] as string}
                   </a>
                   <button type="button" onClick={() => handleCopy(active.value)} style={sheetButton}>
-                    {active.copyLabel}
+                    {c[active.copyKey] as string}
                   </button>
                 </div>
                 <button
@@ -267,7 +280,7 @@ export default function ContactCTA() {
                   onClick={() => setActive(null)}
                   style={{ ...sheetButton, background: 'rgba(44,44,48,0.85)', borderRadius: '16px', fontWeight: 600 }}
                 >
-                  Annuler
+                  {c.cancel}
                 </button>
               </motion.div>
             </motion.div>

@@ -1,22 +1,18 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
 import { TrendingUp, TrendingDown, MessageSquare, Wind, Activity } from 'lucide-react';
 
 type MetricType = 'price' | 'nlp' | 'climate';
 
 interface RegionData {
   id: string;
-  name: string;
-  shortName: string;
   shortCode: string;
   avgPrice: number;
   priceTrend: number;
   sentimentScore: number;
-  topKeyword: string;
-  sentimentText: string;
   climateScore: number;
-  climateLabel: string;
   dvfTransactions: number;
   dpeRating: string;
   sparkRate: number;
@@ -25,46 +21,41 @@ interface RegionData {
 
 const REGIONS: RegionData[] = [
   {
-    id: 'idf', name: 'Île-de-France', shortName: 'Île-de-France', shortCode: '75',
+    id: 'idf', shortCode: '75',
     avgPrice: 9480, priceTrend: 2.1, sentimentScore: 74,
-    topKeyword: 'Transports & Mobilité', sentimentText: 'Forte attractivité pour le pôle tertiaire et les infrastructures de mobilité.',
-    climateScore: 68, climateLabel: 'Modéré', dvfTransactions: 42350, dpeRating: 'D', sparkRate: 4.8,
+    climateScore: 68, dvfTransactions: 42350, dpeRating: 'D', sparkRate: 4.8,
     priceHistory: [8200, 8400, 8650, 8800, 8950, 8900, 9100, 9200, 9350, 9300, 9420, 9480]
   },
   {
-    id: 'ara', name: 'Auvergne-Rhône-Alpes', shortName: 'Auvergne-RA', shortCode: '69',
+    id: 'ara', shortCode: '69',
     avgPrice: 4320, priceTrend: 3.8, sentimentScore: 86,
-    topKeyword: 'Qualité de vie & Alpes', sentimentText: 'Avis élogieux sur l\'environnement alpin, le dynamisme tech lyonnais et la qualité de vie.',
-    climateScore: 42, climateLabel: 'Faible', dvfTransactions: 31200, dpeRating: 'C', sparkRate: 3.9,
+    climateScore: 42, dvfTransactions: 31200, dpeRating: 'C', sparkRate: 3.9,
     priceHistory: [3600, 3700, 3750, 3800, 3850, 3900, 3950, 4050, 4100, 4200, 4270, 4320]
   },
   {
-    id: 'paca', name: 'Provence-Alpes-Côte d\'Azur', shortName: 'PACA', shortCode: '13',
+    id: 'paca', shortCode: '13',
     avgPrice: 4890, priceTrend: 4.5, sentimentScore: 82,
-    topKeyword: 'Climat & Mer', sentimentText: 'Demande touristique soutenue et hausse des résidences secondaires sur le littoral.',
-    climateScore: 84, climateLabel: 'Élevé', dvfTransactions: 28400, dpeRating: 'E', sparkRate: 5.1,
+    climateScore: 84, dvfTransactions: 28400, dpeRating: 'E', sparkRate: 5.1,
     priceHistory: [3900, 4050, 4150, 4200, 4300, 4400, 4500, 4600, 4650, 4750, 4820, 4890]
   },
   {
-    id: 'naq', name: 'Nouvelle-Aquitaine', shortName: 'Nouv.-Aquitaine', shortCode: '33',
+    id: 'naq', shortCode: '33',
     avgPrice: 3750, priceTrend: 5.2, sentimentScore: 89,
-    topKeyword: 'Espaces verts & Océan', sentimentText: 'Fort afflux de cadres franciliens. Satisfaction résidentielle et cadre de vie en hausse continue.',
-    climateScore: 56, climateLabel: 'Moyen', dvfTransactions: 24900, dpeRating: 'C', sparkRate: 4.2,
+    climateScore: 56, dvfTransactions: 24900, dpeRating: 'C', sparkRate: 4.2,
     priceHistory: [2900, 3000, 3100, 3200, 3300, 3400, 3450, 3500, 3580, 3650, 3700, 3750]
   },
   {
-    id: 'occ', name: 'Occitanie', shortName: 'Occitanie', shortCode: '31',
+    id: 'occ', shortCode: '31',
     avgPrice: 3240, priceTrend: 4.1, sentimentScore: 84,
-    topKeyword: 'Aérospatiale & Soleil', sentimentText: 'Dynamisme porté par l\'aéronautique, les universités et un ensoleillement exceptionnel.',
-    climateScore: 65, climateLabel: 'Moyen-Élevé', dvfTransactions: 21800, dpeRating: 'D', sparkRate: 3.6,
+    climateScore: 65, dvfTransactions: 21800, dpeRating: 'D', sparkRate: 3.6,
     priceHistory: [2600, 2700, 2800, 2850, 2900, 2950, 3000, 3050, 3100, 3150, 3200, 3240]
   }
 ];
 
-const METRICS: { id: MetricType; label: string; icon: React.ElementType; color: string }[] = [
-  { id: 'price', label: 'Prix / m²', icon: TrendingUp, color: '#00ffcc' },
-  { id: 'nlp', label: 'Sentiment NLP', icon: MessageSquare, color: '#bd93f9' },
-  { id: 'climate', label: 'Risque Climat', icon: Wind, color: '#ffb86c' },
+const METRICS: { id: MetricType; labelKey: 'metricPrice' | 'metricNlp' | 'metricClimate'; icon: React.ElementType; color: string }[] = [
+  { id: 'price', labelKey: 'metricPrice', icon: TrendingUp, color: '#00ffcc' },
+  { id: 'nlp', labelKey: 'metricNlp', icon: MessageSquare, color: '#bd93f9' },
+  { id: 'climate', labelKey: 'metricClimate', icon: Wind, color: '#ffb86c' },
 ];
 
 function climateColor(score: number) {
@@ -118,7 +109,10 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 export default function HomepediaDemo() {
+  const { t, localeTag } = useLang();
+  const h = t.homepedia;
   const [selected, setSelected] = useState<RegionData>(REGIONS[0]);
+  const sel = h.regions[selected.id];
   const [metric, setMetric] = useState<MetricType>('price');
   const [liveRate, setLiveRate] = useState(selected.sparkRate);
   const [rows, setRows] = useState(148_222_894);
@@ -164,16 +158,16 @@ export default function HomepediaDemo() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ffcc]"></span>
           </span>
           <span className="text-[10px] sm:text-[11px] font-mono text-[#86868b] truncate">
-            Cluster Databricks Spark{' '}
+            {h.cluster}{' '}
             <span className="text-[#00ffcc] font-semibold">{liveRate} GB/s</span>
           </span>
           <span className="hidden lg:block w-px h-3 bg-white/10 shrink-0" />
           <span className="hidden lg:block text-[10px] font-mono text-[#555] truncate">
-            18 sources · DVF · INSEE · Géorisques
+            {h.sources}
           </span>
         </div>
         <div className="text-[10px] font-mono text-[#555] shrink-0 whitespace-nowrap">
-          <span className="text-[#86868b]">{rows.toLocaleString('fr-FR')}</span> rows
+          <span className="text-[#86868b]">{rows.toLocaleString(localeTag)}</span> {h.rows}
         </div>
       </div>
 
@@ -199,7 +193,7 @@ export default function HomepediaDemo() {
               }}
             >
               <m.icon size={12} />
-              <span>{m.label}</span>
+              <span>{h[m.labelKey]}</span>
             </button>
           );
         })}
@@ -235,7 +229,7 @@ export default function HomepediaDemo() {
                 >
                   {r.shortCode}
                 </span>
-                <span>{r.shortName}</span>
+                <span>{h.regions[r.id].shortName}</span>
               </button>
             );
           })}
@@ -251,7 +245,7 @@ export default function HomepediaDemo() {
             let val: string;
             let col: string;
             if (metric === 'price') {
-              val = `${r.avgPrice.toLocaleString('fr-FR')} €`;
+              val = `${r.avgPrice.toLocaleString(localeTag)} €`;
               col = '#00ffcc';
             } else if (metric === 'nlp') {
               val = `${r.sentimentScore}%`;
@@ -283,14 +277,14 @@ export default function HomepediaDemo() {
                         marginBottom: '2px',
                       }}
                     >
-                      DÉP. {r.shortCode}
+                      {h.dept} {r.shortCode}
                     </div>
                     <div
                       className={`text-xs font-medium truncate ${
                         isActive ? 'text-white' : 'text-[#86868b]'
                       }`}
                     >
-                      {r.name}
+                      {h.regions[r.id].name}
                     </div>
                   </div>
                   <div
@@ -320,14 +314,14 @@ export default function HomepediaDemo() {
               {/* En-tête de la région sélectionnée */}
               <div className="flex items-baseline justify-between shrink-0" style={{ gap: '8px' }}>
                 <h3 className="text-base sm:text-xl font-bold text-white tracking-tight truncate">
-                  {selected.name}
+                  {sel.name}
                 </h3>
                 <span className="text-[9px] font-mono text-[#666] uppercase tracking-widest shrink-0">
                   {metric === 'price'
-                    ? 'Marché · DVF & INSEE'
+                    ? h.labelPrice
                     : metric === 'nlp'
-                    ? 'Analyse · NLP Citoyens'
-                    : 'Horizon 2040 · GIEC'}
+                    ? h.labelNlp
+                    : h.labelClimate}
                 </span>
               </div>
 
@@ -350,10 +344,10 @@ export default function HomepediaDemo() {
                           className="text-[9px] font-mono text-[#00ffcc]/75 uppercase tracking-wider"
                           style={{ marginBottom: '4px' }}
                         >
-                          Prix moyen / m²
+                          {h.avgPrice}
                         </div>
                         <div className="text-2xl sm:text-3xl font-bold font-mono text-white leading-none">
-                          {selected.avgPrice.toLocaleString('fr-FR')}
+                          {selected.avgPrice.toLocaleString(localeTag)}
                           <span className="text-sm sm:text-base text-[#86868b]" style={{ marginLeft: '6px' }}>
                             €
                           </span>
@@ -369,7 +363,7 @@ export default function HomepediaDemo() {
                             style={{ color: selected.priceTrend > 0 ? '#00ffcc' : '#ff5f56' }}
                           >
                             {selected.priceTrend > 0 ? '+' : ''}
-                            {selected.priceTrend}% sur 12 mois
+                            {selected.priceTrend}% {h.over12m}
                           </span>
                         </div>
                       </div>
@@ -391,7 +385,7 @@ export default function HomepediaDemo() {
                         className="text-[9px] font-mono text-[#86868b] uppercase tracking-wider"
                         style={{ marginBottom: '4px' }}
                       >
-                        Transactions DVF
+                        {h.dvf}
                       </div>
                       <div className="text-lg sm:text-xl font-bold font-mono text-white leading-tight">
                         {(selected.dvfTransactions / 1000).toFixed(1)}
@@ -400,7 +394,7 @@ export default function HomepediaDemo() {
                         </span>
                       </div>
                       <div className="text-[9.5px] font-mono text-[#666] truncate" style={{ marginTop: '3px' }}>
-                        dédoublonnées &amp; norm.
+                        {h.dvfNote}
                       </div>
                     </div>
 
@@ -412,7 +406,7 @@ export default function HomepediaDemo() {
                         className="text-[9px] font-mono text-[#86868b] uppercase tracking-wider"
                         style={{ marginBottom: '4px' }}
                       >
-                        DPE Médian
+                        {h.dpe}
                       </div>
                       <div
                         className="text-lg sm:text-xl font-bold font-mono leading-tight"
@@ -425,10 +419,10 @@ export default function HomepediaDemo() {
                               : '#ff5f56',
                         }}
                       >
-                        Classe {selected.dpeRating}
+                        {h.dpeClass} {selected.dpeRating}
                       </div>
                       <div className="text-[9.5px] font-mono text-[#666] truncate" style={{ marginTop: '3px' }}>
-                        diagnostics ADEME
+                        {h.dpeNote}
                       </div>
                     </div>
                   </div>
@@ -442,11 +436,10 @@ export default function HomepediaDemo() {
                       className="text-[9px] font-mono text-[#86868b] uppercase tracking-widest"
                       style={{ marginBottom: '4px' }}
                     >
-                      Pipeline Spark SQL
+                      {h.sparkSql}
                     </div>
                     <p className="text-[10.5px] sm:text-[11px] text-[#a1a1a6] leading-relaxed">
-                      Jointure spatiale INSEE × DVF par batch Spark. Déduplication, normalisation des
-                      adresses via BAN et classification automatique des biens.
+                      {h.sparkSqlText}
                     </p>
                   </div>
                 </div>
@@ -470,7 +463,7 @@ export default function HomepediaDemo() {
                           className="text-[9px] font-mono text-[#bd93f9] uppercase tracking-wider"
                           style={{ marginBottom: '4px' }}
                         >
-                          Polarité Positive
+                          {h.polarity}
                         </div>
                         <div
                           className="text-2xl sm:text-3xl font-bold font-mono leading-none"
@@ -483,9 +476,9 @@ export default function HomepediaDemo() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[9px] font-mono text-[#86868b] uppercase">Thème majeur</div>
+                        <div className="text-[9px] font-mono text-[#86868b] uppercase">{h.mainTheme}</div>
                         <div className="text-xs font-semibold text-white" style={{ marginTop: '2px' }}>
-                          {selected.topKeyword}
+                          {sel.topKeyword}
                         </div>
                       </div>
                     </div>
@@ -514,10 +507,10 @@ export default function HomepediaDemo() {
                         className="text-[9px] font-mono text-[#86868b] uppercase tracking-widest"
                         style={{ marginBottom: '6px' }}
                       >
-                        Synthèse · Spark NLP / HuggingFace
+                        {h.synthesis}
                       </div>
                       <p className="text-xs sm:text-[13px] text-[#d1d1d6] leading-relaxed italic">
-                        &ldquo;{selected.sentimentText}&rdquo;
+                        &ldquo;{sel.sentimentText}&rdquo;
                       </p>
                     </div>
                     <div
@@ -526,7 +519,7 @@ export default function HomepediaDemo() {
                     >
                       <Activity size={12} className="text-[#bd93f9] shrink-0" />
                       <span className="text-[10px] font-mono text-[#86868b]">
-                        18 000 avis citoyens · lemmatisation · embeddings
+                        {h.reviews}
                       </span>
                     </div>
                   </div>
@@ -555,7 +548,7 @@ export default function HomepediaDemo() {
                             marginBottom: '4px',
                           }}
                         >
-                          Indice de Vulnérabilité
+                          {h.vulnerability}
                         </div>
                         <div
                           className="text-2xl sm:text-3xl font-bold font-mono leading-none"
@@ -576,7 +569,7 @@ export default function HomepediaDemo() {
                           background: `${climateColor(selected.climateScore)}12`,
                         }}
                       >
-                        Risque {selected.climateLabel}
+                        {h.risk} {sel.climateLabel}
                       </span>
                     </div>
 
@@ -600,12 +593,10 @@ export default function HomepediaDemo() {
                         className="text-[9px] font-mono text-[#86868b] uppercase tracking-widest"
                         style={{ marginBottom: '6px' }}
                       >
-                        Modèle prédictif multi-facteurs
+                        {h.predictive}
                       </div>
                       <p className="text-[11px] sm:text-xs text-[#a1a1a6] leading-relaxed">
-                        Pondération des aléas météo (Géorisques), taux de passoires thermiques DPE
-                        E/F/G ({selected.dpeRating} médian), exposition aux crues et retrait-gonflement
-                        des argiles à horizon 2040.
+                        {h.predictiveText(selected.dpeRating)}
                       </p>
                     </div>
                     <div
@@ -614,7 +605,7 @@ export default function HomepediaDemo() {
                     >
                       <Wind size={12} className="text-[#ffb86c] shrink-0" />
                       <span className="text-[10px] font-mono text-[#86868b]">
-                        Géorisques · ADEME · Projections GIEC RCP 4.5
+                        {h.climateSources}
                       </span>
                     </div>
                   </div>
@@ -629,10 +620,10 @@ export default function HomepediaDemo() {
             style={{ padding: '8px 18px', gap: '8px' }}
           >
             <span className="text-[9px] font-mono text-[#555] truncate">
-              DVF · INSEE · Cadastre · NLP · ADEME
+              {h.footerData}
             </span>
             <span className="text-[9px] font-mono text-[#666] truncate">
-              Spark → Postgres → Elasticsearch → Streamlit
+              {h.footerFlow}
             </span>
           </div>
         </div>

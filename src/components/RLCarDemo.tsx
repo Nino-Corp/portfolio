@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
 
 export default function RLCarDemo() {
   const [epoch, setEpoch] = useState(1);
-  const [status, setStatus] = useState("LEARNING");
+  const { t } = useLang();
+  const [status, setStatus] = useState<"learning" | "crash" | "goal">("learning");
   const controls = useAnimation();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function RLCarDemo() {
         }
 
         if (crash) {
-          if (isMounted) setStatus("CRASH !");
+          if (isMounted) setStatus("crash");
           await safeStart({ scale: 2, backgroundColor: '#ff3366', transition: { duration: 0.1 } });
           await new Promise(r => setTimeout(r, 600)); 
           await safeSet({ scale: 1, backgroundColor: '#00ffcc' });
@@ -59,13 +61,13 @@ export default function RLCarDemo() {
         }
 
         if (success) {
-          if (isMounted) setStatus("GOAL REACHED !");
+          if (isMounted) setStatus("goal");
           await safeStart({ scale: [1, 1.5, 1], backgroundColor: '#00ffcc', transition: { duration: 0.5, repeat: 2 } });
           await new Promise(r => setTimeout(r, 1500));
           if (isMounted) setEpoch(1); // Reset infini
         }
         
-        if (isMounted) setStatus("LEARNING");
+        if (isMounted) setStatus("learning");
       }
     };
 
@@ -79,19 +81,19 @@ export default function RLCarDemo() {
       {/* Header stats */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', zIndex: 10, paddingBottom: '12px', flexShrink: 0 }}>
         <div>
-          <div style={{ fontSize: '0.55rem', color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Simulation Epoch</div>
+          <div style={{ fontSize: '0.55rem', color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{t.rl.epoch}</div>
           <div style={{ fontFamily: 'monospace', fontSize: 'clamp(1.1rem, 3vw, 1.4rem)', color: 'white', fontWeight: 700 }}>{epoch.toString().padStart(3, '0')}</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '0.55rem', color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Status</div>
+          <div style={{ fontSize: '0.55rem', color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{t.rl.status}</div>
           <div style={{ 
             fontFamily: 'monospace', 
             fontSize: 'clamp(0.7rem, 2vw, 1.1rem)', 
             fontWeight: 700,
-            color: status === "CRASH !" ? '#ff3366' : status === "GOAL REACHED !" ? '#00ffcc' : 'white',
+            color: status === "crash" ? '#ff3366' : status === "goal" ? '#00ffcc' : 'white',
             letterSpacing: '0.05em',
           }}>
-            {status}
+            {t.rl[status]}
           </div>
         </div>
       </div>
@@ -112,7 +114,7 @@ export default function RLCarDemo() {
         <div style={{ position: 'absolute', left: '50%', bottom: '10%', width: '3px', height: '12%', background: 'repeating-linear-gradient(0deg, #fff, #fff 4px, #000 4px, #000 8px)', transform: 'translateX(-50%)' }} />
 
         {/* Label */}
-        <div style={{ position: 'absolute', left: '50%', bottom: '2%', transform: 'translateX(-50%)', fontSize: '0.45rem', color: '#666', fontWeight: 'bold', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>START / FINISH</div>
+        <div style={{ position: 'absolute', left: '50%', bottom: '2%', transform: 'translateX(-50%)', fontSize: '0.45rem', color: '#666', fontWeight: 'bold', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>{t.rl.startFinish}</div>
 
         {/* La "Voiture" AI */}
         <motion.div

@@ -1,9 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
 import { ShieldCheck, Server, Terminal, CheckCircle2, GitMerge, FileJson, Database } from 'lucide-react';
 
 export default function DataArchitectureDemo() {
+  const { t } = useLang();
+  const d = t.dataArch;
   const [step, setStep] = useState(0);
   const [terminalCycle, setTerminalCycle] = useState(0);
 
@@ -68,13 +71,13 @@ export default function DataArchitectureDemo() {
           {/* En-tête de la bulle */}
           <div className="flex items-center justify-between shrink-0">
             <span className="text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase">
-              Pipeline Data
+              {d.pipeline}
             </span>
             <span
               className="text-[9px] font-mono text-[#00ffcc] bg-[#00ffcc]/10 border border-[#00ffcc]/30 rounded-full"
               style={{ padding: '2px 8px' }}
             >
-              STEP 0{step + 1}/04
+              {d.step} 0{step + 1}/04
             </span>
           </div>
 
@@ -170,7 +173,7 @@ export default function DataArchitectureDemo() {
               >
                 {step === 0 && (
                   <>
-                    <span className="text-white/45 text-[9px]">{'// INGRESS RAW PAYLOAD'}</span>
+                    <span className="text-white/45 text-[9px]">{d.ingress}</span>
                     <span className="text-white leading-snug break-words">
                       {'{ "label": "AMZN Mktp US", "amt": -15.99 }'}
                     </span>
@@ -178,15 +181,15 @@ export default function DataArchitectureDemo() {
                 )}
                 {step === 1 && (
                   <>
-                    <span className="text-[#ffb86c] text-[9px]">{'// VALIDATING SCHEMA (PYDANTIC)'}</span>
+                    <span className="text-[#ffb86c] text-[9px]">{d.validating}</span>
                     <span className="text-white/85 leading-snug break-words">
-                      Strict parsing &amp; type coercion OK.
+                      {d.validated}
                     </span>
                   </>
                 )}
                 {step === 2 && (
                   <>
-                    <span className="text-[#bd93f9] text-[9px]">{'// CORE-LIB PATTERN MATCHING'}</span>
+                    <span className="text-[#bd93f9] text-[9px]">{d.patternMatching}</span>
                     <span className="text-white/85 leading-snug break-words">
                       Regex &quot;AMZN&quot; ➔ &quot;Amazon&quot; [E_COMMERCE]
                     </span>
@@ -194,7 +197,7 @@ export default function DataArchitectureDemo() {
                 )}
                 {step === 3 && (
                   <>
-                    <span className="text-[#00ffcc]/70 text-[9px]">{'// EGRESS ENRICHED PAYLOAD'}</span>
+                    <span className="text-[#00ffcc]/70 text-[9px]">{d.egress}</span>
                     <span className="text-[#00ffcc] leading-snug break-words font-semibold">
                       {'{ "merchant": "Amazon", "type": "E_COMMERCE" }'}
                     </span>
@@ -224,7 +227,7 @@ export default function DataArchitectureDemo() {
               style={{ gap: '6px' }}
             >
               <Terminal size={11} />
-              <span>bash — CI/CD Runner</span>
+              <span>{d.terminalTitle}</span>
             </div>
             <div style={{ width: '32px' }} />
           </div>
@@ -264,7 +267,7 @@ export default function DataArchitectureDemo() {
                 transition={{ delay: 2.2 }}
                 className="text-[#ffb86c] truncate min-w-0 w-full"
               >
-                &gt; coverage-diff: Increased (+1.2%)
+                &gt; {d.coverage}
               </motion.div>
 
               <motion.div
@@ -275,7 +278,7 @@ export default function DataArchitectureDemo() {
                 style={{ gap: '8px' }}
               >
                 <GitMerge size={12} className="text-[#bd93f9] shrink-0" />
-                <span className="text-[#bd93f9] truncate min-w-0">MR #42 approved (Review)</span>
+                <span className="text-[#bd93f9] truncate min-w-0">{d.mr}</span>
               </motion.div>
             </div>
 
@@ -289,7 +292,7 @@ export default function DataArchitectureDemo() {
             >
               <CheckCircle2 size={15} className="text-[#00ffcc] shrink-0" />
               <span className="text-[#00ffcc] font-semibold tracking-wide truncate min-w-0">
-                Rundeck [Staging] : Deploy Success
+                {d.deploy}
               </span>
             </motion.div>
           </div>

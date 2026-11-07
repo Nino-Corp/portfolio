@@ -1,9 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
 import { Heart, Activity, Wifi, PawPrint, Cpu, Navigation } from 'lucide-react';
 
 export default function PawriseCareDemo() {
+  const { t } = useLang();
+  const p = t.pawrise;
   const [heartRate, setHeartRate] = useState(112);
   const [activeTab, setActiveTab] = useState<'health' | 'map'>('health');
 
@@ -73,7 +76,7 @@ export default function PawriseCareDemo() {
            ========================================================= */}
         <div className="relative flex flex-col items-center justify-center shrink-0 w-full md:w-[240px] md:h-full">
           <div className="md:absolute md:top-0 text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase mb-2 md:mb-0 whitespace-nowrap z-20">
-            Collier IoT
+            {p.collar}
           </div>
 
           <div className="relative w-[78px] h-[78px] sm:w-[88px] sm:h-[88px] flex items-center justify-center shrink-0">
@@ -128,7 +131,7 @@ export default function PawriseCareDemo() {
            ========================================================= */}
         <div className="relative flex-1 flex flex-col items-center justify-center w-full md:h-full md:mx-4 shrink-0 min-h-[60px] md:min-h-0 py-2 md:py-0">
           <div className="md:absolute md:top-0 text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase mb-2 md:mb-0 whitespace-nowrap z-20 bg-[#050505] px-2 md:bg-transparent">
-            Moteur IA &amp; Backend
+            {p.engine}
           </div>
 
           {/* Ligne dynamique (Verticale Mobile / Horizontale Desktop) */}
@@ -155,10 +158,10 @@ export default function PawriseCareDemo() {
             </div>
             <div className="flex flex-col text-left">
               <span className="text-[10px] font-semibold text-white leading-tight whitespace-nowrap">
-                Anomaly AI
+                {p.anomalyAi}
               </span>
               <span className="text-[8px] font-mono text-[#00ffcc] leading-tight whitespace-nowrap mt-[1px]">
-                Score: 99.4% OK
+                {p.score}
               </span>
             </div>
           </div>
@@ -169,7 +172,7 @@ export default function PawriseCareDemo() {
            ========================================================= */}
         <div className="relative flex flex-col items-center justify-center shrink-0 w-full md:w-[240px] md:h-full">
           <div className="md:absolute md:top-0 text-[10px] sm:text-[11px] font-medium text-[#86868b] tracking-[0.16em] uppercase mb-2 md:mb-0 whitespace-nowrap z-20">
-            Mobile App
+            {p.mobileApp}
           </div>
 
           <div 
@@ -205,7 +208,7 @@ export default function PawriseCareDemo() {
                         <div className="leading-none">
                           <div className="text-white text-[11px] font-semibold">Rex</div>
                           <div className="text-[#00ffcc] text-[8px] font-medium flex items-center gap-1" style={{ marginTop: '2px' }}>
-                            <span className="w-1 h-1 rounded-full bg-[#00ffcc]" /> En ligne
+                            <span className="w-1 h-1 rounded-full bg-[#00ffcc]" /> {p.online}
                           </div>
                         </div>
                       </div>
@@ -213,7 +216,7 @@ export default function PawriseCareDemo() {
                         className="text-[8px] font-mono text-white/60 bg-white/[0.06] rounded-full border border-white/10"
                         style={{ padding: '2px 5px' }}
                       >
-                        LIVE
+                        {p.live}
                       </span>
                     </div>
 
@@ -230,8 +233,8 @@ export default function PawriseCareDemo() {
                           <Heart size={15} color="#ff2d55" fill="#ff2d55" />
                         </motion.div>
                         <div>
-                          <div className="text-[8px] text-[#86868b] uppercase tracking-wider">Rythme</div>
-                          <div className="text-[9px] text-[#00ffcc] font-medium">Normal</div>
+                          <div className="text-[8px] text-[#86868b] uppercase tracking-wider">{p.rhythm}</div>
+                          <div className="text-[9px] text-[#00ffcc] font-medium">{p.normal}</div>
                         </div>
                       </div>
                       <div className="text-right leading-none">
@@ -246,7 +249,7 @@ export default function PawriseCareDemo() {
 
                     <div className="flex flex-col">
                       <div className="flex justify-between items-center text-[8px] text-[#86868b]" style={{ marginBottom: '3px' }}>
-                        <span>Variabilité (HRV)</span>
+                        <span>{p.hrv}</span>
                         <span className="text-white/70 font-mono">60s</span>
                       </div>
                       <div className="h-[24px] flex items-end gap-[3px]">
@@ -272,7 +275,7 @@ export default function PawriseCareDemo() {
                     className="flex flex-col justify-between h-full"
                   >
                     <div className="flex items-center justify-between" style={{ marginBottom: '4px' }}>
-                      <span className="text-white text-[10px] font-semibold">Localisation GPS</span>
+                      <span className="text-white text-[10px] font-semibold">{p.gpsTitle}</span>
                       <span className="text-[#00ffcc] text-[8px] font-mono">± 1.2m</span>
                     </div>
 
@@ -296,9 +299,9 @@ export default function PawriseCareDemo() {
                         style={{ padding: '3px 6px' }}
                       >
                         <span className="text-[8px] text-white/90 flex items-center gap-1">
-                          <Navigation size={8} className="text-[#00ffcc]" /> Zone sûre
+                          <Navigation size={8} className="text-[#00ffcc]" /> {p.safeZone}
                         </span>
-                        <span className="text-[8px] font-mono text-[#00ffcc]">à 14m</span>
+                        <span className="text-[8px] font-mono text-[#00ffcc]">{p.distance}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -319,7 +322,7 @@ export default function PawriseCareDemo() {
                 style={{ padding: '4px 0' }}
               >
                 <Activity size={11} />
-                <span>Santé</span>
+                <span>{p.tabHealth}</span>
               </button>
               <button
                 type="button"
@@ -330,7 +333,7 @@ export default function PawriseCareDemo() {
                 style={{ padding: '4px 0' }}
               >
                 <Navigation size={11} />
-                <span>GPS</span>
+                <span>{p.tabGps}</span>
               </button>
             </div>
 

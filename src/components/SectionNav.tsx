@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { useLang } from "@/lib/i18n";
+import type { Dict } from "@/lib/translations";
 import {
   Timeline,
   TimelineItem,
@@ -15,22 +17,22 @@ import {
 export interface NavSection {
   id: string;
   number: string;
-  shortLabel: string;
-  title: string;
+  labelKey: keyof Dict["nav"];
 }
 
 export const NAV_SECTIONS: NavSection[] = [
-  { id: "section-hero", number: "00", shortLabel: "Accueil", title: "Nino L." },
-  { id: "section-01", number: "01", shortLabel: "Introduction", title: "Parcours & Vision" },
-  { id: "section-02", number: "02", shortLabel: "Pawrise Care", title: "Data Science & IoT" },
-  { id: "section-03", number: "03", shortLabel: "IA & Deep RL", title: "Deep RL & Vision" },
-  { id: "section-04", number: "04", shortLabel: "Data Eng.", title: "Pipelines Linxo" },
-  { id: "section-05", number: "05", shortLabel: "Big Data", title: "Homepedia Spark" },
-  { id: "section-06", number: "06", shortLabel: "Fullstack", title: "E-Commerce CBD" },
-  { id: "section-07", number: "07", shortLabel: "Contact", title: "Stack & Réseaux" },
+  { id: "section-hero", number: "00", labelKey: "hero" },
+  { id: "section-01", number: "01", labelKey: "s01" },
+  { id: "section-02", number: "02", labelKey: "s02" },
+  { id: "section-03", number: "03", labelKey: "s03" },
+  { id: "section-04", number: "04", labelKey: "s04" },
+  { id: "section-05", number: "05", labelKey: "s05" },
+  { id: "section-06", number: "06", labelKey: "s06" },
+  { id: "section-07", number: "07", labelKey: "s07" },
 ];
 
 export default function SectionNav() {
+  const { t } = useLang();
   const [activeSection, setActiveSection] = useState<string>("section-hero");
   const isScrollingRef = useRef(false);
 
@@ -91,7 +93,8 @@ export default function SectionNav() {
 
   return (
     <nav
-      aria-label="Fil d'ariane vertical"
+      data-section-nav
+      aria-label={t.nav.ariaLabel}
       aria-hidden={!isVisible}
       className={`hidden lg:flex fixed right-4 xl:right-7 2xl:right-11 top-1/2 -translate-y-1/2 z-50 flex-col select-none w-[155px] ${
         isVisible ? "pointer-events-auto" : "pointer-events-none"
@@ -173,7 +176,7 @@ export default function SectionNav() {
                         : "text-white/30 group-hover:text-white/90 font-normal"
                     }`}
                   >
-                    {section.shortLabel}
+                    {t.nav[section.labelKey]}
                   </TimelineTitle>
                 </TimelineHeader>
               </TimelineItem>

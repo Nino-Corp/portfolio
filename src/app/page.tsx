@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from "framer-motion";
 import MedicalScanDemo from '@/components/MedicalScanDemo';
 import DataArchitectureDemo from '@/components/DataArchitectureDemo';
@@ -17,128 +17,62 @@ import SectionNav from '@/components/SectionNav';
 import HeroTitle from '@/components/HeroTitle';
 import ContactCTA from '@/components/ContactCTA';
 import HeroSubtitle from '@/components/HeroSubtitle';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useLang } from '@/lib/i18n';
 
-const DEMO_CARDS = [
-  { 
-    sectionId: "section-01",
-    title: "Introduction",
-    subtitle: "Parcours & Vision",
-    imgUrl: "/cards/card-01-intro.svg", 
-    alt: "Introduction" 
-  },
-  { 
-    sectionId: "section-02",
-    title: "Pawrise Care",
-    subtitle: "Data Science & IoT",
-    imgUrl: "/cards/card-02-pawrise.svg", 
-    alt: "Pawrise Care" 
-  },
-  { 
-    sectionId: "section-03",
-    title: "Intelligence Artificielle",
-    subtitle: "Deep RL & Computer Vision",
-    imgUrl: "/cards/card-03-ia.svg", 
-    alt: "Intelligence Artificielle" 
-  },
-  { 
-    sectionId: "section-04",
-    title: "Data Engineering",
-    subtitle: "Architecture & Pipelines Linxo",
-    imgUrl: "/cards/card-04-dataeng.svg", 
-    alt: "Data Engineering" 
-  },
-  { 
-    sectionId: "section-05",
-    title: "Big Data & DataOps",
-    subtitle: "Homepedia (Apache Spark)",
-    imgUrl: "/cards/card-05-bigdata.svg", 
-    alt: "Homepedia" 
-  },
-  { 
-    sectionId: "section-06",
-    title: "Développement Fullstack",
-    subtitle: "E-Commerce LesAmisDuCBD",
-    imgUrl: "/cards/card-06-fullstack.svg", 
-    alt: "LesAmisDuCBD" 
-  },
-  { 
-    sectionId: "section-07",
-    title: "Stack & Contact",
-    subtitle: "Technologies & Réseaux",
-    imgUrl: "/cards/card-07-stack.svg", 
-    alt: "Stack & Contact" 
-  },
+const CARD_META = [
+  { sectionId: "section-01", imgUrl: "/cards/card-01-intro.svg" },
+  { sectionId: "section-02", imgUrl: "/cards/card-02-pawrise.svg" },
+  { sectionId: "section-03", imgUrl: "/cards/card-03-ia.svg" },
+  { sectionId: "section-04", imgUrl: "/cards/card-04-dataeng.svg" },
+  { sectionId: "section-05", imgUrl: "/cards/card-05-bigdata.svg" },
+  { sectionId: "section-06", imgUrl: "/cards/card-06-fullstack.svg" },
+  { sectionId: "section-07", imgUrl: "/cards/card-07-stack.svg" },
 ];
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const glowRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
-  const projectDetails = [
-    {
-      id: 1,
-      title: "Crash & Learn RL",
-      subtitle: "Apprentissage par Renforcement Profond",
-      description: "Exploitation de données dynamiques en temps réel issues de capteurs virtuels (LiDAR). L'enjeu a été de transformer ces données brutes, souvent bruitées par la météo, en états modélisés (State) dans un processus de décision markovien (MDP/POMDP). L'objectif final : entraîner un agent autonome capable d'optimiser une fonction de récompense complexe pour la conduite autonome.",
-      skills: ["Reinforcement Learning", "LiDAR", "MDP/POMDP", "Python"]
-    },
-    {
-      id: 2,
-      title: "DiagAI Médical",
-      subtitle: "Diagnostic par Réseaux de Neurones",
-      description: "Projet de Computer Vision appliqué à la santé. J'ai manipulé de vastes jeux de données non structurées (radiographies) nécessitant un lourd travail de prétraitement et de normalisation. Ces données ont servi à entraîner un réseau de neurones profond (Deep Learning) pour résoudre un problème critique de classification binaire, comme la détection de pneumonies avec un haut degré de précision.",
-      skills: ["Computer Vision", "Deep Learning", "Data Normalization", "PyTorch"]
-    },
-    {
-      id: 3,
-      title: "Linxo (Fintech)",
-      subtitle: "Backend & Data Engineering en Microservices",
-      description: "Développement backend au sein d'une architecture distribuée exigeante. Mon quotidien couvre un large spectre de missions : conception de nouveaux microservices (FastAPI), optimisation de pipelines d'enrichissement de données, conception de librairies métier, et refactorisation. J'évolue avec des standards de qualité élevés : validation stricte des schémas (Pydantic), couverture de tests exhaustive (Pytest, Tox, scripts custom), automatisation des environnements (uv), et déploiements continus sécurisés sur AWS (Rundeck, GitLab CI/CD).",
-      skills: ["Python", "FastAPI", "Pydantic", "Pytest / Tox", "AWS SSO", "Rundeck", "GitLab CI/CD", "uv"]
-    },
-    {
-      id: 4,
-      title: "LesAmisDuCBD",
-      subtitle: "Développement Web & Fullstack",
-      description: "Conception et déploiement de A à Z d'une plateforme web e-commerce complète (LesAmisDuCBD). J'ai pris en charge le développement front-end et back-end, la gestion sécurisée des bases de données, l'intégration des systèmes de paiement, et l'optimisation des performances web (latence, SEO, responsive design).",
-      skills: ["React", "TypeScript", "Node.js", "API REST", "E-Commerce", "UI/UX"]
-    },
-    {
-      id: 5,
-      title: "Pawrise Care",
-      subtitle: "Plateforme Connectée de Santé Animale",
-      description: "Solution SaaS complète dédiée au bien-être des animaux de compagnie. Le projet couvre l'ensemble de la chaîne de valeur : l'acquisition des signes vitaux via collier IoT, le traitement des données via un Backend robuste, une application front-end intuitive pour les utilisateurs, et mon moteur d'IA pour détecter de manière proactive les anomalies de santé.",
-      skills: ["Python (Scikit-Learn)", "Time-Series Analysis", "React Native", "Node.js API", "IoT Telemetry (MQTT)", "WebSocket"]
-    },
-    {
-      id: 6,
-      title: "Homepedia",
-      subtitle: "Plateforme Big Data & DataOps sur le Marché Immobilier",
-      description: "Conception et déploiement d'une infrastructure Big Data complète pour l'analyse multi-échelle du marché immobilier français (à destination des collectivités et fonds d'investissement). Pipeline d'ingestion et de standardisation de plus de 15 sources hétérogènes (DVF, INSEE, cadastres, scraping d'annonces, et avis textuels citoyens). Traitement distribué massif sur cluster Apache Spark & Hadoop (Databricks), stockage hybride relationnel (PostgreSQL) et non-relationnel (Elasticsearch), analyse de sentiment par NLP sur les avis municipaux, et restitution sous forme de cartographies interactives (Streamlit, Leaflet) à l'échelle régionale, départementale et communale.",
-      skills: ["Apache Spark", "Hadoop", "Databricks", "Python / PySpark", "PostgreSQL", "Elasticsearch", "NLP (Sentiment Analysis)", "Streamlit / Leaflet", "DataOps / ETL", "Docker"]
-    }
-  ];
+  const { t } = useLang();
+  const projectDetails = t.projectDetails;
+  const selected = projectDetails.find((p) => p.id === selectedProject);
+  const demoCards = useMemo(
+    () => CARD_META.map((meta, i) => ({ ...meta, ...t.cards.items[i] })),
+    [t]
+  );
 
+  // Glow cursor: moved straight on the DOM node (rAF-throttled) so mouse moves never re-render the page.
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const el = glowRef.current;
+    if (!el || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    let raf = 0;
+    let x = 0;
+    let y = 0;
+    const flush = () => {
+      raf = 0;
+      el.style.transform = `translate3d(${x - 200}px, ${y - 200}px, 0)`;
     };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    const handleMouseMove = (e: MouseEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (!raf) raf = requestAnimationFrame(flush);
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
     <main>
       {/* Glow dynamique */}
-      <motion.div 
-        className="glow-cursor"
-        animate={{ x: mousePosition.x - 200, y: mousePosition.y - 200 }}
-        transition={{ type: "tween", ease: "linear", duration: 0.1 }}
-      />
+      <div ref={glowRef} className="glow-cursor" aria-hidden="true" />
 
       {/* Fil d'ariane vertical Apple ultra-moderne */}
       <SectionNav />
+      <LanguageSwitcher />
       
       {/* HERO SECTION */}
       <section className="hero-section" id="section-hero">
@@ -155,7 +89,7 @@ export default function Home() {
             className="w-full mt-4"
             style={{ pointerEvents: 'auto' }}
           >
-            <SocialCards cards={DEMO_CARDS} />
+            <SocialCards cards={demoCards} />
           </motion.div>
         </div>
 
@@ -168,14 +102,14 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
         >
-          ↓ SCROLL OR CLICK TO EXPLORE
+          {t.hero.scroll}
         </motion.div>
       </section>
 
       {/* SECTION 01 : INTRODUCTION */}
       <section className="snap-section" id="section-01">
         <div style={{ width: '100%', maxWidth: '1000px', margin: 'auto' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '30px' }}>01 / Introduction</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '30px' }}>{t.sections.s01}</h2>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -183,24 +117,17 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.02em', color: '#fff' }}>
-              De la donnée brute aux systèmes autonomes.
+              {t.intro.title}
             </h2>
             <div style={{ marginTop: '30px', fontSize: 'clamp(1.1rem, 2vw, 1.2rem)', color: '#a1a1a6', lineHeight: 1.8, fontWeight: 300 }}>
-              J'interviens sur l'ensemble du cycle de vie des projets IT, de la modélisation des données jusqu'à la restitution client. Mes champs d'action :
+              {t.intro.lead}
 
               <ul style={{ marginTop: '20px', paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>Développement Fullstack &amp; Web :</strong> Conception et déploiement d'applications web modernes de A à Z (ex: plateformes e-commerce), de l'interface utilisateur (React, TypeScript) à l'architecture Backend et base de données (Node.js).
-                </li>
-                <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>Data Engineering &amp; Big Data :</strong> Création de pipelines ETL industrialisés, ingestion de flux IoT en temps réel, et traitement distribué à grande échelle (Hadoop, Apache Spark).
-                </li>
-                <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>DevOps &amp; Qualité :</strong> Déploiement et orchestration d'architectures sur AWS (Rundeck, SSO), restitution (OpenSearch, Streamlit) et fiabilisation systématique des flux de production via tests unitaires (Pytest).
-                </li>
-                <li>
-                  <strong style={{ color: '#fff', fontWeight: 500 }}>Intelligence Artificielle :</strong> Modélisation et entraînement d'algorithmes complexes, allant de la Computer Vision en imagerie médicale (Deep Learning) à la conduite autonome par Apprentissage par Renforcement (Processus Markoviens).
-                </li>
+                {t.intro.pillars.map((pillar) => (
+                  <li key={pillar.label}>
+                    <strong style={{ color: '#fff', fontWeight: 500 }}>{pillar.label}</strong> {pillar.text}
+                  </li>
+                ))}
               </ul>
             </div>
           </motion.div>
@@ -210,7 +137,7 @@ export default function Home() {
       {/* SECTION 02 : PAWRISE CARE */}
       <section className="snap-section" id="section-02">
         <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>02 / Data Science & Anomaly Detection</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>{t.sections.s02}</h2>
           <div className="bento-grid">
             
             {/* ROW-SPAN-2 POUR NE PAS ÉCRASER LA CARTE */}
@@ -230,7 +157,7 @@ export default function Home() {
                   className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
                   style={{ margin: 0 }}
                 >
-                  Pawrise Care : Health Dashboard
+                  {t.project.pawriseTitle}
                 </h2>
                 <div className="flex items-center" style={{ gap: '10px' }}>
                   <a 
@@ -240,14 +167,14 @@ export default function Home() {
                     className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
-                    Visiter le site ↗
+                    {t.project.visitSite}
                   </a>
                   <button 
                     onClick={() => setSelectedProject(5)}
                     className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-full text-xs cursor-pointer backdrop-blur-md transition-all active:scale-95 font-medium"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
-                    Détails ➔
+                    {t.common.details}
                   </button>
                 </div>
               </div>
@@ -263,7 +190,7 @@ export default function Home() {
       {/* SECTION 03 : INTELLIGENCE ARTIFICIELLE */}
       <section className="snap-section" id="section-03">
         <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>03 / Intelligence Artificielle</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>{t.sections.s03}</h2>
 
           {/* Layout flex : row sur desktop, col sur mobile */}
           <div style={{ display: 'flex', flexDirection: 'row', gap: '16px', width: '100%', flexWrap: 'wrap' }}>
@@ -291,14 +218,14 @@ export default function Home() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>Crash &amp; Learn RL</h3>
-                    <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: '#a1a1a6' }}>Apprentissage par Renforcement Profond</p>
+                    <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: '#a1a1a6' }}>{t.project.rlSubtitle}</p>
                   </div>
                   <button
                     onClick={() => setSelectedProject(1)}
                     className="hover:bg-white/20 active:scale-95 transition-all"
                     style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap', flexShrink: 0 }}
                   >
-                    Détails ➔
+                    {t.common.details}
                   </button>
                 </div>
               </div>
@@ -326,15 +253,15 @@ export default function Home() {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '12px', flexWrap: 'wrap' }}>
                   <div>
-                    <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>DiagAI Médical</h3>
-                    <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: '#a1a1a6' }}>Diagnostic par réseaux de neurones</p>
+                    <h3 style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)', fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>{t.projectDetails[1].title}</h3>
+                    <p style={{ margin: '3px 0 0', fontSize: '0.8rem', color: '#a1a1a6' }}>{t.project.medSubtitle}</p>
                   </div>
                   <button
                     onClick={() => setSelectedProject(2)}
                     className="hover:bg-white/20 active:scale-95 transition-all"
                     style={{ pointerEvents: 'auto', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '8px 16px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', backdropFilter: 'blur(10px)', whiteSpace: 'nowrap', flexShrink: 0 }}
                   >
-                    Détails ➔
+                    {t.common.details}
                   </button>
                 </div>
               </div>
@@ -347,7 +274,7 @@ export default function Home() {
       {/* SECTION 04 : DATA ENGINEERING */}
       <section className="snap-section" id="section-04">
         <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>04 / Data Engineering & Architecture</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>{t.sections.s04}</h2>
 
           <div className="bento-grid">
             <motion.div
@@ -366,7 +293,7 @@ export default function Home() {
                   className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
                   style={{ margin: 0 }}
                 >
-                  Linxo : Pipeline d'Enrichissement (Fintech)
+                  {t.project.linxoTitle}
                 </h3>
                 <div className="flex items-center" style={{ gap: '10px' }}>
                   <a
@@ -376,14 +303,14 @@ export default function Home() {
                     className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
-                    Visiter ↗
+                    {t.project.visit}
                   </a>
                   <button
                     onClick={() => setSelectedProject(3)}
                     className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-full text-xs font-medium cursor-pointer backdrop-blur-md flex items-center transition-all active:scale-95"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
-                    Détails ➔
+                    {t.common.details}
                   </button>
                 </div>
               </div>
@@ -401,7 +328,7 @@ export default function Home() {
       <section className="snap-section" id="section-05">
         <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
           <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '2px' }}>
-            05 / Big Data & DataOps
+            {t.sections.s05}
           </h2>
 
           <div className="bento-grid">
@@ -422,10 +349,10 @@ export default function Home() {
                     className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
                     style={{ margin: 0 }}
                   >
-                    Homepedia : Exploring Housing Insights
+                    {t.project.homepediaTitle}
                   </h3>
                   <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: '#86868b' }}>
-                    Architecture Big Data distribuée (Apache Spark) & Cartographie décisionnelle
+                    {t.project.homepediaSubtitle}
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -434,7 +361,7 @@ export default function Home() {
                     className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-full text-xs font-medium cursor-pointer backdrop-blur-md flex items-center transition-all active:scale-95"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
-                    Détails ➔
+                    {t.common.details}
                   </button>
                 </div>
               </div>
@@ -450,7 +377,7 @@ export default function Home() {
       {/* SECTION 06 : WEB & FULLSTACK */}
       <section className="snap-section" id="section-06">
         <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>06 / Développement Fullstack</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>{t.sections.s06}</h2>
           <div className="bento-grid">
             
             <motion.div 
@@ -469,7 +396,7 @@ export default function Home() {
                   className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
                   style={{ margin: 0 }}
                 >
-                  E-Commerce Website (LesAmisDuCBD)
+                  {t.project.ecommerceTitle}
                 </h2>
                 <div className="flex items-center">
                   <button 
@@ -477,7 +404,7 @@ export default function Home() {
                     className="pointer-events-auto bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-full text-xs font-medium cursor-pointer backdrop-blur-md flex items-center transition-all active:scale-95"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
-                    Détails ➔
+                    {t.common.details}
                   </button>
                 </div>
               </div>
@@ -494,7 +421,7 @@ export default function Home() {
       {/* SECTION 07 : STACK & RESEAUX */}
       <section className="snap-section" id="section-07">
         <div style={{ width: '100%', maxWidth: '1200px', margin: 'auto' }}>
-          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>07 / Stack & Contact</h2>
+          <h2 style={{ fontSize: '1rem', color: '#888', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px', marginLeft: '10px' }}>{t.sections.s07}</h2>
           <div className="bento-grid">
             
             {/* Tuile Stack */}
@@ -603,20 +530,20 @@ export default function Home() {
             </button>
             
             <h3 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '5px', letterSpacing: '-0.02em' }}>
-              {projectDetails.find(p => p.id === selectedProject)?.title}
+              {selected?.title}
             </h3>
             <div style={{ color: '#00ffcc', fontSize: '1rem', marginBottom: '25px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              {projectDetails.find(p => p.id === selectedProject)?.subtitle}
+              {selected?.subtitle}
             </div>
             
             <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: '#d1d1d6', marginBottom: '30px' }}>
-              {projectDetails.find(p => p.id === selectedProject)?.description}
+              {selected?.description}
             </p>
             
             <div>
-              <div style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', marginBottom: '10px', letterSpacing: '0.1em' }}>Compétences Clés</div>
+              <div style={{ fontSize: '0.8rem', color: '#888', textTransform: 'uppercase', marginBottom: '10px', letterSpacing: '0.1em' }}>{t.project.keySkills}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                {projectDetails.find(p => p.id === selectedProject)?.skills.map(skill => (
+                {selected?.skills.map(skill => (
                   <span key={skill} style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 14px', borderRadius: '20px', fontSize: '0.9rem', border: '1px solid rgba(255,255,255,0.1)' }}>
                     {skill}
                   </span>

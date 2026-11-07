@@ -1,8 +1,10 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLang } from '@/lib/i18n';
 
 export default function ECommerceDemo() {
+  const { t } = useLang();
   return (
     <div className="ecom-demo w-full h-full absolute inset-0 overflow-hidden flex flex-col items-center justify-center bg-black p-4 sm:p-6">
       
@@ -50,8 +52,8 @@ export default function ECommerceDemo() {
             className="ecom-title"
             style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', textAlign: 'center', margin: 0, lineHeight: 1.1 }}
           >
-            Le meilleur du CBD,<br/>
-            <span style={{ color: '#2ecc71' }}>directement chez vous.</span>
+            {t.ecommerce.heroLine1}<br/>
+            <span style={{ color: '#2ecc71' }}>{t.ecommerce.heroLine2}</span>
           </motion.h3>
 
           {/* Faux produits animés */}
@@ -114,7 +116,7 @@ export default function ECommerceDemo() {
         }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
       >
-        Visiter le site en ligne
+        {t.ecommerce.visit}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           <polyline points="15 3 21 3 21 9"></polyline>
