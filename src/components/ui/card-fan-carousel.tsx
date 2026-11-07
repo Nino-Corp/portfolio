@@ -247,7 +247,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                 WebkitTapHighlightColor: "transparent",
               }}
             >
-              <div className="relative w-full h-full overflow-hidden rounded-xl md:rounded-2xl border border-white/10 bg-black shadow-2xl transition-colors duration-300 group-hover:border-[#00ffcc]/50 group-focus-visible:border-[#00ffcc]">
+              <div className="relative w-full h-full overflow-hidden rounded-xl md:rounded-2xl border border-white/10 bg-black shadow-2xl transition-colors duration-300 group-hover:border-[#5b8cff]/50 group-focus-visible:border-[#5b8cff]">
                 <img
                   src={item.imgUrl}
                   alt={item.alt || item.title || `Section ${i + 1}`}
@@ -256,10 +256,21 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                   draggable={false}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 pt-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-right pointer-events-none">
-                  <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">{item.title || item.alt}</h4>
+                <div
+                  className="absolute inset-x-0 bottom-0 pt-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-left pointer-events-none"
+                  style={{ padding: `${cardWidth * 0.06}px`, paddingTop: 40 }}
+                >
+                  <h4
+                    className="font-bold text-white leading-tight break-words text-balance"
+                    style={{ fontSize: Math.max(10, cardWidth * 0.075) }}
+                  >
+                    {item.title || item.alt}
+                  </h4>
                   {item.subtitle && (
-                    <p className="mt-0.5 text-[10px] sm:text-[11px] font-medium tracking-wide text-[#00ffcc] leading-tight">
+                    <p
+                      className="mt-1 font-medium text-[#5b8cff] leading-tight break-words text-balance"
+                      style={{ fontSize: Math.max(9, cardWidth * 0.055) }}
+                    >
                       {item.subtitle}
                     </p>
                   )}

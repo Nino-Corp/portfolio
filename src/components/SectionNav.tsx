@@ -132,9 +132,9 @@ export default function SectionNav() {
                 <TimelineIndicator
                   className={`size-4 -left-5 transition-all duration-300 ${
                     isActive
-                      ? "scale-125 border-[#00ffcc] bg-[#00ffcc]/15 shadow-[0_0_16px_#00ffcc]"
+                      ? "scale-125 border-[#5b8cff] bg-[#5b8cff]/15 shadow-[0_0_16px_#5b8cff]"
                       : isCompleted
-                      ? "border-[#00ffcc] bg-[#00ffcc] shadow-[0_0_8px_rgba(0,255,204,0.35)]"
+                      ? "border-[#5b8cff] bg-[#5b8cff] shadow-[0_0_8px_rgba(91,140,255,0.35)]"
                       : "border-white/20 bg-white/[0.03] group-hover:border-white/50 group-hover:scale-110"
                   }`}
                 >
@@ -142,7 +142,7 @@ export default function SectionNav() {
                     <span className="w-1 h-1 rounded-full bg-black" />
                   ) : isActive ? (
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ffcc] opacity-75" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#5b8cff] opacity-75" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white shadow-[0_0_4px_#ffffff]" />
                     </span>
                   ) : (
@@ -157,9 +157,9 @@ export default function SectionNav() {
                     <span
                       className={
                         isActive
-                          ? "text-[#00ffcc]"
+                          ? "text-[#5b8cff]"
                           : isCompleted
-                          ? "text-[#00ffcc]/70"
+                          ? "text-[#5b8cff]/70"
                           : "text-white/25 group-hover:text-white/60"
                       }
                     >

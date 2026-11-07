@@ -56,13 +56,13 @@ export default function RLCarDemo() {
           if (isMounted) setStatus("crash");
           await safeStart({ scale: 2, backgroundColor: '#ff3366', transition: { duration: 0.1 } });
           await new Promise(r => setTimeout(r, 600)); 
-          await safeSet({ scale: 1, backgroundColor: '#00ffcc' });
+          await safeSet({ scale: 1, backgroundColor: '#5b8cff' });
           if (isMounted) setEpoch(e => e + 1);
         }
 
         if (success) {
           if (isMounted) setStatus("goal");
-          await safeStart({ scale: [1, 1.5, 1], backgroundColor: '#00ffcc', transition: { duration: 0.5, repeat: 2 } });
+          await safeStart({ scale: [1, 1.5, 1], backgroundColor: '#5b8cff', transition: { duration: 0.5, repeat: 2 } });
           await new Promise(r => setTimeout(r, 1500));
           if (isMounted) setEpoch(1); // Reset infini
         }
@@ -90,7 +90,7 @@ export default function RLCarDemo() {
             fontFamily: 'monospace', 
             fontSize: 'clamp(0.7rem, 2vw, 1.1rem)', 
             fontWeight: 700,
-            color: status === "crash" ? '#ff3366' : status === "goal" ? '#00ffcc' : 'white',
+            color: status === "crash" ? '#ff3366' : status === "goal" ? '#5b8cff' : 'white',
             letterSpacing: '0.05em',
           }}>
             {t.rl[status]}
@@ -123,9 +123,9 @@ export default function RLCarDemo() {
             position: 'absolute',
             width: '16px',
             height: '10px',
-            backgroundColor: '#00ffcc',
+            backgroundColor: '#5b8cff',
             borderRadius: '2px',
-            boxShadow: '0 0 15px #00ffcc, 0 0 5px #fff',
+            boxShadow: '0 0 15px #5b8cff, 0 0 5px #fff',
             zIndex: 20,
             transformOrigin: 'center center',
             marginLeft: '-8px',

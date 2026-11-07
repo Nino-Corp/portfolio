@@ -43,7 +43,7 @@ export default function BigDataPipelineDemo() {
       <div style={{ display: 'flex', justifyContent: 'space-between', zIndex: 10, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>
         <div>
           <div style={{ fontSize: '0.7rem', color: '#888', textTransform: 'uppercase' }}>Ingestion Rate</div>
-          <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#00ffcc', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#5b8cff', fontFamily: 'monospace' }}>
             {throughput} GB/s
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function BigDataPipelineDemo() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '8px', background: 'rgba(0,255,204,0.1)', border: '1px solid #00ffcc', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 15px rgba(0,255,204,0.2)' }}>⚡</div>
+          <div style={{ width: '50px', height: '50px', borderRadius: '8px', background: 'rgba(91,140,255,0.1)', border: '1px solid #5b8cff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 15px rgba(91,140,255,0.2)' }}>⚡</div>
           <span style={{ fontSize: '0.6rem', color: '#aaa' }}>Spark Streaming</span>
         </div>
 
@@ -92,8 +92,8 @@ export default function BigDataPipelineDemo() {
                 width: '6px',
                 height: '6px',
                 borderRadius: '50%',
-                background: '#00ffcc',
-                boxShadow: '0 0 10px #00ffcc'
+                background: '#5b8cff',
+                boxShadow: '0 0 10px #5b8cff'
               }}
             />
           ))}

@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 800" role="img" aria-label="Stack et Contact">
 <defs>
-<radialGradient id="bg" cx="50%" cy="36%" r="70%"><stop offset="0" stop-color="#0b1c20"/><stop offset=".55" stop-color="#050b0e"/><stop offset="1" stop-color="#010203"/></radialGradient>
-<radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#00ffcc" stop-opacity=".28"/><stop offset="1" stop-color="#00ffcc" stop-opacity="0"/></radialGradient>
-<linearGradient id="ln" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#00ffcc"/><stop offset="1" stop-color="#00d8b4" stop-opacity=".6"/></linearGradient>
+<radialGradient id="bg" cx="50%" cy="36%" r="70%"><stop offset="0" stop-color="#161b25"/><stop offset=".55" stop-color="#0b0d12"/><stop offset="1" stop-color="#050608"/></radialGradient>
+<radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#5b8cff" stop-opacity=".28"/><stop offset="1" stop-color="#5b8cff" stop-opacity="0"/></radialGradient>
+<linearGradient id="ln" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#5b8cff"/><stop offset="1" stop-color="#3a5fcf" stop-opacity=".6"/></linearGradient>
 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
 </defs>
 <rect width="560" height="800" fill="url(#bg)"/>
 <rect width="560" height="800" fill="url(#grid)"/>
 <circle cx="280" cy="360" r="260" fill="url(#halo)"/>
 <rect x="14" y="14" width="532" height="772" rx="34" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
-<text x="44" y="96" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="54" font-weight="700" fill="#00ffcc">07</text>
+<text x="44" y="96" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="54" font-weight="700" fill="#5b8cff">07</text>
 <text x="44" y="128" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="24" letter-spacing="5" fill="#fff" fill-opacity=".6">TECH · CONTACT</text>
-<circle cx="500" cy="80" r="6" fill="#00ffcc"/><circle cx="500" cy="80" r="14" fill="none" stroke="#00ffcc" stroke-opacity=".4" stroke-width="2"/>
+<circle cx="500" cy="80" r="6" fill="#5b8cff"/><circle cx="500" cy="80" r="14" fill="none" stroke="#5b8cff" stroke-opacity=".4" stroke-width="2"/>
 <g fill="none" stroke="url(#ln)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-<rect x="100" y="210" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="0.25" stroke-width="2"/><rect x="228" y="210" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="1" stroke-width="4"/><rect x="356" y="210" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="0.25" stroke-width="2"/><rect x="100" y="338" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="1" stroke-width="4"/><rect x="228" y="338" width="112" height="112" rx="24" fill="#00ffcc" stroke-opacity="1" stroke-width="4"/><rect x="356" y="338" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="1" stroke-width="4"/><rect x="100" y="466" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="0.25" stroke-width="2"/><rect x="228" y="466" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="1" stroke-width="4"/><rect x="356" y="466" width="112" height="112" rx="24" fill="#06100f" stroke-opacity="0.25" stroke-width="2"/><path d="M268 394l-24 24 24 24M292 394l24 24-24 24" stroke="#021012" stroke-width="6"/>
+<rect x="100" y="210" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="0.25" stroke-width="2"/><rect x="228" y="210" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="1" stroke-width="4"/><rect x="356" y="210" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="0.25" stroke-width="2"/><rect x="100" y="338" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="1" stroke-width="4"/><rect x="228" y="338" width="112" height="112" rx="24" fill="#5b8cff" stroke-opacity="1" stroke-width="4"/><rect x="356" y="338" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="1" stroke-width="4"/><rect x="100" y="466" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="0.25" stroke-width="2"/><rect x="228" y="466" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="1" stroke-width="4"/><rect x="356" y="466" width="112" height="112" rx="24" fill="#10131a" stroke-opacity="0.25" stroke-width="2"/><path d="M268 394l-24 24 24 24M292 394l24 24-24 24" stroke="#021012" stroke-width="6"/>
 </g>
 </svg>

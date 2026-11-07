@@ -43,7 +43,7 @@ export default function DataArchitectureDemo() {
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(0, 255, 204, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.02) 1px, transparent 1px)',
+            'linear-gradient(rgba(91,140,255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(91,140,255, 0.02) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }}
       />
@@ -52,7 +52,7 @@ export default function DataArchitectureDemo() {
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(0, 255, 204, 0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(circle at 50% 50%, rgba(91,140,255, 0.04) 0%, transparent 70%)',
         }}
       />
 
@@ -74,7 +74,7 @@ export default function DataArchitectureDemo() {
               {d.pipeline}
             </span>
             <span
-              className="text-[9px] font-mono text-[#00ffcc] bg-[#00ffcc]/10 border border-[#00ffcc]/30 rounded-full"
+              className="text-[9px] font-mono text-[#5b8cff] bg-[#5b8cff]/10 border border-[#5b8cff]/30 rounded-full"
               style={{ padding: '2px 8px' }}
             >
               {d.step} 0{step + 1}/04
@@ -98,7 +98,7 @@ export default function DataArchitectureDemo() {
               }}
             />
 
-            {/* Ligne de progression active (#00ffcc) */}
+            {/* Ligne de progression active (#5b8cff) */}
             <div
               style={{
                 position: 'absolute',
@@ -111,7 +111,7 @@ export default function DataArchitectureDemo() {
               }}
             >
               <motion.div
-                className="h-full bg-[#00ffcc] shadow-[0_0_10px_#00ffcc]"
+                className="h-full bg-[#5b8cff] shadow-[0_0_10px_#5b8cff]"
                 animate={{ width: `${(step / 3) * 100}%` }}
                 transition={{ duration: 0.45, ease: 'easeInOut' }}
               />
@@ -126,12 +126,12 @@ export default function DataArchitectureDemo() {
               >
                 <motion.div
                   animate={{
-                    borderColor: step >= i ? '#00ffcc' : 'rgba(255,255,255,0.12)',
+                    borderColor: step >= i ? '#5b8cff' : 'rgba(255,255,255,0.12)',
                     backgroundColor:
                       step === i
-                        ? 'rgba(0,255,204,0.16)'
+                        ? 'rgba(91,140,255,0.16)'
                         : step > i
-                        ? 'rgba(0,255,204,0.06)'
+                        ? 'rgba(91,140,255,0.06)'
                         : '#121215',
                     scale: step === i ? 1.08 : 1,
                   }}
@@ -139,7 +139,7 @@ export default function DataArchitectureDemo() {
                 >
                   <node.icon
                     size={17}
-                    className={step >= i ? 'text-[#00ffcc]' : 'text-white/35'}
+                    className={step >= i ? 'text-[#5b8cff]' : 'text-white/35'}
                   />
                 </motion.div>
                 <span
@@ -159,7 +159,7 @@ export default function DataArchitectureDemo() {
             style={{ minHeight: '74px', padding: '12px 14px 12px 18px' }}
           >
             {/* Liseré lumineux gauche */}
-            <div className="absolute top-0 left-0 w-[3px] h-full bg-[#00ffcc]/70" />
+            <div className="absolute top-0 left-0 w-[3px] h-full bg-[#5b8cff]/70" />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -197,8 +197,8 @@ export default function DataArchitectureDemo() {
                 )}
                 {step === 3 && (
                   <>
-                    <span className="text-[#00ffcc]/70 text-[9px]">{d.egress}</span>
-                    <span className="text-[#00ffcc] leading-snug break-words font-semibold">
+                    <span className="text-[#5b8cff]/70 text-[9px]">{d.egress}</span>
+                    <span className="text-[#5b8cff] leading-snug break-words font-semibold">
                       {'{ "merchant": "Amazon", "type": "E_COMMERCE" }'}
                     </span>
                   </>
@@ -246,7 +246,7 @@ export default function DataArchitectureDemo() {
                 className="flex items-center w-full"
                 style={{ gap: '8px' }}
               >
-                <span className="text-[#00ffcc] shrink-0">$</span>
+                <span className="text-[#5b8cff] shrink-0">$</span>
                 <span className="truncate min-w-0">uv run pytest --cov=core</span>
               </motion.div>
 
@@ -258,7 +258,7 @@ export default function DataArchitectureDemo() {
                 style={{ gap: '10px' }}
               >
                 <span className="text-[#86868b] truncate min-w-0">test_patterns.py</span>
-                <span className="text-[#00ffcc] shrink-0 whitespace-nowrap">PASSED [100%]</span>
+                <span className="text-[#5b8cff] shrink-0 whitespace-nowrap">PASSED [100%]</span>
               </motion.div>
 
               <motion.div
@@ -287,11 +287,11 @@ export default function DataArchitectureDemo() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 4.2 }}
-              className="flex items-center bg-[#00ffcc]/10 rounded-xl border border-[#00ffcc]/30 shrink-0 w-full shadow-[0_0_15px_rgba(0,255,204,0.08)]"
+              className="flex items-center bg-[#5b8cff]/10 rounded-xl border border-[#5b8cff]/30 shrink-0 w-full shadow-[0_0_15px_rgba(91,140,255,0.08)]"
               style={{ padding: '9px 12px', gap: '8px' }}
             >
-              <CheckCircle2 size={15} className="text-[#00ffcc] shrink-0" />
-              <span className="text-[#00ffcc] font-semibold tracking-wide truncate min-w-0">
+              <CheckCircle2 size={15} className="text-[#5b8cff] shrink-0" />
+              <span className="text-[#5b8cff] font-semibold tracking-wide truncate min-w-0">
                 {d.deploy}
               </span>
             </motion.div>

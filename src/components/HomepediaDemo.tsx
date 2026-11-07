@@ -53,7 +53,7 @@ const REGIONS: RegionData[] = [
 ];
 
 const METRICS: { id: MetricType; labelKey: 'metricPrice' | 'metricNlp' | 'metricClimate'; icon: React.ElementType; color: string }[] = [
-  { id: 'price', labelKey: 'metricPrice', icon: TrendingUp, color: '#00ffcc' },
+  { id: 'price', labelKey: 'metricPrice', icon: TrendingUp, color: '#5b8cff' },
   { id: 'nlp', labelKey: 'metricNlp', icon: MessageSquare, color: '#bd93f9' },
   { id: 'climate', labelKey: 'metricClimate', icon: Wind, color: '#ffb86c' },
 ];
@@ -61,11 +61,11 @@ const METRICS: { id: MetricType; labelKey: 'metricPrice' | 'metricNlp' | 'metric
 function climateColor(score: number) {
   if (score >= 75) return '#ff5f56';
   if (score >= 50) return '#ffb86c';
-  return '#00ffcc';
+  return '#5b8cff';
 }
 
 function sentimentColor(score: number) {
-  if (score >= 80) return '#00ffcc';
+  if (score >= 80) return '#5b8cff';
   if (score >= 65) return '#ffb86c';
   return '#ff5f56';
 }
@@ -135,7 +135,7 @@ export default function HomepediaDemo() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(ellipse 80% 40% at 70% 0%, rgba(0,255,204,0.06) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 0% 100%, rgba(189,147,249,0.04) 0%, transparent 60%)',
+            'radial-gradient(ellipse 80% 40% at 70% 0%, rgba(91,140,255,0.06) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 0% 100%, rgba(189,147,249,0.04) 0%, transparent 60%)',
         }}
       />
       <div
@@ -154,12 +154,12 @@ export default function HomepediaDemo() {
       >
         <div className="flex items-center min-w-0" style={{ gap: '8px' }}>
           <span className="relative flex h-2 w-2 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ffcc] opacity-60"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00ffcc]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#5b8cff] opacity-60"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#5b8cff]"></span>
           </span>
           <span className="text-[10px] sm:text-[11px] font-mono text-[#86868b] truncate">
             {h.cluster}{' '}
-            <span className="text-[#00ffcc] font-semibold">{liveRate} GB/s</span>
+            <span className="text-[#5b8cff] font-semibold">{liveRate} GB/s</span>
           </span>
           <span className="hidden lg:block w-px h-3 bg-white/10 shrink-0" />
           <span className="hidden lg:block text-[10px] font-mono text-[#555] truncate">
@@ -246,7 +246,7 @@ export default function HomepediaDemo() {
             let col: string;
             if (metric === 'price') {
               val = `${r.avgPrice.toLocaleString(localeTag)} €`;
-              col = '#00ffcc';
+              col = '#5b8cff';
             } else if (metric === 'nlp') {
               val = `${r.sentimentScore}%`;
               col = sentimentColor(r.sentimentScore);
@@ -334,14 +334,14 @@ export default function HomepediaDemo() {
                     style={{
                       padding: '14px 18px',
                       background:
-                        'linear-gradient(135deg, rgba(0,255,204,0.09) 0%, rgba(0,255,204,0.02) 100%)',
-                      border: '1px solid rgba(0,255,204,0.2)',
+                        'linear-gradient(135deg, rgba(91,140,255,0.09) 0%, rgba(91,140,255,0.02) 100%)',
+                      border: '1px solid rgba(91,140,255,0.2)',
                     }}
                   >
                     <div className="flex items-center justify-between" style={{ gap: '12px' }}>
                       <div className="min-w-0">
                         <div
-                          className="text-[9px] font-mono text-[#00ffcc]/75 uppercase tracking-wider"
+                          className="text-[9px] font-mono text-[#5b8cff]/75 uppercase tracking-wider"
                           style={{ marginBottom: '4px' }}
                         >
                           {h.avgPrice}
@@ -354,13 +354,13 @@ export default function HomepediaDemo() {
                         </div>
                         <div className="flex items-center" style={{ gap: '6px', marginTop: '8px' }}>
                           {selected.priceTrend > 0 ? (
-                            <TrendingUp size={13} className="text-[#00ffcc] shrink-0" />
+                            <TrendingUp size={13} className="text-[#5b8cff] shrink-0" />
                           ) : (
                             <TrendingDown size={13} className="text-red-400 shrink-0" />
                           )}
                           <span
                             className="text-[11px] font-mono font-semibold"
-                            style={{ color: selected.priceTrend > 0 ? '#00ffcc' : '#ff5f56' }}
+                            style={{ color: selected.priceTrend > 0 ? '#5b8cff' : '#ff5f56' }}
                           >
                             {selected.priceTrend > 0 ? '+' : ''}
                             {selected.priceTrend}% {h.over12m}
@@ -370,7 +370,7 @@ export default function HomepediaDemo() {
 
                       {/* Courbe Sparkline */}
                       <div className="opacity-90 shrink-0">
-                        <Sparkline data={selected.priceHistory} color="#00ffcc" />
+                        <Sparkline data={selected.priceHistory} color="#5b8cff" />
                       </div>
                     </div>
                   </div>
@@ -413,7 +413,7 @@ export default function HomepediaDemo() {
                         style={{
                           color:
                             selected.dpeRating === 'C'
-                              ? '#00ffcc'
+                              ? '#5b8cff'
                               : selected.dpeRating === 'D'
                               ? '#ffb86c'
                               : '#ff5f56',

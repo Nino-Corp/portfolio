@@ -36,7 +36,7 @@ export default function PawriseCareDemo() {
       <div 
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(0, 255, 204, 0.04) 0%, transparent 60%)'
+          background: 'radial-gradient(circle at 50% 50%, rgba(91,140,255, 0.04) 0%, transparent 60%)'
         }}
       />
 
@@ -83,12 +83,12 @@ export default function PawriseCareDemo() {
             <motion.div
               animate={{ scale: [1, 1.55], opacity: [0.35, 0] }}
               transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
-              className="absolute inset-0 rounded-full border border-[#00ffcc]/40 pointer-events-none"
+              className="absolute inset-0 rounded-full border border-[#5b8cff]/40 pointer-events-none"
             />
             <motion.div
               animate={{ scale: [1, 1.3], opacity: [0.25, 0] }}
               transition={{ duration: 2.4, delay: 0.8, repeat: Infinity, ease: "easeOut" }}
-              className="absolute inset-0 rounded-full border border-[#00ffcc]/30 pointer-events-none"
+              className="absolute inset-0 rounded-full border border-[#5b8cff]/30 pointer-events-none"
             />
 
             <div 
@@ -102,15 +102,15 @@ export default function PawriseCareDemo() {
             </div>
 
             <div 
-              className="absolute -bottom-1.5 flex items-center gap-1 rounded-full bg-[#111113]/95 border border-[#00ffcc]/50 shadow-[0_0_15px_rgba(0,255,204,0.3)] backdrop-blur-md"
+              className="absolute -bottom-1.5 flex items-center gap-1 rounded-full bg-[#111113]/95 border border-[#5b8cff]/50 shadow-[0_0_15px_rgba(91,140,255,0.3)] backdrop-blur-md"
               style={{ padding: '3px 8px' }}
             >
               <motion.span 
                 animate={{ opacity: [1, 0.25, 1] }} 
                 transition={{ duration: 1.4, repeat: Infinity }}
-                className="w-1.5 h-1.5 rounded-full bg-[#00ffcc] shadow-[0_0_6px_#00ffcc]"
+                className="w-1.5 h-1.5 rounded-full bg-[#5b8cff] shadow-[0_0_6px_#5b8cff]"
               />
-              <span className="text-[9px] font-mono font-semibold text-[#00ffcc] tracking-wider">
+              <span className="text-[9px] font-mono font-semibold text-[#5b8cff] tracking-wider">
                 MQTT
               </span>
             </div>
@@ -118,10 +118,10 @@ export default function PawriseCareDemo() {
             <motion.div
               animate={{ opacity: [0.4, 1, 0.4], y: [0, -2, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -right-2 top-0 bg-[#00ffcc]/10 border border-[#00ffcc]/30 rounded-full flex items-center justify-center backdrop-blur-sm"
+              className="absolute -right-2 top-0 bg-[#5b8cff]/10 border border-[#5b8cff]/30 rounded-full flex items-center justify-center backdrop-blur-sm"
               style={{ width: '22px', height: '22px' }}
             >
-              <Wifi size={12} color="#00ffcc" />
+              <Wifi size={12} color="#5b8cff" />
             </motion.div>
           </div>
         </div>
@@ -135,14 +135,14 @@ export default function PawriseCareDemo() {
           </div>
 
           {/* Ligne dynamique (Verticale Mobile / Horizontale Desktop) */}
-          <div className="absolute top-[-30px] bottom-[-30px] left-1/2 -translate-x-1/2 w-[1.5px] md:top-1/2 md:bottom-auto md:-translate-y-1/2 md:-left-[50px] md:-right-[50px] md:translate-x-0 md:w-auto md:h-[1.5px] bg-gradient-to-b md:bg-gradient-to-r from-transparent via-[#00ffcc]/30 to-transparent" />
+          <div className="absolute top-[-30px] bottom-[-30px] left-1/2 -translate-x-1/2 w-[1.5px] md:top-1/2 md:bottom-auto md:-translate-y-1/2 md:-left-[50px] md:-right-[50px] md:translate-x-0 md:w-auto md:h-[1.5px] bg-gradient-to-b md:bg-gradient-to-r from-transparent via-[#5b8cff]/30 to-transparent" />
 
           {/* Particules */}
           <div className="absolute inset-0 overflow-visible pointer-events-none">
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
-                className="pawrise-particle absolute bg-[#00ffcc] rounded-full shadow-[0_0_10px_#00ffcc] w-[6px] h-[6px]"
+                className="pawrise-particle absolute bg-[#5b8cff] rounded-full shadow-[0_0_10px_#5b8cff] w-[6px] h-[6px]"
                 style={{ animationDelay: `${i * 0.7}s` }}
               />
             ))}
@@ -150,17 +150,17 @@ export default function PawriseCareDemo() {
 
           {/* Puce Centrale IA */}
           <div 
-            className="relative z-10 flex items-center gap-2.5 rounded-xl bg-[#141417]/95 border border-white/15 shadow-[0_8px_24px_rgba(0,0,0,0.8),0_0_20px_rgba(0,255,204,0.05)] backdrop-blur-xl shrink-0"
+            className="relative z-10 flex items-center gap-2.5 rounded-xl bg-[#141417]/95 border border-white/15 shadow-[0_8px_24px_rgba(0,0,0,0.8),0_0_20px_rgba(91,140,255,0.05)] backdrop-blur-xl shrink-0"
             style={{ padding: '8px 12px' }}
           >
-            <div className="relative w-6 h-6 rounded-lg bg-[#00ffcc]/10 border border-[#00ffcc]/40 flex items-center justify-center shadow-[inset_0_0_8px_rgba(0,255,204,0.2)]">
-              <Cpu size={14} className="text-[#00ffcc]" />
+            <div className="relative w-6 h-6 rounded-lg bg-[#5b8cff]/10 border border-[#5b8cff]/40 flex items-center justify-center shadow-[inset_0_0_8px_rgba(91,140,255,0.2)]">
+              <Cpu size={14} className="text-[#5b8cff]" />
             </div>
             <div className="flex flex-col text-left">
               <span className="text-[10px] font-semibold text-white leading-tight whitespace-nowrap">
                 {p.anomalyAi}
               </span>
-              <span className="text-[8px] font-mono text-[#00ffcc] leading-tight whitespace-nowrap mt-[1px]">
+              <span className="text-[8px] font-mono text-[#5b8cff] leading-tight whitespace-nowrap mt-[1px]">
                 {p.score}
               </span>
             </div>
@@ -183,7 +183,7 @@ export default function PawriseCareDemo() {
               className="w-[46px] h-[11px] bg-black rounded-full mx-auto flex items-center justify-end shrink-0 border border-white/[0.06]"
               style={{ padding: '0 4px', marginBottom: '6px' }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00ffcc]/80" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5b8cff]/80" />
             </div>
 
             <div className="flex-1 flex flex-col justify-between min-h-0 overflow-hidden">
@@ -207,8 +207,8 @@ export default function PawriseCareDemo() {
                         />
                         <div className="leading-none">
                           <div className="text-white text-[11px] font-semibold">Rex</div>
-                          <div className="text-[#00ffcc] text-[8px] font-medium flex items-center gap-1" style={{ marginTop: '2px' }}>
-                            <span className="w-1 h-1 rounded-full bg-[#00ffcc]" /> {p.online}
+                          <div className="text-[#5b8cff] text-[8px] font-medium flex items-center gap-1" style={{ marginTop: '2px' }}>
+                            <span className="w-1 h-1 rounded-full bg-[#5b8cff]" /> {p.online}
                           </div>
                         </div>
                       </div>
@@ -234,7 +234,7 @@ export default function PawriseCareDemo() {
                         </motion.div>
                         <div>
                           <div className="text-[8px] text-[#86868b] uppercase tracking-wider">{p.rhythm}</div>
-                          <div className="text-[9px] text-[#00ffcc] font-medium">{p.normal}</div>
+                          <div className="text-[9px] text-[#5b8cff] font-medium">{p.normal}</div>
                         </div>
                       </div>
                       <div className="text-right leading-none">
@@ -259,7 +259,7 @@ export default function PawriseCareDemo() {
                             initial={{ height: 0 }} 
                             animate={{ height: `${h}%` }} 
                             transition={{ duration: 0.6, delay: i * 0.05 }} 
-                            className="flex-1 rounded-[2px] bg-gradient-to-t from-[#00ffcc]/30 to-[#00ffcc]/80" 
+                            className="flex-1 rounded-[2px] bg-gradient-to-t from-[#5b8cff]/30 to-[#5b8cff]/80" 
                           />
                         ))}
                       </div>
@@ -276,13 +276,13 @@ export default function PawriseCareDemo() {
                   >
                     <div className="flex items-center justify-between" style={{ marginBottom: '4px' }}>
                       <span className="text-white text-[10px] font-semibold">{p.gpsTitle}</span>
-                      <span className="text-[#00ffcc] text-[8px] font-mono">± 1.2m</span>
+                      <span className="text-[#5b8cff] text-[8px] font-mono">± 1.2m</span>
                     </div>
 
                     <div 
                       className="flex-1 w-full rounded-xl relative overflow-hidden border border-white/10 flex items-center justify-center"
                       style={{
-                        background: 'radial-gradient(circle at center, rgba(0,255,204,0.12) 0%, rgba(15,15,18,0.95) 75%)',
+                        background: 'radial-gradient(circle at center, rgba(91,140,255,0.12) 0%, rgba(15,15,18,0.95) 75%)',
                         backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
                         backgroundSize: '14px 14px'
                       }}
@@ -290,18 +290,18 @@ export default function PawriseCareDemo() {
                       <motion.div
                         animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-                        className="w-7 h-7 rounded-full border border-[#00ffcc] absolute"
+                        className="w-7 h-7 rounded-full border border-[#5b8cff] absolute"
                       />
-                      <div className="relative z-10 w-3 h-3 rounded-full bg-[#00ffcc] border-2 border-white shadow-[0_0_12px_#00ffcc]" />
+                      <div className="relative z-10 w-3 h-3 rounded-full bg-[#5b8cff] border-2 border-white shadow-[0_0_12px_#5b8cff]" />
 
                       <div 
                         className="absolute bottom-1.5 left-1.5 right-1.5 bg-black/75 backdrop-blur-md rounded-lg border border-white/10 flex items-center justify-between"
                         style={{ padding: '3px 6px' }}
                       >
                         <span className="text-[8px] text-white/90 flex items-center gap-1">
-                          <Navigation size={8} className="text-[#00ffcc]" /> {p.safeZone}
+                          <Navigation size={8} className="text-[#5b8cff]" /> {p.safeZone}
                         </span>
-                        <span className="text-[8px] font-mono text-[#00ffcc]">{p.distance}</span>
+                        <span className="text-[8px] font-mono text-[#5b8cff]">{p.distance}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -317,7 +317,7 @@ export default function PawriseCareDemo() {
                 type="button"
                 onClick={() => setActiveTab('health')}
                 className={`flex-1 flex items-center justify-center gap-1 rounded-lg text-[9px] font-medium transition-all cursor-pointer border-none ${
-                  activeTab === 'health' ? 'bg-white/15 text-[#00ffcc]' : 'bg-transparent text-[#86868b]'
+                  activeTab === 'health' ? 'bg-white/15 text-[#5b8cff]' : 'bg-transparent text-[#86868b]'
                 }`}
                 style={{ padding: '4px 0' }}
               >
@@ -328,7 +328,7 @@ export default function PawriseCareDemo() {
                 type="button"
                 onClick={() => setActiveTab('map')}
                 className={`flex-1 flex items-center justify-center gap-1 rounded-lg text-[9px] font-medium transition-all cursor-pointer border-none ${
-                  activeTab === 'map' ? 'bg-white/15 text-[#00ffcc]' : 'bg-transparent text-[#86868b]'
+                  activeTab === 'map' ? 'bg-white/15 text-[#5b8cff]' : 'bg-transparent text-[#86868b]'
                 }`}
                 style={{ padding: '4px 0' }}
               >

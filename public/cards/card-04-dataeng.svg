@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 800" role="img" aria-label="Data Engineering">
 <defs>
-<radialGradient id="bg" cx="50%" cy="36%" r="70%"><stop offset="0" stop-color="#0b1c20"/><stop offset=".55" stop-color="#050b0e"/><stop offset="1" stop-color="#010203"/></radialGradient>
-<radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#00ffcc" stop-opacity=".28"/><stop offset="1" stop-color="#00ffcc" stop-opacity="0"/></radialGradient>
-<linearGradient id="ln" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#00ffcc"/><stop offset="1" stop-color="#00d8b4" stop-opacity=".6"/></linearGradient>
+<radialGradient id="bg" cx="50%" cy="36%" r="70%"><stop offset="0" stop-color="#161b25"/><stop offset=".55" stop-color="#0b0d12"/><stop offset="1" stop-color="#050608"/></radialGradient>
+<radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#5b8cff" stop-opacity=".28"/><stop offset="1" stop-color="#5b8cff" stop-opacity="0"/></radialGradient>
+<linearGradient id="ln" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#5b8cff"/><stop offset="1" stop-color="#3a5fcf" stop-opacity=".6"/></linearGradient>
 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
 </defs>
 <rect width="560" height="800" fill="url(#bg)"/>
 <rect width="560" height="800" fill="url(#grid)"/>
 <circle cx="280" cy="360" r="260" fill="url(#halo)"/>
 <rect x="14" y="14" width="532" height="772" rx="34" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
-<text x="44" y="96" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="54" font-weight="700" fill="#00ffcc">04</text>
+<text x="44" y="96" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="54" font-weight="700" fill="#5b8cff">04</text>
 <text x="44" y="128" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="24" letter-spacing="5" fill="#fff" fill-opacity=".6">ETL · API</text>
-<circle cx="500" cy="80" r="6" fill="#00ffcc"/><circle cx="500" cy="80" r="14" fill="none" stroke="#00ffcc" stroke-opacity=".4" stroke-width="2"/>
+<circle cx="500" cy="80" r="6" fill="#5b8cff"/><circle cx="500" cy="80" r="14" fill="none" stroke="#5b8cff" stroke-opacity=".4" stroke-width="2"/>
 <g fill="none" stroke="url(#ln)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-<path d="M70 214v72a42.0 14 0 0 0 84 0v-72"/><ellipse cx="112.0" cy="214" rx="42.0" ry="14"/><path d="M70 250.0a42.0 14 0 0 0 84 0" stroke-opacity=".5"/><path d="M70 434v72a42.0 14 0 0 0 84 0v-72"/><ellipse cx="112.0" cy="434" rx="42.0" ry="14"/><path d="M70 470.0a42.0 14 0 0 0 84 0" stroke-opacity=".5"/><rect x="238" y="310" width="84" height="100" rx="18" fill="#06100f"/><path d="M262 340h36M262 360h36M262 380h20" stroke-width="3"/><path d="M406 324v72a42.0 14 0 0 0 84 0v-72"/><ellipse cx="448.0" cy="324" rx="42.0" ry="14"/><path d="M406 360.0a42.0 14 0 0 0 84 0" stroke-opacity=".5"/><path d="M154 250H196Q238 250 238 330M154 470H196Q238 470 238 390M322 360H394" stroke-dasharray="2 12" stroke-width="5"/><circle cx="196" cy="250" r="6" fill="#00ffcc" fill-opacity="1" stroke="none"/><circle cx="196" cy="470" r="6" fill="#00ffcc" fill-opacity="1" stroke="none"/><circle cx="364" cy="360" r="6" fill="#00ffcc" fill-opacity="1" stroke="none"/>
+<path d="M70 214v72a42.0 14 0 0 0 84 0v-72"/><ellipse cx="112.0" cy="214" rx="42.0" ry="14"/><path d="M70 250.0a42.0 14 0 0 0 84 0" stroke-opacity=".5"/><path d="M70 434v72a42.0 14 0 0 0 84 0v-72"/><ellipse cx="112.0" cy="434" rx="42.0" ry="14"/><path d="M70 470.0a42.0 14 0 0 0 84 0" stroke-opacity=".5"/><rect x="238" y="310" width="84" height="100" rx="18" fill="#10131a"/><path d="M262 340h36M262 360h36M262 380h20" stroke-width="3"/><path d="M406 324v72a42.0 14 0 0 0 84 0v-72"/><ellipse cx="448.0" cy="324" rx="42.0" ry="14"/><path d="M406 360.0a42.0 14 0 0 0 84 0" stroke-opacity=".5"/><path d="M154 250H196Q238 250 238 330M154 470H196Q238 470 238 390M322 360H394" stroke-dasharray="2 12" stroke-width="5"/><circle cx="196" cy="250" r="6" fill="#5b8cff" fill-opacity="1" stroke="none"/><circle cx="196" cy="470" r="6" fill="#5b8cff" fill-opacity="1" stroke="none"/><circle cx="364" cy="360" r="6" fill="#5b8cff" fill-opacity="1" stroke="none"/>
 </g>
 </svg>

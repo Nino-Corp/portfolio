@@ -57,7 +57,7 @@ export default function MedicalScanDemo() {
       {/* Laser de scan */}
       {isScanning && (
         <motion.div
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: '#00ffcc', boxShadow: '0 0 20px 5px rgba(0,255,204,0.5)', zIndex: 10 }}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: '#5b8cff', boxShadow: '0 0 20px 5px rgba(91,140,255,0.5)', zIndex: 10 }}
           initial={{ y: '0%' }}
           animate={{ y: '100vh' }}
           transition={{ duration: 2, ease: "linear" }}
@@ -78,12 +78,12 @@ export default function MedicalScanDemo() {
               right: '22%',
               width: 'clamp(70px, 22%, 120px)',
               height: 'clamp(80px, 25%, 120px)',
-              border: `2px solid ${results.right.isAnomaly ? '#ff3366' : '#00ffcc'}`,
-              backgroundColor: results.right.isAnomaly ? 'rgba(255,51,102,0.1)' : 'rgba(0,255,204,0.1)',
+              border: `2px solid ${results.right.isAnomaly ? '#ff3366' : '#5b8cff'}`,
+              backgroundColor: results.right.isAnomaly ? 'rgba(255,51,102,0.1)' : 'rgba(91,140,255,0.1)',
               zIndex: 10
             }}
           >
-            <div style={{ position: 'absolute', top: '-22px', left: '-2px', background: results.right.isAnomaly ? '#ff3366' : '#00ffcc', color: results.right.isAnomaly ? 'white' : 'black', fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)', fontWeight: 'bold', padding: '2px 6px', maxWidth: '130px', lineHeight: '1.2', whiteSpace: 'nowrap' }}>
+            <div style={{ position: 'absolute', top: '-22px', left: '-2px', background: results.right.isAnomaly ? '#ff3366' : '#5b8cff', color: results.right.isAnomaly ? 'white' : 'black', fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)', fontWeight: 'bold', padding: '2px 6px', maxWidth: '130px', lineHeight: '1.2', whiteSpace: 'nowrap' }}>
               {results.right.isAnomaly ? t.medical.anomaly : t.medical.healthy} ({results.right.score}%)
             </div>
           </motion.div>
@@ -99,12 +99,12 @@ export default function MedicalScanDemo() {
               left: '18%',
               width: 'clamp(60px, 18%, 100px)',
               height: 'clamp(90px, 28%, 140px)',
-              border: `2px solid ${results.left.isAnomaly ? '#ff3366' : '#00ffcc'}`,
-              backgroundColor: results.left.isAnomaly ? 'rgba(255,51,102,0.1)' : 'rgba(0,255,204,0.1)',
+              border: `2px solid ${results.left.isAnomaly ? '#ff3366' : '#5b8cff'}`,
+              backgroundColor: results.left.isAnomaly ? 'rgba(255,51,102,0.1)' : 'rgba(91,140,255,0.1)',
               zIndex: 10
             }}
           >
-            <div style={{ position: 'absolute', top: '-22px', left: '-2px', background: results.left.isAnomaly ? '#ff3366' : '#00ffcc', color: results.left.isAnomaly ? 'white' : 'black', fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)', fontWeight: 'bold', padding: '2px 6px', maxWidth: '130px', lineHeight: '1.2', whiteSpace: 'nowrap' }}>
+            <div style={{ position: 'absolute', top: '-22px', left: '-2px', background: results.left.isAnomaly ? '#ff3366' : '#5b8cff', color: results.left.isAnomaly ? 'white' : 'black', fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)', fontWeight: 'bold', padding: '2px 6px', maxWidth: '130px', lineHeight: '1.2', whiteSpace: 'nowrap' }}>
               {results.left.isAnomaly ? t.medical.anomaly : t.medical.healthy} ({results.left.score}%)
             </div>
           </motion.div>

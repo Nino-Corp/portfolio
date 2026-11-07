@@ -18,6 +18,7 @@ import HeroTitle from '@/components/HeroTitle';
 import ContactCTA from '@/components/ContactCTA';
 import HeroSubtitle from '@/components/HeroSubtitle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import AetherParticles from '@/components/AetherParticles';
 import { useLang } from '@/lib/i18n';
 
 const CARD_META = [
@@ -69,6 +70,7 @@ export default function Home() {
     <main>
       {/* Glow dynamique */}
       <div ref={glowRef} className="glow-cursor" aria-hidden="true" />
+      <AetherParticles />
 
       {/* Fil d'ariane vertical Apple ultra-moderne */}
       <SectionNav />
@@ -164,7 +166,7 @@ export default function Home() {
                     href="https://pawrise-care.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
+                    className="pointer-events-auto bg-[#5b8cff]/10 hover:bg-[#5b8cff]/20 border border-[#5b8cff]/40 text-[#5b8cff] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
                     {t.project.visitSite}
@@ -300,7 +302,7 @@ export default function Home() {
                     href="https://www.linxo.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pointer-events-auto bg-[#00ffcc]/10 hover:bg-[#00ffcc]/20 border border-[#00ffcc]/40 text-[#00ffcc] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
+                    className="pointer-events-auto bg-[#5b8cff]/10 hover:bg-[#5b8cff]/20 border border-[#5b8cff]/40 text-[#5b8cff] rounded-full text-xs cursor-pointer backdrop-blur-md no-underline flex items-center transition-all active:scale-95 font-medium"
                     style={{ padding: '6px 14px', gap: '4px' }}
                   >
                     {t.project.visit}
@@ -532,7 +534,7 @@ export default function Home() {
             <h3 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '5px', letterSpacing: '-0.02em' }}>
               {selected?.title}
             </h3>
-            <div style={{ color: '#00ffcc', fontSize: '1rem', marginBottom: '25px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            <div style={{ color: '#5b8cff', fontSize: '1rem', marginBottom: '25px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
               {selected?.subtitle}
             </div>
             

@@ -358,8 +358,8 @@ body {
   transition: all 0.3s ease;
 }
 [data-slot="timeline-separator"][data-state="completed"] {
-  background-color: #00ffcc;
-  box-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+  background-color: #5b8cff;
+  box-shadow: none;
 }
 
 [data-slot="timeline-indicator"] {
@@ -371,16 +371,16 @@ body {
   box-shadow: none;
 }
 [data-slot="timeline-indicator"][data-state="current"] {
-  border-color: #00ffcc;
-  background: rgba(0, 255, 204, 0.12);
-  outline: 2px solid rgba(0, 255, 204, 0.25);
+  border-color: #5b8cff;
+  background: rgba(91,140,255, 0.12);
+  outline: 1px solid rgba(91,140,255, 0.45);
   outline-offset: 2px;
-  box-shadow: 0 0 18px rgba(0, 255, 204, 0.6);
+  box-shadow: none;
 }
 [data-slot="timeline-indicator"][data-state="completed"] {
-  border-color: #00ffcc;
-  background: #00ffcc;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+  border-color: #5b8cff;
+  background: #5b8cff;
+  box-shadow: none;
 }
 
 /* Nav Fil d'ariane vertical item spacing & separator alignment */
