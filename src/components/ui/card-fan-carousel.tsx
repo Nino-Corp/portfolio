@@ -284,7 +284,12 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                 />
                 <div
                   className="absolute inset-x-0 bottom-0 pt-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-left pointer-events-none"
-                  style={{ padding: `${cardWidth * 0.06}px`, paddingTop: 40 }}
+                  style={{
+                    paddingTop: 40,
+                    paddingRight: cardWidth * 0.06,
+                    paddingBottom: cardWidth * 0.06,
+                    paddingLeft: cardWidth * 0.06,
+                  }}
                 >
                   <h4
                     className="font-bold text-white leading-tight break-words text-balance"
