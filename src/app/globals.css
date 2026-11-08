@@ -19,6 +19,17 @@
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  /* No rubber-band / pull-to-refresh at the top: it was snapping the page to the next section */
+  overscroll-behavior-y: none;
+}
+
+/* Touch / small screens: sections are often taller than the viewport, so mandatory snapping
+   fights the finger and jumps. Proximity only snaps when a section edge is already close. */
+@media (max-width: 1023px), (pointer: coarse) {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -28,6 +39,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
   min-height: 100vh;
 }
 
@@ -145,9 +157,15 @@ body {
   z-index: 10;
 }
 
-/* Dynamic viewport height: avoids the mobile browser toolbar cropping the hero */
+/* Small viewport height: avoids the mobile browser toolbar cropping the hero / leaking the next section */
 @supports (height: 100svh) {
   .hero-section { height: 100svh; }
+  .snap-section,
+  .bento-section { min-height: 100svh; }
+}
+
+@media (max-width: 1023px) {
+  .hero-section { width: 100%; }
 }
 
 @media (max-width: 639px) {
@@ -329,6 +347,45 @@ body {
   /* Row flex des projets IA -> colonne sur mobile */
   .ai-projects-row {
     flex-direction: column !important;
+  }
+
+  /* --- Mobile: each section must fit in one screen (no peek of the next one) --- */
+  .snap-section {
+    padding-top: 40px;
+    padding-bottom: 16px;
+  }
+  .snap-section > div > h2:first-child {
+    margin-bottom: 10px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* 01 Introduction: tighter type and spacing */
+  #section-01 h2:not(:first-child) {
+    font-size: clamp(1.4rem, 6.2vw, 1.8rem) !important;
+  }
+  #section-01 h2 + div,
+  #section-01 [style*="margin-top: 30px"] {
+    margin-top: 12px !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+  #section-01 ul {
+    margin-top: 10px !important;
+    gap: 8px !important;
+    padding-left: 16px !important;
+  }
+
+  /* 03 IA: two demos share the screen */
+  #section-03 .bento-cell {
+    flex: 1 1 100% !important;
+    min-height: calc((100svh - 120px) / 2) !important;
+  }
+
+  /* 02 / 04 / 05 / 06: single card fills the remaining screen height */
+  #section-02 .bento-cell,
+  #section-04 .bento-cell,
+  #section-05 .bento-cell {
+    padding: 14px !important;
   }
 }
 

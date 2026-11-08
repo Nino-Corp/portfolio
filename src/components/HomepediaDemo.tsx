@@ -128,7 +128,7 @@ export default function HomepediaDemo() {
   const activeMetric = METRICS.find(m => m.id === metric)!;
 
   return (
-    <div className="relative w-full h-full min-h-[540px] md:min-h-0 md:absolute md:inset-0 overflow-hidden bg-[#060608] flex flex-col select-none rounded-xl border border-white/[0.05]">
+    <div className="relative w-full h-full min-h-[490px] md:min-h-0 md:absolute md:inset-0 overflow-hidden bg-[#060608] flex flex-col select-none rounded-xl border border-white/[0.05]">
 
       {/* Ambiance de fond */}
       <div

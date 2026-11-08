@@ -343,17 +343,17 @@ export default function Home() {
               style={{ padding: '24px', position: 'relative', backgroundColor: '#050505', overflow: 'hidden' }}
             >
               <div 
-                className="z-20 pointer-events-none flex flex-col sm:flex-row sm:justify-between items-start sm:items-center shrink-0"
-                style={{ marginBottom: '16px', gap: '12px' }}
+                className="z-20 pointer-events-none flex flex-row justify-between items-center shrink-0"
+                style={{ marginBottom: '12px', gap: '12px' }}
               >
                 <div>
-                  <h3 
+                  <h3
                     className="bento-title text-base sm:text-lg lg:text-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
                     style={{ margin: 0 }}
                   >
                     {t.project.homepediaTitle}
                   </h3>
-                  <p style={{ margin: '4px 0 0', fontSize: '0.8rem', color: '#86868b' }}>
+                  <p className="hidden sm:block" style={{ margin: '4px 0 0', fontSize: '0.8rem', color: '#86868b' }}>
                     {t.project.homepediaSubtitle}
                   </p>
                 </div>

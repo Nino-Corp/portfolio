@@ -177,6 +177,30 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
       });
       observer.observe(container);
 
+      // Touch direction lock: once the gesture is mainly horizontal, block the native vertical pan
+      // so spinning the ring never scrolls the page. Vertical gestures stay native (page scroll).
+      let tStartX = 0;
+      let tStartY = 0;
+      let tLock: "x" | "y" | null = null;
+      const onTouchStart = (e: TouchEvent) => {
+        const p = e.touches[0];
+        tStartX = p.clientX;
+        tStartY = p.clientY;
+        tLock = null;
+      };
+      const onTouchMove = (e: TouchEvent) => {
+        const p = e.touches[0];
+        if (!tLock) {
+          const dx = Math.abs(p.clientX - tStartX);
+          const dy = Math.abs(p.clientY - tStartY);
+          if (dx < 4 && dy < 4) return;
+          tLock = dx > dy ? "x" : "y";
+        }
+        if (tLock === "x" && e.cancelable) e.preventDefault();
+      };
+
+      container.addEventListener("touchstart", onTouchStart, { passive: true });
+      container.addEventListener("touchmove", onTouchMove, { passive: false });
       container.addEventListener("wheel", onWheel, { passive: false });
       container.addEventListener("pointerdown", onPointerDown);
       container.addEventListener("pointermove", onPointerMove);
@@ -186,6 +210,8 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
       raf = requestAnimationFrame(tick);
 
       return () => {
+        container.removeEventListener("touchstart", onTouchStart);
+        container.removeEventListener("touchmove", onTouchMove);
         container.removeEventListener("wheel", onWheel);
         container.removeEventListener("pointerdown", onPointerDown);
         container.removeEventListener("pointermove", onPointerMove);
